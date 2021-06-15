@@ -8,15 +8,6 @@ using MathNet.Numerics.Optimization;
 using MathNet.Numerics.LinearAlgebra;
 using MathNet.Numerics;
 
-public enum ScanDisplayType
-{
-    none,
-    bitmap,
-    distanceTransform,
-    visibility,
-    score
-}
-
 /// <summary>
 /// DEPRECATED CODE!
 /// Initial implementation of the pipeline up to generating flythrough paths without optimization
