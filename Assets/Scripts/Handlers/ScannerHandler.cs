@@ -83,18 +83,18 @@ public class VisibilitymapHandler : IHandler<(RSGrid, LayerMask), float[,,]>
 /// Author: Robin Schmidiger
 /// Date: May 2021
 /// </summary>
-public class DistanceTransformHandler : IHandler<(RSGrid, bool[,,]), float[,,]>
+public class DistanceTransformHandler : IHandler<(RSGrid, bool[,,], int), float[,,]>
 {
     /// <summary>
     /// 
     /// </summary>
     /// <param name="input">Tuple consisting of a grid an the bitmap that corresponds to the grid</param>
     /// <returns>the distance transform of the grid as a multid. array. The distances are given in [u]</returns>
-    public float[,,] Invoke((RSGrid, bool[,,]) input)
+    public float[,,] Invoke((RSGrid, bool[,,], int) input)
     {
         RSGrid rsgrid = input.Item1;
         bool[,,] bitmap = input.Item2;
-        int ITERATIONS = 5; // Specifies the number of relaxation steps of the distance transform. This should be higher than the largest minimal distance within the grid
+        int iterations = input.Item3;
 
         // Initialize the distance transform as the bitmap.
         float[,,] last_result = rsgrid.ForAllIndexed((_, i) => {
@@ -102,7 +102,7 @@ public class DistanceTransformHandler : IHandler<(RSGrid, bool[,,]), float[,,]>
         }) ;
 
 
-        for (int current_iteration = 0; current_iteration < ITERATIONS; current_iteration++)
+        for (int current_iteration = 0; current_iteration < iterations; current_iteration++)
         {
             Func<Vector<double>, Vector<float>, float> f = (_, i) =>
             {

@@ -18,9 +18,50 @@ public class RSGrid
     Vector<float> lengths;  // Note: mathnet doesn't support int vectors as of yet. Just use float for now
     IEnumerable<Vector<double>> all_positions;
 
-    Vector<double> GetPosition(Vector<float> at)
+    public Vector<double> GetPosition(Vector<float> at)
     {
         return corner + at.Map(x => (double)x + 0.5f).Multiply(cell_size);
+    }
+
+    public Vector<float> GetIndex(Vector<double> at)
+    {
+        return ((at - corner) / cell_size).Map(x => (float)x - 0.5f);
+    }
+
+    public float InterpolateGet(Vector<float> i, float[,,] map, float default_value)
+    {
+        var k = i.Map(x => Mathf.Floor(x));
+
+        var f = new Func<float, float, float, float>((x, y, z) =>
+        {
+            try
+            {
+                return map[(int)x, (int)y, (int)z];
+            }
+            catch (IndexOutOfRangeException)
+            {
+                return default_value;
+            }
+        });
+        var v = RSUtils.Utils.TriLerp(
+            new float[] { i.At(0) % 1, i.At(1) % 1, i.At(2) % 1 },
+            new float[] {
+                f(k.At(0) + 0, k.At(1) + 0, k.At(2) + 0),
+                f(k.At(0) + 0, k.At(1) + 0, k.At(2) + 1),
+                f(k.At(0) + 0, k.At(1) + 1, k.At(2) + 0),
+                f(k.At(0) + 0, k.At(1) + 1, k.At(2) + 1),
+                f(k.At(0) + 1, k.At(1) + 0, k.At(2) + 0),
+                f(k.At(0) + 1, k.At(1) + 0, k.At(2) + 1),
+                f(k.At(0) + 1, k.At(1) + 1, k.At(2) + 0),
+                f(k.At(0) + 1, k.At(1) + 1, k.At(2) + 1)
+            }
+            );
+        if(v == Mathf.Infinity)
+        {
+            return default_value;
+        }
+        //Debug.Log(v);
+        return v;
     }
 
     public RSGrid(double cell_size, Vector<double> corner, Vector<float> lengths)
@@ -72,6 +113,16 @@ public class RSGrid
     public double GetCellSize()
     {
         return cell_size;
+    }
+
+    public Vector<double> GetLowerBound()
+    {
+        return corner;
+    }
+
+    public Vector<double> GetUpperBound()
+    {
+        return corner + (cell_size * lengths.Map(x => (double)x));
     }
 
     public Vector<float> GetLengths()

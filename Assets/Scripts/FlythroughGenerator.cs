@@ -13,7 +13,8 @@ public enum ScanDisplayType
     visibility,
     score,
     controlpoints,
-    tour
+    tour,
+    trajectory
 }
 
 /// <summary>
@@ -42,8 +43,10 @@ public class FlythroughGenerator : MonoBehaviour
     public float[,,] visibilitymap;
     public float[,,] distancetransformmap;
     public List<Vector<double>> controlpoints;
-    public List<GameObject> controlpointobjs;
     public List<Vector<double>> tour;
+    public List<Vector<double>> trajectory;
+    public Vector3 debug_sphere_position;
+    public float debug_sphere_amp = 1f;
 
     [Header("Control Point Placement Scoring")]
     public float bitmapWeight = 10;
@@ -52,8 +55,26 @@ public class FlythroughGenerator : MonoBehaviour
     public float minDistanceWeight = 20;
     public int numControlPoints = 10;
     public float visibilityGain = 100f;
+    public int distance_transform_iterations = 8;
 
+    [Header("Tour Planning")]
+    public bool backtrack = false;
 
+    [Header("Trajectory Optimization")]
+    public int num_trajectory_points = 100;
+    public double gradient_tolerance = 0.1;
+    public double parameter_tolerance = 0.1;
+    public double function_progress_tolerance = 0.1;
+    public int max_iterations = 250;
+
+    [Range(0, 1)]
+    public double distance_weight = 0.5d;
+    [Range(0, 1)]
+    public double velocity_weight = 0.5d;
+    [Range(0, 1)]
+    public double acceleration_weight = 0.5d;
+    [Range(0, 1)]
+    public double collision_weight = 0.5d;
 
     [Header("debug")]
     [Range(0, .99f)]
@@ -118,18 +139,25 @@ public class FlythroughGenerator : MonoBehaviour
                 {
                     Func<Vector<double>, Vector<float>, double> f = (x, i) =>
                     {
-                        float c = (float)distancetransformmap.GetValue((int)i.At(0), (int)i.At(1), (int)i.At(2));
-                        Gizmos.color = c == 0f ? Color.white : new Color(1f / c, 1f / c, 1f / c);
+                        //float c = (float)distancetransformmap.GetValue((int)i.At(0), (int)i.At(1), (int)i.At(2));
+                        //Gizmos.color = c == 0f ? Color.white : new Color(1f / c, 1f / c, 1f / c);
 
                         //Gizmos.DrawSphere(RSUtils.Utils.VToV3(x), (float)(rsgrid.GetCellSize() / 2f));
                         if (Mathf.FloorToInt(_debugHeight * rsgrid.GetLengths().At(1)) == (int)i.At(1))
                         {
+                            float c = 1f / (0.01f + rsgrid.InterpolateGet(rsgrid.GetIndex(x), distancetransformmap, 0.01f));
+                            Gizmos.color = new Color(c * debug_sphere_amp, 0, 0);
                             Gizmos.DrawCube(RSUtils.Utils.VToV3(x), new Vector3(1, 0.1f, 1) * (float)(rsgrid.GetCellSize()));
                         }
 
                         return -1d;
                     };
                     rsgrid.ForAllIndexed(f);
+
+                    float c = 1f / (0.01f + rsgrid.InterpolateGet(rsgrid.GetIndex(RSUtils.Utils.V3ToV(debug_sphere_position)), distancetransformmap, 0.01f));
+                    Gizmos.color = new Color(c * debug_sphere_amp, 0, 0);
+                    Handles.Label(debug_sphere_position + Vector3.up, c.ToString());
+                    Gizmos.DrawSphere(debug_sphere_position, .5f);
                 }
                 break;
             case ScanDisplayType.controlpoints:
@@ -149,15 +177,25 @@ public class FlythroughGenerator : MonoBehaviour
                 {
                     for (int i = 1; i < tour.Count; i++)
                     {
-                        Gizmos.DrawLine(RSUtils.Utils.VToV3(tour[i - 1]), RSUtils.Utils.VToV3(tour[i]));
+                        Gizmos.DrawLine(RSUtils.Utils.VToV3(tour[i-1]), RSUtils.Utils.VToV3(tour[i]));
+                    }
+                    Gizmos.color = Color.white;
+                    foreach (var p in tour)
+                    {
+                        Gizmos.DrawSphere(RSUtils.Utils.VToV3(p), 0.1f);
                     }
                 }
-                Gizmos.color = Color.white;
-                foreach(var p in tour)
+                break;
+            case ScanDisplayType.trajectory:
+                if (trajectory != null)
                 {
-                    Gizmos.DrawSphere(RSUtils.Utils.VToV3(p), 0.1f);
-                }
+                    Gizmos.color = Color.blue;
+                    for (int i = 1; i < trajectory.Count; i++)
+                    {
+                        Gizmos.DrawLine(RSUtils.Utils.VToV3(trajectory[i - 1]), RSUtils.Utils.VToV3(trajectory[i]));
 
+                    }
+                }
                 break;
 
             // display green tiles at debug height
@@ -173,6 +211,7 @@ public class FlythroughGenerator : MonoBehaviour
                             Gizmos.DrawCube(RSUtils.Utils.VToV3(x), new Vector3(1, 0.1f, 1) * (float)(rsgrid.GetCellSize()));
                         }
                         return -1d;
+
                     };
 
                     rsgrid.ForAllIndexed(f);
@@ -197,7 +236,7 @@ public class FlythroughGeneratorEditor : Editor
             fg.rsgrid = RSGrid.BuildFromCollider(fg.GetComponent<Collider>(), fg.cell_size);
             fg.bitmap = new BitmapHandler().Invoke((fg.rsgrid, fg.mask));
             fg.visibilitymap = new VisibilitymapHandler().Invoke((fg.rsgrid, fg.mask));
-            fg.distancetransformmap = new DistanceTransformHandler().Invoke((fg.rsgrid, fg.bitmap));
+            fg.distancetransformmap = new DistanceTransformHandler().Invoke((fg.rsgrid, fg.bitmap, fg.distance_transform_iterations));
 
         }
 
@@ -206,30 +245,30 @@ public class FlythroughGeneratorEditor : Editor
         {
             fg.controlpoints = new ControlPointHandler().Invoke((fg.rsgrid, fg.bitmap, fg.bitmapWeight, fg.visibilitymap, fg.visibilityWeight, fg.distancetransformmap, fg.distanceTransformWeight, fg.minDistanceWeight, fg.numControlPoints));
 
-            fg.controlpointobjs = new List<GameObject>();
-            foreach(var p in fg.controlpoints)
-            {
-                GameObject obj = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-                obj.transform.localScale = Vector3.one * 0.4f;
-                obj.transform.parent = fg.transform;
-                obj.transform.position = RSUtils.Utils.VToV3(p);
-
-                fg.controlpointobjs.Add(obj);
-            }
         }
 
         if(GUILayout.Button("Plan Tour"))
         {
-            fg.tour = new TourPlannerHandler().Invoke(fg.controlpointobjs.ConvertAll(x => RSUtils.Utils.V3ToV(x.transform.position)));
+            fg.tour = new TourPlannerHandler().Invoke((fg.controlpoints, fg.backtrack));
         }
 
-        if(GUILayout.Button("Apply To FollowPath"))
+        if (GUILayout.Button("Generate Trajectory"))
+        {
+            var algo = TrajectoryOptimizationHandler.BuildMinimizer(fg.function_progress_tolerance, fg.gradient_tolerance, fg.parameter_tolerance, fg.max_iterations);
+            var objective = TrajectoryOptimizationHandler.BuildObjectiveFunction(fg.tour, fg.distance_weight, fg.velocity_weight, fg.acceleration_weight, fg.rsgrid, fg.distancetransformmap, fg.collision_weight, fg.num_trajectory_points);
+
+            fg.trajectory = new TrajectoryOptimizationHandler().Invoke((fg.tour, fg.num_trajectory_points, algo, objective));
+        }
+
+        if (GUILayout.Button("Apply To FollowPath"))
         {
             FollowPath fp = FindObjectOfType<FollowPath>();
             fp.controlPoints = new List<Transform>();
-            foreach(var p in fg.tour)
+            for(int i=0;i<fg.trajectory.Count;i++)
             {
+                var p = fg.trajectory[i];
                 var obj = new GameObject();
+                obj.name = i.ToString();
                 obj.transform.position = RSUtils.Utils.VToV3(p);
                 obj.transform.parent = fp.transform;
                 fp.controlPoints.Add(obj.transform);

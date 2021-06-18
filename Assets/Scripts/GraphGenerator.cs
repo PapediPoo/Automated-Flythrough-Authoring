@@ -30,7 +30,6 @@ public class GraphGenerator : MonoBehaviour
     private void Start()
     {
         FloorScanner fs = FindObjectOfType<FloorScanner>();
-        print(fs.controlPoints);
         List<Vector3> cps = fs.controlPoints.ConvertAll(x => RSUtils.Utils.VToV3(x) - Vector3.up);
 
         GenerateConnectivityGraph(cps);

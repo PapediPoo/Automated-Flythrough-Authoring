@@ -8,11 +8,12 @@ using System.Linq;
 using QuikGraph;
 using QuikGraph.Algorithms;
 
-public class TourPlannerHandler : IHandler<List<Vector<double>>, List<Vector<double>>>
+public class TourPlannerHandler : IHandler<(List<Vector<double>>, bool), List<Vector<double>>>
 {
-    public List<Vector<double>> Invoke(List<Vector<double>> input)
+    public List<Vector<double>> Invoke((List<Vector<double>>, bool) input)
     {
-        List<Vector<double>> coarseCPs = input;
+        List<Vector<double>> coarseCPs = input.Item1;
+        bool backtrack = input.Item2;
 
         var paths = new Dictionary<Edge<int>, NavMeshPath>();
         var qgraph = new UndirectedGraph<int, Edge<int>>();
@@ -32,17 +33,20 @@ public class TourPlannerHandler : IHandler<List<Vector<double>>, List<Vector<dou
                 {
                     Debug.LogWarning("Path generation unsuccessful");
                 }
-
-                float w = 0;
-                for(int k = 1; k < p.corners.Length; k++)
+                else
                 {
-                    w += (p.corners[k - 1] - p.corners[k]).magnitude;
+                    float w = 0;
+                    for (int k = 1; k < p.corners.Length; k++)
+                    {
+                        w += (p.corners[k - 1] - p.corners[k]).magnitude;
+                    }
+                    var e = new Edge<int>(i, j);
+                    qgraph.AddEdge(e);
+                    qcost.Add(e, w);
+                    paths.Add(e, p);
                 }
 
-                var e = new Edge<int>(i, j);
-                qgraph.AddEdge(e);
-                qcost.Add(e, w);
-                paths.Add(e, p);
+
             }
         }
 
@@ -64,25 +68,34 @@ public class TourPlannerHandler : IHandler<List<Vector<double>>, List<Vector<dou
                     DFS(w);
                 }
             }
-            if (coarsetour.Last() != v)
+            if (coarsetour.Last() != v && (backtrack || labels.All(x => !x)))
             {
                 coarsetour.Add(v);
             }
         }
         DFS(0);
 
+        Vector3 lastpos = Utils.VToV3(coarseCPs[coarsetour[0]]);
         for(int i = 1; i < coarsetour.Count; i++)
         {
             Edge<int> e;
             if (!qgraph.TryGetEdge(coarsetour[i - 1], coarsetour[i], out e)) Debug.Log("not found");
             //Debug.Log(e);
-            foreach (Vector3 p in paths[e].corners)
+            var corners = paths[e].corners;
+            if ((corners.First() - lastpos).magnitude > (corners.Last() - lastpos).magnitude) corners = corners.Reverse().ToArray();
+            foreach (Vector3 p in corners.Take(corners.Count() - 1))
             {
                 finetour.Add(Utils.V3ToV(p + Vector3.up));
             }
+            if(i == coarsetour.Count - 1)
+            {
+                finetour.Add(Utils.V3ToV(corners.Last() + Vector3.up));
+            }
+
+            lastpos = corners.Last();
         }
 
-        //return finetour;
-        return coarsetour.ConvertAll(x => coarseCPs[x]);
+        return finetour;
+        //return coarsetour.ConvertAll(x => coarseCPs[x]);
     }
 }

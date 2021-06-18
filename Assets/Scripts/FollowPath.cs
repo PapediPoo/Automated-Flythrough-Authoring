@@ -15,6 +15,7 @@ public class FollowPath : MonoBehaviour
     public GameObject target;
     public bool lookForward = true;
     private Vector3 lastPos;
+    public float max_rot_speed = 30f;
 
     CubicSpline[] positionCP = new CubicSpline[3];
     Quaternion[] rotationCP;
@@ -82,7 +83,12 @@ public class FollowPath : MonoBehaviour
 
         if (lookForward)
         {
-            rot = QuaternionUtil.SmoothDamp(target.transform.rotation, Quaternion.LookRotation(pos - lastPos, Vector3.up), ref rotationRef, (float)Time.deltaTime / (stepSize * 2f));
+            //var targetrot = Quaternion.RotateTowards(target.transform.rotation, Quaternion.LookRotation(pos - lastPos, Vector3.up), Time.deltaTime * max_rot_speed);
+            //rot = targetrot;
+            //rot = QuaternionUtil.SmoothDamp(target.transform.rotation, targetrot, ref rotationRef, (float)Time.deltaTime / (stepSize * 2f));
+            var targetrot = QuaternionUtil.SmoothDamp(target.transform.rotation, Quaternion.LookRotation(pos - lastPos, Vector3.up), ref rotationRef, (float)Time.deltaTime / (stepSize));
+
+            rot = Quaternion.RotateTowards(target.transform.rotation, targetrot, Time.deltaTime * max_rot_speed);
             lastPos = pos;
         }
         else

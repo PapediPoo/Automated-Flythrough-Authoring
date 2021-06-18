@@ -26,7 +26,7 @@ namespace RSUtils
 
             float x00 = Mathf.Lerp(q[0], q[4], x[0]);
             float x10 = Mathf.Lerp(q[2], q[6], x[0]);
-            float x01 = Mathf.Lerp(q[1], q[4], x[0]);
+            float x01 = Mathf.Lerp(q[1], q[5], x[0]);
             float x11 = Mathf.Lerp(q[3], q[7], x[0]);
 
             float r0 = Mathf.Lerp(x00, x01, x[1]);
