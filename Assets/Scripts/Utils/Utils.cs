@@ -13,7 +13,7 @@ namespace RSUtils
             System.Diagnostics.Debug.Assert(x.Length == 2);
             System.Diagnostics.Debug.Assert(q.Length == 4);
 
-            float r0 = Mathf.Lerp(q[0], q[0], x[0]);
+            float r0 = Mathf.Lerp(q[0], q[2], x[0]);
             float r1 = Mathf.Lerp(q[1], q[3], x[0]);
 
             return Mathf.Lerp(r0, r1, x[1]);
