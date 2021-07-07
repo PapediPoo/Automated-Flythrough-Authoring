@@ -40,6 +40,11 @@ namespace RSUtils
             return new Vector3((float)v.At(0), (float)v.At(1), (float)v.At(2));
         }
 
+        public static Vector3 VToV3(Vector<float> v)
+        {
+            return new Vector3(v.At(0), v.At(1), v.At(2));
+        }
+
         public static Vector<double> V3ToV(Vector3 v3)
         {
             return Vector<double>.Build.DenseOfArray(new double[] { v3.x, v3.y, v3.z });

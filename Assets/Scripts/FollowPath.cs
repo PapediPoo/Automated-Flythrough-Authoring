@@ -8,7 +8,7 @@ using System;
 
 public class FollowPath : MonoBehaviour
 {
-    public List<Transform> controlPoints = new List<Transform>();
+    public List<Vector3> controlPoints = new List<Vector3>();
     public double t;
     public double speed;
     private float stepSize;
@@ -27,17 +27,22 @@ public class FollowPath : MonoBehaviour
     {
         RefreshSplines();
 
-        target.transform.rotation = controlPoints[0].transform.rotation;
-        lastPos = controlPoints[0].transform.position;
+        target.transform.rotation = Quaternion.LookRotation(controlPoints[1] - controlPoints.First(), Vector3.up);
+        lastPos = controlPoints.First();
     }
 
-    public void SetCP(List<Transform> newControlPoints)
+    private void OnEnable()
+    {
+        Start();
+    }
+
+    public void SetCP(List<Vector3> newControlPoints)
     {
         controlPoints = newControlPoints;
         stepSize = (float)speed * Time.deltaTime;
 
         RefreshSplines();
-        transform.rotation = controlPoints[0].transform.rotation;
+        transform.rotation = Quaternion.LookRotation(controlPoints[1] - controlPoints.First(), Vector3.up);
     }
 
     // Update is called once per frame
@@ -75,7 +80,7 @@ public class FollowPath : MonoBehaviour
         if(t >= controlPoints.Count()-1)
         {
             t = 0f;
-            transform.rotation = controlPoints[0].transform.rotation;
+            transform.rotation = Quaternion.LookRotation(controlPoints[1] - controlPoints.First(), Vector3.up);
         }
 
         Vector3 pos = new Vector3((float)positionCP[0].Interpolate(t), (float)positionCP[1].Interpolate(t), (float)positionCP[2].Interpolate(t));
@@ -102,17 +107,18 @@ public class FollowPath : MonoBehaviour
 
     private void RefreshSplines()
     {
-        Vector3[] xyz = (from o in controlPoints select o.transform.position).ToArray();
+        //Vector3[] xyz = (from o in controlPoints select o.transform.position).ToArray();
+        Vector3[] xyz = controlPoints.ToArray();
         double[] x = Array.ConvertAll(Enumerable.Range(0, controlPoints.Count).ToArray(), item => (double)item);
         //List<float> dists = Enumerable.Zip(xyz, xyz.Skip(1), (a, b) => (a - b).magnitude).ToList();
         //dists.Insert(0, 0f);
         //dists.Sort();
         //double[] x = Array.ConvertAll<float, double>(dists.ToArray(), item => (double)item);
-        double[] yx = Array.ConvertAll((from o in controlPoints select o.transform.position.x).ToArray(), item => (double)item);
-        double[] yy = Array.ConvertAll((from o in controlPoints select o.transform.position.y).ToArray(), item => (double)item);
-        double[] yz = Array.ConvertAll((from o in controlPoints select o.transform.position.z).ToArray(), item => (double)item);
+        double[] yx = Array.ConvertAll((from o in controlPoints select o.x).ToArray(), item => (double)item);
+        double[] yy = Array.ConvertAll((from o in controlPoints select o.y).ToArray(), item => (double)item);
+        double[] yz = Array.ConvertAll((from o in controlPoints select o.z).ToArray(), item => (double)item);
 
-        rotationCP = (from o in controlPoints select o.transform.rotation).ToArray();
+        // rotationCP = (from o in controlPoints select o.transform.rotation).ToArray();
 
         //positionCP[0] = CubicSpline.InterpolateNaturalSorted(x, yx);
         //positionCP[1] = CubicSpline.InterpolateNaturalSorted(x, yy);
@@ -139,25 +145,5 @@ public class FollowPath : MonoBehaviour
 
         // return Quaternion.Slerp(q1, q2, ct - i);
         return QuaternionUtil.SmoothDamp(target.transform.rotation, q2, ref rotationRef, 1f / (float)speed);
-    }
-
-    public void OnDrawGizmosSelected()
-    {
-        if (controlPoints.Count >= 2)
-        {
-            if (rotationCP == null || positionCP[0] == null)
-            {
-                RefreshSplines();
-            }
-            Vector3 lastPos = new Vector3((float)positionCP[0].Interpolate(0f), (float)positionCP[1].Interpolate(0f), (float)positionCP[2].Interpolate(0f));
-            Gizmos.color = Color.red;
-            for (float i = 0f; i <= controlPoints.Count() - 1; i += .2f)
-            {
-                Vector3 pos = new Vector3((float)positionCP[0].Interpolate(i), (float)positionCP[1].Interpolate(i), (float)positionCP[2].Interpolate(i));
-                Gizmos.DrawLine(lastPos, pos);
-                lastPos = pos;
-            }
-
-        }
     }
 }

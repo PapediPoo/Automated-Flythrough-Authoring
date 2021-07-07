@@ -4,19 +4,19 @@ using UnityEngine;
 using MathNet.Numerics.LinearAlgebra;
 using System;
 
+[System.Serializable]
 public class RSGrid
 {
     /// <summary>
     /// Describes a 3d grid and provides helper functions for applying functions for each cell of the grid
-    /// Version: 0.1
+    /// Version: 0.2
     /// Author: Robin Schmidiger
-    /// Date: Mai 2021
+    /// Date: June 2021
     /// </summary>
 
-    double cell_size;
-    Vector<double> corner;
-    Vector<float> lengths;  // Note: mathnet doesn't support int vectors as of yet. Just use float for now
-    IEnumerable<Vector<double>> all_positions;
+    public double cell_size;
+    public Vector<double> corner;
+    public Vector<float> lengths;  // Note: mathnet doesn't support int vectors as of yet. Just use float for now
 
     public Vector<double> GetPosition(Vector<float> at)
     {
@@ -56,7 +56,7 @@ public class RSGrid
                 f(k.At(0) + 1, k.At(1) + 1, k.At(2) + 1)
             }
             );
-        if(v == Mathf.Infinity)
+        if(float.IsNaN(v))
         {
             return default_value;
         }
@@ -120,6 +120,20 @@ public class RSGrid
         this.cell_size = cell_size;
         this.corner = corner;
         this.lengths = lengths;
+
+        //this.cornerv3 = RSUtils.Utils.VToV3(corner);
+        //this.lengthsv3 = RSUtils.Utils.VToV3(lengths);
+    }
+
+    private void Rebuild()
+    {
+        if(corner != null && lengths != null)
+        {
+            return;
+        }
+
+        //corner = RSUtils.Utils.V3ToV(cornerv3);
+        //lengths = RSUtils.Utils.V3ToV(lengthsv3).Map(x => (float)x);
     }
 
     /// <summary>
@@ -131,8 +145,8 @@ public class RSGrid
     /// <typeparam name="T">Return type of function f</typeparam>
     /// <param name="f">Function to be applied for each cell. takes 3D position vector as input</param>
     /// <returns>Returns multidim. array with f applied to each cell position</returns>
-    public T[,,] ForAll<T>(Func<Vector<double>, T> f) {
-        return ForAllIndexed((x, _) => f(x));
+    public T[,,] ForAll<T>(Func<Vector<double>, T> f, bool void_function = false) {
+        return ForAllIndexed((x, _) => f(x), void_function);
     }
 
     /// <summary>
@@ -144,17 +158,31 @@ public class RSGrid
     /// <typeparam name="T">Return type of function f</typeparam>
     /// <param name="f">Function to be applied for each cell position and index. Takes 3D position vector and index vector as input. NOTE: index vector is a float vector</param>
     /// <returns>Returns multidim. array with f applied to each cell position AND index</returns>
-    public T[,,] ForAllIndexed<T>(Func<Vector<double>, Vector<float>, T> f)
+    public T[,,] ForAllIndexed<T>(Func<Vector<double>, Vector<float>, T> f, bool void_function = false)
     {
-        T[,,] output = new T[(int)lengths.At(0), (int)lengths.At(1), (int)lengths.At(2)];
+        T[,,] output = null;
+        if (!void_function)
+        {
+            output = new T[(int)lengths.At(0), (int)lengths.At(1), (int)lengths.At(2)];
+        }
+        Vector<float> vec = Vector<float>.Build.Dense(3);
         for (int u = 0; u < lengths.At(0); u++)
         {
             for (int v = 0; v < lengths.At(1); v++)
             {
                 for (int w = 0; w < lengths.At(2); w++)
                 {
-                    Vector<float> vec = Vector<float>.Build.DenseOfArray(new float[] { u, v, w });
-                    output[u, v, w] = f(GetPosition(vec), vec);
+                    vec = Vector<float>.Build.DenseOfArray(new float[] { u, v, w });
+                    //vec.SetValues(new float[] { u, v, w});
+
+                    if (output != null)
+                    {
+                        output[u, v, w] = f(GetPosition(vec), vec);
+                    }
+                    else
+                    {
+                        f(GetPosition(vec), vec);
+                    }
                 }
             }
         }

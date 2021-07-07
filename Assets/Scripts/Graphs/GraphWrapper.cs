@@ -35,7 +35,7 @@ namespace Graph {
             {
                 List<Transform> path = lblpath.ToList().ConvertAll(e => nodes.Find(o => o.name == e.Source).transform);
                 path.Add(nodes.Find(o => o.name == lblpath.ToList()[lblpath.Count() - 1].Target).transform);
-                fp.SetCP(path);
+                // fp.SetCP(path);
             }
         }
 

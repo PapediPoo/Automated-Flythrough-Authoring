@@ -98,10 +98,10 @@ public class FloorScanner : MonoBehaviour
                             c = (float)visibility.GetValue(x, y, z);
                             Gizmos.color = new Color(1f - c, c, 0f);
                             break;
-                        case ScanDisplayType.score:
-                            //c = Mathf.InverseLerp(0, maxScore, (float)Score(RSUtils.Utils.V3ToV(pos)));
-                            //Gizmos.color = new Color(c, 1f - c, 0);
-                            break;
+                        //case ScanDisplayType.score:
+                        //    c = Mathf.InverseLerp(0, maxScore, (float)Score(RSUtils.Utils.V3ToV(pos)));
+                        //    Gizmos.color = new Color(c, 1f - c, 0);
+                        //    break;
                         default:
                             break;
                     }
@@ -159,7 +159,7 @@ public class FloorScannerEditor : Editor
             GraphGenerator gg = FindObjectOfType<GraphGenerator>();
             FollowPath fp = FindObjectOfType<FollowPath>();
             List<Transform> ts = gg.PlanPath(gg.qgraph, gg.qcost);
-            fp.SetCP(ts);
+            // fp.SetCP(ts);
         }
     }
 }

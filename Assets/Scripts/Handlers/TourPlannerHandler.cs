@@ -20,13 +20,18 @@ public class TourPlannerHandler : IHandler<(List<Vector<double>>, bool), List<Ve
         var qcost = new Dictionary<Edge<int>, float>();
 
         qgraph.AddVertexRange(Enumerable.Range(0, coarseCPs.Count));
+        NavMeshHit nmhu;
+        NavMeshHit nmhv;
 
         for(int i = 0; i < coarseCPs.Count; i++)
         {
             for(int j = 0; j < i; j++)
             {
-                Vector3 u = Utils.VToV3(coarseCPs[i]) - Vector3.up;
-                Vector3 v = Utils.VToV3(coarseCPs[j]) - Vector3.up;
+                NavMesh.SamplePosition(Utils.VToV3(coarseCPs[i]), out nmhu, 3f, NavMesh.AllAreas);
+                NavMesh.SamplePosition(Utils.VToV3(coarseCPs[j]), out nmhv, 3f, NavMesh.AllAreas);
+
+                Vector3 u = nmhu.position;
+                Vector3 v = nmhv.position;
 
                 NavMeshPath p = new NavMeshPath();
                 if(!NavMesh.CalculatePath(u, v, NavMesh.AllAreas, p))
