@@ -53,25 +53,40 @@ public class TrajectoryOptimizationHandler : IHandler<(Vector<double>, LBFGS, IO
                 return rch.distance;
             });
 
+            var f_dist = new Func<double, double, double, double>((a, b, y) =>
+            {
+                return (y - b) * (y - b) * a / (b * b);
+            });
+
+            var fd_dist = new Func<double, double, double, double>((a, b, y) =>
+            {
+                return (y - b) * (2 * a) / (b * b);
+            });
+
             var height_grad = new Converter<float, double[]>(y => {
                 return new double[] { 0, 2 * (y - settings.desired_height), 0 };
             });
 
+
+            var a = 50d;
+            var b = 1d;
+
+            var dist_grad = Array.ConvertAll(trajectory_point_array, y => fd_dist(a, b, container.rsgrid.LerpGet(container.rsgrid.GetIndex(y), container.distancetransform, 0f)) * container.rsgrid.GradientGet(container.rsgrid.GetIndex(y), container.distancetransform, 0f));
+
+
             double value = (settings.distance_weight * ((X.Transpose() * Ad * X) + (fd.Transpose() * X)).At(0, 0))
           + (settings.velocity_weight * (X.Transpose() * Av * X).At(0, 0))
           + (settings.acceleration_weight * (X.Transpose() * Aa * X).At(0, 0))
-          + (settings.collision_weight * Array.ConvertAll(trajectory_point_array, y => -container.rsgrid.LerpGet(container.rsgrid.GetIndex(y), container.distancetransform, 0f)).Sum())
+          + (settings.collision_weight * Array.ConvertAll(trajectory_point_array, y => f_dist(a, b, container.rsgrid.LerpGet(container.rsgrid.GetIndex(y), container.distancetransform, 0f))).Sum())
           + (settings.height_weight * height_val.Aggregate((y, z) => y + Mathf.Pow(z - settings.desired_height, 2)));
-            //+ (settings.height_weight * Array.ConvertAll(trajectory_point_array, y => Mathf.Abs(settings.desired_height - container.rsgrid.LerpGet(container.rsgrid.GetIndex(y), container.heightmap, 10f))).Sum());
 
             //Debug.Log(container.rsgrid.GradientGet(container.rsgrid.GetIndex(trajectory_point_array[0]), container.heightmap, 10f));
 
             Vector<double> gradient = (settings.distance_weight * (Gd * X + fgd).Column(0))
             + (settings.velocity_weight * (Gv * X).Column(0))
             + (settings.acceleration_weight * (Ga * X).Column(0))
-            + (settings.collision_weight * 0.1f * Vector<double>.Build.DenseOfEnumerable(Array.ConvertAll(trajectory_point_array, y => -container.rsgrid.GradientGet(container.rsgrid.GetIndex(y), container.distancetransform, 0f)).SelectMany(y => y)))
+            + (settings.collision_weight * Vector<double>.Build.DenseOfEnumerable(dist_grad.SelectMany(y => y)))
             + (settings.height_weight * Vector<double>.Build.DenseOfEnumerable(Array.ConvertAll(height_val, height_grad).SelectMany(y => y)));
-            //+ (settings.height_weight * Vector<double>.Build.DenseOfEnumerable(Array.ConvertAll(trajectory_point_array, height_grad).SelectMany(y => y)));
             return new Tuple<double, Vector<double>>(value, gradient);
         });
 
