@@ -3,35 +3,80 @@ using System.Collections.Generic;
 using UnityEngine;
 using MathNet.Numerics.LinearAlgebra;
 using System;
+using System.Diagnostics;
 
 [System.Serializable]
 public class RSGrid
 {
+    //TODO: reduce number of runtime mem allocs!
+
     /// <summary>
     /// Describes a 3d grid and provides helper functions for applying functions for each cell of the grid
     /// Version: 0.2
     /// Author: Robin Schmidiger
-    /// Date: June 2021
+    /// Date: July 2021
     /// </summary>
 
     public double cell_size;
     public Vector<double> corner;
     public Vector<float> lengths;  // Note: mathnet doesn't support int vectors as of yet. Just use float for now
 
-    public Vector<double> GetPosition(Vector<float> at)
+    /// <summary>
+    /// Returns the world space position of the cell specified by the index vector.
+    /// Preconditions: index.Count == 3 && 0 <= index[i] < lengths[i]
+    /// </summary>
+    /// <param name="index">The index for which the position should be evaluated. </param>
+    /// <returns></returns>
+    public Vector<double> GetPosition(Vector<float> index)
     {
-        return corner + at.Map(x => (double)x + 0.5f).Multiply(cell_size);
+        // Check preconditions
+        System.Diagnostics.Debug.Assert(index.Count == 3);
+        for(int i = 0; i < index.Count; i++)
+        {
+            System.Diagnostics.Debug.Assert(0 <= index[i] && index[i] < lengths[i]);
+        }
+
+        // Calculate and return actual position
+        // Note: the 0.5f ensures that the returned position is at the middle point of the cell
+        return corner + index.Map(x => (double)x + 0.5f).Multiply(cell_size);
     }
 
-    public Vector<float> GetIndex(Vector<double> at)
+    /// <summary>
+    /// returns the index that maps th the specified position
+    /// Precondition: position.Count == 3
+    /// </summary>
+    /// <param name="position">The position vector for which the index should be returned</param>
+    /// <returns></returns>
+    public Vector<float> GetIndex(Vector<double> position)
     {
-        return ((at - corner) / cell_size).Map(x => (float)x - 0.5f);
+        // check preconditions
+        System.Diagnostics.Debug.Assert(position.Count == 3);
+
+        // calculate index from position and return
+        return ((position - corner) / cell_size).Map(x => (float)x - 0.5f);
     }
 
-    public float LerpGet(Vector<float> i, float[,,] map, float default_value)
+    /// <summary>
+    /// When specifying a map and a floating-point index, returns the linearly interpolated value of the map.
+    /// If the index is out of bounds, returns the default value
+    /// For example: 
+    /// map = [[0, 1], [2, 3]], index = [0.5, 0.5]
+    /// returns 1.5
+    /// </summary>
+    /// <param name="index">The index vector to be evaluated at</param>
+    /// <param name="map">The map to take values from</param>
+    /// <param name="default_value">The default value if the index is OOB</param>
+    /// <returns></returns>
+    public float GetLerp(Vector<float> index, float[,,] map, float default_value)
     {
-        var k = i.Map(x => Mathf.Floor(x));
+        // Check preconditions
+        System.Diagnostics.Debug.Assert(index.Count == 3);
+        System.Diagnostics.Debug.Assert(map.Rank == index.Count);
 
+        // The input index rounded to the next lower int
+        var int_index = index.Map(x => Mathf.Floor(x));
+
+        // Value-retrieving helper function that handles index OOB exceptions
         var f = new Func<float, float, float, float>((x, y, z) =>
         {
             try
@@ -43,17 +88,19 @@ public class RSGrid
                 return default_value;
             }
         });
+
+        // Do trilinear interpolation
         var v = RSUtils.Utils.TriLerp(
-            new float[] { i.At(0) % 1, i.At(1) % 1, i.At(2) % 1 },
+            new float[] { index.At(0) % 1, index.At(1) % 1, index.At(2) % 1 },
             new float[] {
-                f(k.At(0) + 0, k.At(1) + 0, k.At(2) + 0),
-                f(k.At(0) + 0, k.At(1) + 0, k.At(2) + 1),
-                f(k.At(0) + 0, k.At(1) + 1, k.At(2) + 0),
-                f(k.At(0) + 0, k.At(1) + 1, k.At(2) + 1),
-                f(k.At(0) + 1, k.At(1) + 0, k.At(2) + 0),
-                f(k.At(0) + 1, k.At(1) + 0, k.At(2) + 1),
-                f(k.At(0) + 1, k.At(1) + 1, k.At(2) + 0),
-                f(k.At(0) + 1, k.At(1) + 1, k.At(2) + 1)
+                f(int_index.At(0) + 0, int_index.At(1) + 0, int_index.At(2) + 0),
+                f(int_index.At(0) + 0, int_index.At(1) + 0, int_index.At(2) + 1),
+                f(int_index.At(0) + 0, int_index.At(1) + 1, int_index.At(2) + 0),
+                f(int_index.At(0) + 0, int_index.At(1) + 1, int_index.At(2) + 1),
+                f(int_index.At(0) + 1, int_index.At(1) + 0, int_index.At(2) + 0),
+                f(int_index.At(0) + 1, int_index.At(1) + 0, int_index.At(2) + 1),
+                f(int_index.At(0) + 1, int_index.At(1) + 1, int_index.At(2) + 0),
+                f(int_index.At(0) + 1, int_index.At(1) + 1, int_index.At(2) + 1)
             }
             );
         if(float.IsNaN(v))
@@ -64,9 +111,19 @@ public class RSGrid
         return v;
     }
 
-    public Vector<double> GradientGet(Vector<float> i, float[,,] map, float default_value)
+    /// <summary>
+    /// Returns the gradient of the linear interpolation induced by the map at the index position
+    /// </summary>
+    /// <param name="index">The index at which the gradient should be evaluated</param>
+    /// <param name="map">The map for which the gradient should be evaluated</param>
+    /// <param name="default_value">The default value for IOOB</param>
+    /// <returns></returns>
+    public Vector<double> GetLerpGradient(Vector<float> index, float[,,] map, float default_value)
     {
-        var k = i.Map(x => (float)Math.Floor(x));
+        // Index vector with components rounded to next lower int
+        var int_index = index.Map(x => (float)Math.Floor(x));
+
+        // retrieve helper-function that returns the default_value on IOOB
         var f = new Func<float, float, float, float>((x, y, z) =>
         {
             try
@@ -86,31 +143,35 @@ public class RSGrid
                 return default_value;
             }
         });
+
+        // Gradients along x direction
         float[] xs = new float[]{
-            f(k.At(0) + 1, k.At(1) + 0, k.At(2) + 0) - f(k.At(0) + 0, k.At(1) + 0, k.At(2) + 0),
-            f(k.At(0) + 1, k.At(1) + 0, k.At(2) + 1) - f(k.At(0) + 0, k.At(1) + 0, k.At(2) + 1),
-            f(k.At(0) + 1, k.At(1) + 1, k.At(2) + 0) - f(k.At(0) + 0, k.At(1) + 1, k.At(2) + 0),
-            f(k.At(0) + 1, k.At(1) + 1, k.At(2) + 1) - f(k.At(0) + 0, k.At(1) + 1, k.At(2) + 1)
+            f(int_index.At(0) + 1, int_index.At(1) + 0, int_index.At(2) + 0) - f(int_index.At(0) + 0, int_index.At(1) + 0, int_index.At(2) + 0),
+            f(int_index.At(0) + 1, int_index.At(1) + 0, int_index.At(2) + 1) - f(int_index.At(0) + 0, int_index.At(1) + 0, int_index.At(2) + 1),
+            f(int_index.At(0) + 1, int_index.At(1) + 1, int_index.At(2) + 0) - f(int_index.At(0) + 0, int_index.At(1) + 1, int_index.At(2) + 0),
+            f(int_index.At(0) + 1, int_index.At(1) + 1, int_index.At(2) + 1) - f(int_index.At(0) + 0, int_index.At(1) + 1, int_index.At(2) + 1)
         };
 
+        // Gradients along y direction
         float[] ys = new float[] {
-            f(k.At(0) + 0, k.At(1) + 1, k.At(2) + 0) - f(k.At(0) + 0, k.At(1) + 0, k.At(2) + 0),
-            f(k.At(0) + 0, k.At(1) + 1, k.At(2) + 1) - f(k.At(0) + 0, k.At(1) + 0, k.At(2) + 1),
-            f(k.At(0) + 1, k.At(1) + 1, k.At(2) + 0) - f(k.At(0) + 1, k.At(1) + 0, k.At(2) + 0),
-            f(k.At(0) + 1, k.At(1) + 1, k.At(2) + 1) - f(k.At(0) + 1, k.At(1) + 0, k.At(2) + 1)
+            f(int_index.At(0) + 0, int_index.At(1) + 1, int_index.At(2) + 0) - f(int_index.At(0) + 0, int_index.At(1) + 0, int_index.At(2) + 0),
+            f(int_index.At(0) + 0, int_index.At(1) + 1, int_index.At(2) + 1) - f(int_index.At(0) + 0, int_index.At(1) + 0, int_index.At(2) + 1),
+            f(int_index.At(0) + 1, int_index.At(1) + 1, int_index.At(2) + 0) - f(int_index.At(0) + 1, int_index.At(1) + 0, int_index.At(2) + 0),
+            f(int_index.At(0) + 1, int_index.At(1) + 1, int_index.At(2) + 1) - f(int_index.At(0) + 1, int_index.At(1) + 0, int_index.At(2) + 1)
         };
 
+        // Gradients along z direction
         float[] zs = new float[] {
-            f(k.At(0) + 0, k.At(1) + 0, k.At(2) + 1) - f(k.At(0) + 0, k.At(1) + 0, k.At(2) + 0),
-            f(k.At(0) + 0, k.At(1) + 1, k.At(2) + 1) - f(k.At(0) + 0, k.At(1) + 1, k.At(2) + 0),
-            f(k.At(0) + 1, k.At(1) + 0, k.At(2) + 1) - f(k.At(0) + 1, k.At(1) + 0, k.At(2) + 0),
-            f(k.At(0) + 1, k.At(1) + 1, k.At(2) + 1) - f(k.At(0) + 1, k.At(1) + 1, k.At(2) + 0)
+            f(int_index.At(0) + 0, int_index.At(1) + 0, int_index.At(2) + 1) - f(int_index.At(0) + 0, int_index.At(1) + 0, int_index.At(2) + 0),
+            f(int_index.At(0) + 0, int_index.At(1) + 1, int_index.At(2) + 1) - f(int_index.At(0) + 0, int_index.At(1) + 1, int_index.At(2) + 0),
+            f(int_index.At(0) + 1, int_index.At(1) + 0, int_index.At(2) + 1) - f(int_index.At(0) + 1, int_index.At(1) + 0, int_index.At(2) + 0),
+            f(int_index.At(0) + 1, int_index.At(1) + 1, int_index.At(2) + 1) - f(int_index.At(0) + 1, int_index.At(1) + 1, int_index.At(2) + 0)
         };
 
-        var xv = RSUtils.Utils.BiLerp(new float[] { i.At(1) % 1, i.At(2) % 1 }, xs);
-        var yv = RSUtils.Utils.BiLerp(new float[] { i.At(0) % 1, i.At(2) % 1 }, ys);
-        var zv = RSUtils.Utils.BiLerp(new float[] { i.At(0) % 1, i.At(1) % 1 }, zs);
-
+        // do bilinear interpolation on all directional gradients and compose the gradient vector
+        var xv = RSUtils.Utils.BiLerp(new float[] { index.At(1) % 1, index.At(2) % 1 }, xs);
+        var yv = RSUtils.Utils.BiLerp(new float[] { index.At(0) % 1, index.At(2) % 1 }, ys);
+        var zv = RSUtils.Utils.BiLerp(new float[] { index.At(0) % 1, index.At(1) % 1 }, zs);
         return Vector<double>.Build.DenseOfArray(new double[] { xv, yv, zv });
 
     }
@@ -121,19 +182,6 @@ public class RSGrid
         this.corner = corner;
         this.lengths = lengths;
 
-        //this.cornerv3 = RSUtils.Utils.VToV3(corner);
-        //this.lengthsv3 = RSUtils.Utils.VToV3(lengths);
-    }
-
-    private void Rebuild()
-    {
-        if(corner != null && lengths != null)
-        {
-            return;
-        }
-
-        //corner = RSUtils.Utils.V3ToV(cornerv3);
-        //lengths = RSUtils.Utils.V3ToV(lengthsv3).Map(x => (float)x);
     }
 
     /// <summary>
@@ -157,14 +205,18 @@ public class RSGrid
     /// </summary>
     /// <typeparam name="T">Return type of function f</typeparam>
     /// <param name="f">Function to be applied for each cell position and index. Takes 3D position vector and index vector as input. NOTE: index vector is a float vector</param>
+    /// <param name="void_function">If f doesn't return anything meaningful, set void_function to true. This avoids unnecessary memory allocation.</param>
     /// <returns>Returns multidim. array with f applied to each cell position AND index</returns>
     public T[,,] ForAllIndexed<T>(Func<Vector<double>, Vector<float>, T> f, bool void_function = false)
     {
+        // Alloc an output multi-array if needed
         T[,,] output = null;
         if (!void_function)
         {
             output = new T[(int)lengths.At(0), (int)lengths.At(1), (int)lengths.At(2)];
         }
+
+
         Vector<float> vec = Vector<float>.Build.Dense(3);
         for (int u = 0; u < lengths.At(0); u++)
         {
@@ -172,8 +224,9 @@ public class RSGrid
             {
                 for (int w = 0; w < lengths.At(2); w++)
                 {
+                    // For some reason rebuilding the vector completely for every iteration is faster than editing the vector components.
+                    // Note: this produces a lot of garbage
                     vec = Vector<float>.Build.DenseOfArray(new float[] { u, v, w });
-                    //vec.SetValues(new float[] { u, v, w});
 
                     if (output != null)
                     {
@@ -194,12 +247,12 @@ public class RSGrid
         return cell_size;
     }
 
-    public Vector<double> GetLowerBound()
+    public Vector<double> GetLowerCorner()
     {
         return corner;
     }
 
-    public Vector<double> GetUpperBound()
+    public Vector<double> GetUpperCorner()
     {
         return corner + (cell_size * lengths.Map(x => (double)x));
     }

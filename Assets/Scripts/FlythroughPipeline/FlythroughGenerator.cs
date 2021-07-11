@@ -45,6 +45,9 @@ public class FlythroughGenerator : MonoBehaviour
     public TrajectorySettings trajectory_settings;
     public TrajectoryContainer trajectory_container;
 
+    [SerializeField]
+    public Transform controlpoint_container;
+
     [Header("debug")]
     [Range(0, .99f)]
     public float _debugHeight = 0.5f;
@@ -55,15 +58,15 @@ public class FlythroughGenerator : MonoBehaviour
 
     void Start()
     {
-        GenerateMaps();
-        FindControlPoints();
-        PlanTour();
-        for(int i = 0; i < trajectory_settings.max_iterations; i++)
-        {
-            RefineTrajectory();
-        }
-        ApplyPath();
-        FindObjectOfType<FollowPath>().enabled = true;
+        //GenerateMaps();
+        //FindControlPoints();
+        //PlanTour();
+        //for(int i = 0; i < trajectory_settings.max_iterations; i++)
+        //{
+        //    RefineTrajectory();
+        //}
+        //ApplyPath();  
+        //FindObjectOfType<FollowPath>().enabled = true;
     }
 
     private void Update()
@@ -84,12 +87,12 @@ public class FlythroughGenerator : MonoBehaviour
     public void FindControlPoints()
     {
         var cp = new ControlPointHandler().Invoke((map_container, control_point_settings));
-        ObjectContainer.ToObjectContainer(cp, transform.GetChild(2));
+        ObjectContainer.ToObjectContainer(cp, controlpoint_container);
     }
 
     public void PlanTour()
     {
-        trajectory_container = new TrajectoryInitializationHandler().Invoke((transform.GetChild(2), trajectory_settings, map_container));
+        trajectory_container = new TrajectoryInitializationHandler().Invoke((controlpoint_container, trajectory_settings, map_container));
     }
 
     public void ApplyPath()
@@ -168,7 +171,7 @@ public class FlythroughGenerator : MonoBehaviour
                         //Gizmos.DrawSphere(RSUtils.Utils.VToV3(x), (float)(rsgrid.GetCellSize() / 2f));
                         if (Mathf.FloorToInt(_debugHeight * map_container.rsgrid.GetLengths().At(1)) == (int)i.At(1))
                         {
-                            float cl = 1f / (0.01f + map_container.rsgrid.LerpGet(map_container.rsgrid.GetIndex(x), map_container.distancetransform, 0.01f));
+                            float cl = 1f / (0.01f + map_container.rsgrid.GetLerp(map_container.rsgrid.GetIndex(x), map_container.distancetransform, 0.01f));
                             Gizmos.color = new Color(cl * 0.05f, 0, 0);
                             Gizmos.DrawCube(Utils.VToV3(x), new Vector3(1, 0.1f, 1) * (float)map_container.rsgrid.GetCellSize());
                         }

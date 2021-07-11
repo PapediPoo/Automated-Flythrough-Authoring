@@ -71,13 +71,13 @@ public class TrajectoryOptimizationHandler : IHandler<(Vector<double>, LBFGS, IO
             var a = 50d;
             var b = 1d;
 
-            var dist_grad = Array.ConvertAll(trajectory_point_array, y => fd_dist(a, b, container.rsgrid.LerpGet(container.rsgrid.GetIndex(y), container.distancetransform, 0f)) * container.rsgrid.GradientGet(container.rsgrid.GetIndex(y), container.distancetransform, 0f));
+            var dist_grad = Array.ConvertAll(trajectory_point_array, y => fd_dist(a, b, container.rsgrid.GetLerp(container.rsgrid.GetIndex(y), container.distancetransform, 0f)) * container.rsgrid.GetLerpGradient(container.rsgrid.GetIndex(y), container.distancetransform, 0f));
 
 
             double value = (settings.distance_weight * ((X.Transpose() * Ad * X) + (fd.Transpose() * X)).At(0, 0))
           + (settings.velocity_weight * (X.Transpose() * Av * X).At(0, 0))
           + (settings.acceleration_weight * (X.Transpose() * Aa * X).At(0, 0))
-          + (settings.collision_weight * Array.ConvertAll(trajectory_point_array, y => f_dist(a, b, container.rsgrid.LerpGet(container.rsgrid.GetIndex(y), container.distancetransform, 0f))).Sum())
+          + (settings.collision_weight * Array.ConvertAll(trajectory_point_array, y => f_dist(a, b, container.rsgrid.GetLerp(container.rsgrid.GetIndex(y), container.distancetransform, 0f))).Sum())
           + (settings.height_weight * height_val.Aggregate((y, z) => y + Mathf.Pow(z - settings.desired_height, 2)));
 
             //Debug.Log(container.rsgrid.GradientGet(container.rsgrid.GetIndex(trajectory_point_array[0]), container.heightmap, 10f));
