@@ -96,3 +96,4 @@ Received Import Request.
 Start importing Assets/Models/blend (optimized)/new_concrete.blend using Guid(03dcccfc81f2f4f4e829adb90c6acf1d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6113549588346da711c30a3d324d0e61') in 0.087260 seconds
   Import took 0.098129 seconds .
 
+AssetImportWorkerClient::OnTransportError - code=2 error=End of file
