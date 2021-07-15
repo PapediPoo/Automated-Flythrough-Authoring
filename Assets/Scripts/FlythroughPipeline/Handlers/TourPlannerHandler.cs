@@ -8,12 +8,12 @@ using System.Linq;
 using QuikGraph;
 using QuikGraph.Algorithms;
 
-public class TourPlannerHandler : IHandler<(List<Vector<double>>, bool), List<Vector<double>>>
+public class TourPlannerHandler : IHandler<(List<Vector<double>>, TrajectorySettings), List<Vector<double>>>
 {
-    public List<Vector<double>> Invoke((List<Vector<double>>, bool) input)
+    public List<Vector<double>> Invoke((List<Vector<double>>, TrajectorySettings) input)
     {
         List<Vector<double>> coarseCPs = input.Item1;
-        bool backtrack = input.Item2;
+        TrajectorySettings settings = input.Item2;
 
         var paths = new Dictionary<Edge<int>, NavMeshPath>();
         var qgraph = new UndirectedGraph<int, Edge<int>>();
@@ -73,12 +73,17 @@ public class TourPlannerHandler : IHandler<(List<Vector<double>>, bool), List<Ve
                     DFS(w);
                 }
             }
-            if (coarsetour.Last() != v && (backtrack || labels.All(x => !x)))
+            if (coarsetour.Last() != v && (settings.backtrack || labels.All(x => !x)))
             {
                 coarsetour.Add(v);
             }
         }
         DFS(0);
+
+        foreach(var v in coarsetour)
+        {
+            Debug.Log(v);
+        }
 
         Vector3 lastpos = Utils.VToV3(coarseCPs[coarsetour[0]]);
         for(int i = 1; i < coarsetour.Count; i++)
@@ -90,11 +95,11 @@ public class TourPlannerHandler : IHandler<(List<Vector<double>>, bool), List<Ve
             if ((corners.First() - lastpos).magnitude > (corners.Last() - lastpos).magnitude) corners = corners.Reverse().ToArray();
             foreach (Vector3 p in corners.Take(corners.Count() - 1))
             {
-                finetour.Add(Utils.V3ToV(p + Vector3.up));
+                finetour.Add(Utils.V3ToV(p + (Vector3.up * settings.desired_height)));
             }
             if(i == coarsetour.Count - 1)
             {
-                finetour.Add(Utils.V3ToV(corners.Last() + Vector3.up));
+                finetour.Add(Utils.V3ToV(corners.Last() + (Vector3.up * settings.desired_height)));
             }
 
             lastpos = corners.Last();

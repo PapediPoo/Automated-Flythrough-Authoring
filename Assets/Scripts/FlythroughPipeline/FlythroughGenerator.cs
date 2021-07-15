@@ -22,11 +22,10 @@ public enum ScanDisplayType
 /// The different parameters of this component let you adjust how the flythrough is generated.
 /// 
 /// TODO:
-/// - add more comments
 /// - Make visibility metric generation more performant
 /// - Add "masking" to visibility metric, So that points that have already been seen are masked out.
 /// 
-/// Version: 0.4
+/// Version: 0.5
 /// Author: Robin Schmidiger
 /// Date: July 2021
 /// </summary>
@@ -40,6 +39,7 @@ public class FlythroughGenerator : MonoBehaviour
 
     [SerializeField]
     public ControlPointSettings control_point_settings;
+    public int control_point_layer = 0;
 
     [SerializeField]
     public TrajectorySettings trajectory_settings;
@@ -87,7 +87,7 @@ public class FlythroughGenerator : MonoBehaviour
     public void FindControlPoints()
     {
         var cp = new ControlPointHandler().Invoke((map_container, control_point_settings));
-        ObjectContainer.ToObjectContainer(cp, controlpoint_container);
+        ObjectContainer.ToObjectContainer(cp, controlpoint_container, true, control_point_layer);
     }
 
     public void PlanTour()

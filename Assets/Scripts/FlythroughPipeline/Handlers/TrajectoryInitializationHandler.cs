@@ -15,7 +15,7 @@ public class TrajectoryInitializationHandler : IHandler<(Transform, TrajectorySe
         TrajectoryContainer tc;
 
         var ls = ObjectContainer.FromObjectContainer(object_container).ConvertAll(x => Utils.V3ToV(x));
-        tc.tour = new TourPlannerHandler().Invoke((ls, ts.backtrack));
+        tc.tour = new TourPlannerHandler().Invoke((ls, ts));
         tc.lbfgs = new LBFGS(10, ts.max_iterations);
         tc.trajectory = TrajectoryOptimizationHandler.CPToInitGuess(tc.tour, ts.num_trajectory_points);
         tc.objective = TrajectoryOptimizationHandler.BuildObjectiveFunction(tc.tour, ts, mc);

@@ -8,9 +8,28 @@ using MathNet.Numerics.Optimization.ObjectiveFunctions;
 using MathNet.Numerics.Interpolation;
 using System.Linq;
 using System;
+
+
 //public class TrajectoryOptimizationHandler : IHandler<(List<Vector<double>>, int, IUnconstrainedMinimizer, IObjectiveFunction), List<Vector<double>>>
 public class TrajectoryOptimizationHandler : IHandler<(Vector<double>, LBFGS, IObjectiveFunction), Vector<double>>
 {
+    public struct HeightAtPointContainer
+    {
+        public Func<float, float> f;
+        public Func<float, float> df;
+        public float MAX_DIST;
+        public float MAX_VALUE;
+    }
+
+    public struct DistanceAtPointContainer
+    {
+        public Func<float, float> f;
+        public Func<float, float> df;
+        public float MAX_DIST;
+        public float MAX_VALUE;
+        public Collider[] cols;
+    }
+
     public Vector<double> Invoke((Vector<double>, LBFGS, IObjectiveFunction) input)
     {
         var control_points = input.Item1;
@@ -33,6 +52,11 @@ public class TrajectoryOptimizationHandler : IHandler<(Vector<double>, LBFGS, IO
         var (Av, Gv) = GenerateVelocityMatrix(n);
         var (Aa, Ga) = GenerateAccelerationMatrix(n);
 
+
+
+        var Dc = DistanceAtPointAlloc(.5f, 25f, 10);
+        var Hc = HeightAtPointAlloc(5f, 10f, settings.desired_height);
+
         var trajectory_point_array = new Vector<double>[settings.num_trajectory_points];
         for(int i = 0; i < settings.num_trajectory_points; i++)
         {
@@ -47,46 +71,20 @@ public class TrajectoryOptimizationHandler : IHandler<(Vector<double>, LBFGS, IO
                 x.CopySubVectorTo(trajectory_point_array[i], 3 * i, 0, 3);
             }
 
-            var rch = new RaycastHit();
-            var height_val = Array.ConvertAll(trajectory_point_array, y => {
-                Physics.Raycast(Utils.VToV3(y), Vector3.down, out rch);
-                return rch.distance;
-            });
-
-            var f_dist = new Func<double, double, double, double>((a, b, y) =>
-            {
-                return (y - b) * (y - b) * a / (b * b);
-            });
-
-            var fd_dist = new Func<double, double, double, double>((a, b, y) =>
-            {
-                return (y - b) * (2 * a) / (b * b);
-            });
-
-            var height_grad = new Converter<float, double[]>(y => {
-                return new double[] { 0, 2 * (y - settings.desired_height), 0 };
-            });
-
-
-            var a = 50d;
-            var b = 1d;
-
-            var dist_grad = Array.ConvertAll(trajectory_point_array, y => fd_dist(a, b, container.rsgrid.GetLerp(container.rsgrid.GetIndex(y), container.distancetransform, 0f)) * container.rsgrid.GetLerpGradient(container.rsgrid.GetIndex(y), container.distancetransform, 0f));
-
+            var dist_valgrad = Array.ConvertAll(trajectory_point_array, y => DistanceAtPoint(Utils.VToV3(y), Dc, settings));
+            var height_valgrad = Array.ConvertAll(trajectory_point_array, y => HeightAtPoint(Utils.VToV3(y), Hc, settings));
 
             double value = (settings.distance_weight * ((X.Transpose() * Ad * X) + (fd.Transpose() * X)).At(0, 0))
           + (settings.velocity_weight * (X.Transpose() * Av * X).At(0, 0))
           + (settings.acceleration_weight * (X.Transpose() * Aa * X).At(0, 0))
-          + (settings.collision_weight * Array.ConvertAll(trajectory_point_array, y => f_dist(a, b, container.rsgrid.GetLerp(container.rsgrid.GetIndex(y), container.distancetransform, 0f))).Sum())
-          + (settings.height_weight * height_val.Aggregate((y, z) => y + Mathf.Pow(z - settings.desired_height, 2)));
-
-            //Debug.Log(container.rsgrid.GradientGet(container.rsgrid.GetIndex(trajectory_point_array[0]), container.heightmap, 10f));
+          + (settings.collision_weight * Array.ConvertAll(dist_valgrad, y => y.Item1).Sum())
+          + (settings.height_weight * Array.ConvertAll(height_valgrad, y => y.Item1).Sum());
 
             Vector<double> gradient = (settings.distance_weight * (Gd * X + fgd).Column(0))
             + (settings.velocity_weight * (Gv * X).Column(0))
             + (settings.acceleration_weight * (Ga * X).Column(0))
-            + (settings.collision_weight * Vector<double>.Build.DenseOfEnumerable(dist_grad.SelectMany(y => y)))
-            + (settings.height_weight * Vector<double>.Build.DenseOfEnumerable(Array.ConvertAll(height_val, height_grad).SelectMany(y => y)));
+            + (settings.collision_weight * Vector<double>.Build.DenseOfEnumerable(Array.ConvertAll(dist_valgrad, y => Utils.V3ToV(y.Item2)).SelectMany(y => y)))
+            + (settings.height_weight * Vector<double>.Build.DenseOfEnumerable(Array.ConvertAll(height_valgrad, y => Utils.V3ToV(y.Item2)).SelectMany(y => y)));
             return new Tuple<double, Vector<double>>(value, gradient);
         });
 
@@ -100,6 +98,108 @@ public class TrajectoryOptimizationHandler : IHandler<(Vector<double>, LBFGS, IO
         var G = A + A.Transpose();
         var fg = f;
         return (A, f, G, fg);
+    }
+
+    private static HeightAtPointContainer HeightAtPointAlloc(float MAX_DIST, float MAX_VAL, float desired_height)
+    {
+        var f = new Func<float, float>(y =>
+        {
+            return (y - desired_height) * (y - desired_height) * MAX_VAL;
+        });
+
+        var df = new Func<float, float>(y =>
+        {
+            return (y - desired_height) * (2 * MAX_VAL);
+        });
+
+        HeightAtPointContainer container;
+        container.f = f;
+        container.df = df;
+        container.MAX_DIST = MAX_DIST;
+        container.MAX_VALUE = MAX_VAL;
+
+        return container;
+    }
+
+    private static (float, Vector3) HeightAtPoint(Vector3 point, HeightAtPointContainer container, TrajectorySettings settings)
+    {
+
+        RaycastHit rch;
+        float current_height;
+        if(Physics.Raycast(point, Vector3.down, out rch, container.MAX_DIST, settings.mask.value))
+        {
+            current_height = rch.distance;
+        }
+        else
+        {
+            current_height = container.MAX_DIST;
+        }
+
+        return (container.f(current_height), Vector3.up * container.df(current_height));
+    }
+
+    public static DistanceAtPointContainer DistanceAtPointAlloc(float MAX_DIST, float MAX_VAL, int collider_buffer_size)
+    {
+        var f = new Func<float, float>(y =>
+        {
+            if (y < MAX_DIST)
+            {
+                return (y - MAX_DIST) * (y - MAX_DIST) * MAX_VAL / (MAX_DIST * MAX_DIST);
+            }
+            else
+            {
+                return 0;
+            }
+        });
+
+        var df = new Func<float, float>(y =>
+        {
+            if (y < MAX_DIST)
+            {
+                return (y - MAX_DIST) * (2 * MAX_VAL) / (MAX_DIST * MAX_DIST);
+            }
+            else
+            {
+                return 0;
+            }
+        });
+
+        DistanceAtPointContainer container;
+        container.f = f;
+        container.df = df;
+        container.MAX_DIST = MAX_DIST;
+        container.MAX_VALUE = MAX_VAL;
+        container.cols = new Collider[collider_buffer_size];
+
+        return container;
+    }
+
+    public static (float, Vector3) DistanceAtPoint(Vector3 point, DistanceAtPointContainer container, TrajectorySettings settings)
+    {
+
+        float val = container.MAX_VALUE;
+        Vector3 grad = Vector3.zero;
+
+        int num_cols = Physics.OverlapSphereNonAlloc(point, container.MAX_DIST, container.cols, settings.mask.value);
+
+        for(int i = 0; i < num_cols; i++)
+        {
+            Collider col = container.cols[i];
+            if(col is MeshCollider && !((MeshCollider)col).convex)
+            {
+                continue;
+            }
+
+            Vector3 closest_point = col.ClosestPoint(point);
+
+            float closest_point_dist = (point- closest_point).magnitude;
+            if (closest_point_dist < val)
+            {
+                val = closest_point_dist;
+                grad = point - closest_point;
+            }
+        }
+        return (container.f(val), grad * container.df(val));
     }
 
     private static (Matrix<double>, Matrix<double>) GenerateVelocityMatrix(int n)

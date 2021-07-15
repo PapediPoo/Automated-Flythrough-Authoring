@@ -9,6 +9,7 @@ public struct TrajectorySettings
     public int max_iterations;
     public float desired_height;
     public bool backtrack;
+    public LayerMask mask;
 
     [Range(0.05f, 1)]
     public double distance_weight;

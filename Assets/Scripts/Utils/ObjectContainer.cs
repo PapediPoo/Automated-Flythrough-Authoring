@@ -40,7 +40,7 @@ namespace RSUtils
         /// <param name="trajectory">The trajectory vector to be instantiated</param>
         /// <param name="target">The transform of the target object that </param>
         /// <param name="clear"></param>
-        public static void ToObjectContainer(Vector<double> trajectory, Transform target, bool clear = true)
+        public static void ToObjectContainer(Vector<double> trajectory, Transform target, bool clear = true, int layer = 0)
         {
             if (clear)
             {
@@ -57,10 +57,11 @@ namespace RSUtils
                 obj.transform.localScale = Vector3.one * 0.2f;
                 obj.transform.parent = target;
                 obj.transform.position = new Vector3((float)trajectory[i], (float)trajectory[i + 1], (float)trajectory[i + 2]);
+                obj.layer = layer;
             }
         }
 
-        public static void ToObjectContainer(List<Vector<double>> vectors, Transform target, bool clear = true)
+        public static void ToObjectContainer(List<Vector<double>> vectors, Transform target, bool clear = true, int layer = 0)
         {
             if (clear)
             {
@@ -78,6 +79,7 @@ namespace RSUtils
                 obj.transform.localScale = Vector3.one * 0.2f;
                 obj.transform.parent = target;
                 obj.transform.position = v3;
+                obj.layer = layer;
             }
         }
 
