@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2796619843086054967}
   - component: {fileID: 2796619843086054965}
   - component: {fileID: 2796619843086054966}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Plane014
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -55,6 +55,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -79,6 +80,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &2796619843405524368
 GameObject:
   m_ObjectHideFlags: 0
@@ -90,7 +92,7 @@ GameObject:
   - component: {fileID: 2796619843405524375}
   - component: {fileID: 2796619843405524373}
   - component: {fileID: 2796619843405524374}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Object027
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -134,6 +136,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -158,6 +161,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &2796619843963938340
 GameObject:
   m_ObjectHideFlags: 0
@@ -167,7 +171,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2796619843963938331}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: GE_240_footstool_00
   m_TagString: Untagged
   m_Icon: {fileID: 0}

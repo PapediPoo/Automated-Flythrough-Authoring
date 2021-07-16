@@ -11,12 +11,12 @@ GameObject:
   - component: {fileID: 6477971927804513578}
   - component: {fileID: 1850622161366684160}
   - component: {fileID: 7523980821950505780}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Group_001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &6477971927804513578
 Transform:
@@ -55,6 +55,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -79,6 +80,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &4846454987946460008
 GameObject:
   m_ObjectHideFlags: 0
@@ -88,12 +90,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5190892864687069650}
-  m_Layer: 0
-  m_Name: table2
+  m_Layer: 11
+  m_Name: table_prefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &5190892864687069650
 Transform:
@@ -123,12 +125,12 @@ GameObject:
   - component: {fileID: 5494796819370625191}
   - component: {fileID: 5494796819370625190}
   - component: {fileID: 5494796819370625209}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &5494796819370625208
 Transform:
@@ -167,6 +169,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -191,6 +194,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!136 &5494796819370625209
 CapsuleCollider:
   m_ObjectHideFlags: 0
