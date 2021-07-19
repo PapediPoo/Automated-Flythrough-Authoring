@@ -31,6 +31,12 @@ public class FollowPath : MonoBehaviour
         lastPos = controlPoints.First();
     }
 
+    public void Restart()
+    {
+        Start();
+        t = 0f;
+    }
+
     private void OnEnable()
     {
         Start();

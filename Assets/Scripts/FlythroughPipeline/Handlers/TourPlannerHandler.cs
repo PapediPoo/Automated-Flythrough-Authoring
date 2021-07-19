@@ -80,10 +80,10 @@ public class TourPlannerHandler : IHandler<(List<Vector<double>>, TrajectorySett
         }
         DFS(0);
 
-        foreach(var v in coarsetour)
-        {
-            Debug.Log(v);
-        }
+        //foreach(var v in coarsetour)
+        //{
+        //    Debug.Log(v);
+        //}
 
         Vector3 lastpos = Utils.VToV3(coarseCPs[coarsetour[0]]);
         for(int i = 1; i < coarsetour.Count; i++)

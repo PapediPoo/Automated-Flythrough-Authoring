@@ -47,6 +47,7 @@ public class FlythroughGenerator : MonoBehaviour
 
     [SerializeField]
     public Transform controlpoint_container;
+    public GameObject controlpoint_prefab;
 
     [Header("debug")]
     [Range(0, .99f)]
@@ -71,12 +72,12 @@ public class FlythroughGenerator : MonoBehaviour
 
     private void Update()
     {
-        //refine_counter += Time.deltaTime;
-        //if(refine_counter >= refine_every)
-        //{
-        //    RefineTrajectory();
-        //    refine_counter -= refine_every;
-        //}
+        refine_counter += Time.deltaTime;
+        if (refine_counter >= refine_every)
+        {
+            RefineTrajectory();
+            refine_counter -= refine_every;
+        }
     }
 
     public void GenerateMaps()
@@ -87,7 +88,7 @@ public class FlythroughGenerator : MonoBehaviour
     public void FindControlPoints()
     {
         var cp = new ControlPointHandler().Invoke((map_container, control_point_settings));
-        ObjectContainer.ToObjectContainer(cp, controlpoint_container, true, control_point_layer);
+        ObjectContainer.ToObjectContainer(cp, controlpoint_container, controlpoint_prefab, true, control_point_layer);
     }
 
     public void PlanTour()
@@ -225,6 +226,22 @@ public class FlythroughGenerator : MonoBehaviour
         {
             trajectory_container.trajectory = toh.Invoke((trajectory_container.trajectory, trajectory_container.lbfgs, trajectory_container.objective));
         }
+        UpdateLineRenderer(FindObjectOfType<LineRenderer>());
+    }
+
+    private void UpdateLineRenderer(LineRenderer lr)
+    {
+        var trajectory = trajectory_container.trajectory;
+
+
+        if (lr != null && trajectory != null)
+        {
+            lr.positionCount = trajectory.Count / 3;
+            for (int i = 0; i < trajectory.Count; i += 3)
+            {
+                lr.SetPosition(i / 3, new Vector3((float)trajectory[i], (float)trajectory[i + 1], (float)trajectory[i + 2]));
+            }
+        }
     }
 
 }
@@ -256,13 +273,13 @@ public class FlythroughGeneratorEditor : Editor
     /// </summary>
     void Update()
     {
-        if(++tick_count > 100)
-        {
-            tick_count = 0;
-            ((FlythroughGenerator)target).RefineTrajectory();
+        //if(++tick_count > 100)
+        //{
+        //    tick_count = 0;
+        //    ((FlythroughGenerator)target).RefineTrajectory();
 
-            UpdateLineRenderer(FindObjectOfType<LineRenderer>());
-        }
+        //    UpdateLineRenderer(FindObjectOfType<LineRenderer>());
+        //}
     }
 
     /// <summary>

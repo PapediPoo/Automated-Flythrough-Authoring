@@ -61,7 +61,7 @@ namespace RSUtils
             }
         }
 
-        public static void ToObjectContainer(List<Vector<double>> vectors, Transform target, bool clear = true, int layer = 0)
+        public static void ToObjectContainer(List<Vector<double>> vectors, Transform target, GameObject prefab=null, bool clear = true, int layer = 0)
         {
             if (clear)
             {
@@ -73,13 +73,23 @@ namespace RSUtils
 
             foreach (Vector<double> v in vectors)
             {
-                Vector3 v3 = Utils.VToV3(v);
-                GameObject obj = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-                obj.name = v3.ToString();
-                obj.transform.localScale = Vector3.one * 0.2f;
-                obj.transform.parent = target;
-                obj.transform.position = v3;
-                obj.layer = layer;
+                if (prefab == null)
+                {
+                    Vector3 v3 = Utils.VToV3(v);
+                    GameObject obj = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+                    obj.name = v3.ToString();
+                    obj.transform.localScale = Vector3.one * 0.2f;
+                    obj.transform.parent = target;
+                    obj.transform.position = v3;
+                    obj.layer = layer;
+                }
+                else
+                {
+                    Vector3 v3 = Utils.VToV3(v);
+                    GameObject obj = Instantiate(prefab, v3, Quaternion.identity, target);
+                    obj.name = v3.ToString();
+                    obj.layer = layer;
+                }
             }
         }
 
