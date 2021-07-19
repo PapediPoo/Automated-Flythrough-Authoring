@@ -3,9 +3,133 @@ guid: 1ac35ba82e5d0b74a86804cfa4a8c31e
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: 003
+    second: {fileID: 6320989912383043599, guid: 1b5fbe01d6f4cbd4888a25e572998af7,
+      type: 3}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Chrome
+    second: {fileID: -7255647052170860681, guid: 1b5fbe01d6f4cbd4888a25e572998af7,
+      type: 3}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Glass1a
+    second: {fileID: 1355254464004144925, guid: 1b5fbe01d6f4cbd4888a25e572998af7,
+      type: 3}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Gummi SW
+    second: {fileID: 8831560205412250502, guid: 1b5fbe01d6f4cbd4888a25e572998af7,
+      type: 3}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat.1
+    second: {fileID: -749338713933554755, guid: 1b5fbe01d6f4cbd4888a25e572998af7,
+      type: 3}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat.4
+    second: {fileID: -2400404728525148765, guid: 1b5fbe01d6f4cbd4888a25e572998af7,
+      type: 3}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material #2
+    second: {fileID: -710910164944623929, guid: 1b5fbe01d6f4cbd4888a25e572998af7,
+      type: 3}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material_1
+    second: {fileID: -5635484798206224817, guid: 1b5fbe01d6f4cbd4888a25e572998af7,
+      type: 3}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Pages
+    second: {fileID: 4382737335783463193, guid: 1b5fbe01d6f4cbd4888a25e572998af7,
+      type: 3}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Plexi
+    second: {fileID: 1999046940280534454, guid: 1b5fbe01d6f4cbd4888a25e572998af7,
+      type: 3}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SW Glanz
+    second: {fileID: -6370452732718009573, guid: 1b5fbe01d6f4cbd4888a25e572998af7,
+      type: 3}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SW Rau
+    second: {fileID: -8696495013467120317, guid: 1b5fbe01d6f4cbd4888a25e572998af7,
+      type: 3}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Silber Braun Metall
+    second: {fileID: 1871867194672875383, guid: 1b5fbe01d6f4cbd4888a25e572998af7,
+      type: 3}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Speech 1
+    second: {fileID: 7943928900492757694, guid: 1b5fbe01d6f4cbd4888a25e572998af7,
+      type: 3}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: aluminium_01
+    second: {fileID: -6462912851849502085, guid: 1b5fbe01d6f4cbd4888a25e572998af7,
+      type: 3}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: "aluminium_\u0440\u0435\u0448\u0435\u0442\u043A\u0430"
+    second: {fileID: -1853227984997937253, guid: 1b5fbe01d6f4cbd4888a25e572998af7,
+      type: 3}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: metal6
+    second: {fileID: -5744801351206756851, guid: 1b5fbe01d6f4cbd4888a25e572998af7,
+      type: 3}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: panel1
+    second: {fileID: 5854343001691649402, guid: 1b5fbe01d6f4cbd4888a25e572998af7,
+      type: 3}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: plast2
+    second: {fileID: -67306793891291260, guid: 1b5fbe01d6f4cbd4888a25e572998af7, type: 3}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: wire_255255255
+    second: {fileID: -5680590720133373063, guid: 1b5fbe01d6f4cbd4888a25e572998af7,
+      type: 3}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: "\u5BB6\u5177\u4E0D\u9508\u94A2"
+    second: {fileID: 2100000, guid: 75d630d975610a84eabd76ee5ceb7627, type: 2}
   materials:
-    materialImportMode: 0
+    materialImportMode: 1
     materialName: 0
     materialSearch: 1
     materialLocation: 1
