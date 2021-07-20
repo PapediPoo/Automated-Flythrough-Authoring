@@ -6,6 +6,13 @@ using MathNet.Numerics.Interpolation;
 using System.Linq;
 using System;
 
+/// <summary>
+/// Lets the target object follow the specified trajectory with constant speed.a
+/// 
+/// Author: Robin Schmidiger
+/// Date: April 2021
+/// Version: 0.8
+/// </summary>
 public class FollowPath : MonoBehaviour
 {
     public List<Vector3> controlPoints = new List<Vector3>();
@@ -14,7 +21,7 @@ public class FollowPath : MonoBehaviour
     private float stepSize;
     public GameObject target;
     public bool lookForward = true;
-    private Vector3 lastPos;
+    private Vector3 last_pos;
     public float max_rot_speed = 30f;
 
     CubicSpline[] positionCP = new CubicSpline[3];
@@ -28,20 +35,23 @@ public class FollowPath : MonoBehaviour
         RefreshSplines();
 
         target.transform.rotation = Quaternion.LookRotation(controlPoints[1] - controlPoints.First(), Vector3.up);
-        lastPos = controlPoints.First();
+        last_pos = controlPoints.First();
     }
 
+    /// <summary>
+    /// Resets the trajectory to its target position.
+    /// Regenerates the spline.
+    /// </summary>
     public void Restart()
     {
         Start();
         t = 0f;
     }
 
-    private void OnEnable()
-    {
-        Start();
-    }
-
+    /// <summary>
+    /// Updates the contorl point list and refreshes the splines
+    /// </summary>
+    /// <param name="newControlPoints"></param>
     public void SetCP(List<Vector3> newControlPoints)
     {
         controlPoints = newControlPoints;
@@ -51,93 +61,85 @@ public class FollowPath : MonoBehaviour
         transform.rotation = Quaternion.LookRotation(controlPoints[1] - controlPoints.First(), Vector3.up);
     }
 
-    // Update is called once per frame
+    /// <summary>
+    /// updates the time variable and the position of the target object every frame.
+    /// The resulting animation is being looped.
+    /// </summary>
     void Update()
     {
-        /*
-         *         // Approximate step size
-        for(int i = 0; i < iterations; i++)
-        {
-            if(time + stepsize >= pointPositions.Count)
-            {
-                ResetFlythrough();
-            }
 
-            float evalStepsize = (UnifCubicBSpline(pointPositions, time + stepsize) - lastPosition).magnitude;
-            stepsize *= Time.deltaTime * speed / evalStepsize;
-        }
-
-        time += stepsize;
-         * 
-         */
-
-        //t += Time.deltaTime * speed;
-        stepSize = (float)speed * Time.deltaTime;
-        for(int i = 0; i < 10; i++)
+        // Do optimization on the stepsize to make the move speed approximatively constant
+        stepSize = (float)speed * Time.deltaTime;   // Initial guess for optimization
+        var NUM_ITERATIONS = 10;
+        for(int i = 0; i < NUM_ITERATIONS; i++)
         {
             Vector3 evalPos = new Vector3((float)positionCP[0].Interpolate(t+stepSize), (float)positionCP[1].Interpolate(t + stepSize), (float)positionCP[2].Interpolate(t + stepSize));
-            float evalStepsize = (evalPos-lastPos).magnitude;
-            //print(evalStepsize);
+            float evalStepsize = (evalPos-last_pos).magnitude;
             stepSize *= Time.deltaTime * (float)speed / evalStepsize;
         }
 
+        // apply optimized step size
         t += stepSize;
 
+        // Reset loop if end is reached
         if(t >= controlPoints.Count()-1)
         {
             t = 0f;
             transform.rotation = Quaternion.LookRotation(controlPoints[1] - controlPoints.First(), Vector3.up);
         }
 
+        // get next position by interpolation
         Vector3 pos = new Vector3((float)positionCP[0].Interpolate(t), (float)positionCP[1].Interpolate(t), (float)positionCP[2].Interpolate(t));
         Quaternion rot;
 
+        // calculate viewing direction
         if (lookForward)
         {
-            //var targetrot = Quaternion.RotateTowards(target.transform.rotation, Quaternion.LookRotation(pos - lastPos, Vector3.up), Time.deltaTime * max_rot_speed);
-            //rot = targetrot;
-            //rot = QuaternionUtil.SmoothDamp(target.transform.rotation, targetrot, ref rotationRef, (float)Time.deltaTime / (stepSize * 2f));
-            var targetrot = QuaternionUtil.SmoothDamp(target.transform.rotation, Quaternion.LookRotation(pos - lastPos, Vector3.up), ref rotationRef, (float)Time.deltaTime / (stepSize));
+            var target_rot = QuaternionUtil.SmoothDamp(target.transform.rotation, Quaternion.LookRotation(pos - last_pos, Vector3.up), ref rotationRef, (float)Time.deltaTime / (stepSize));
 
-            rot = Quaternion.RotateTowards(target.transform.rotation, targetrot, Time.deltaTime * max_rot_speed);
-            lastPos = pos;
+            rot = Quaternion.RotateTowards(target.transform.rotation, target_rot, Time.deltaTime * max_rot_speed);
+            last_pos = pos;
         }
         else
         {
             rot = PSlerp(rotationCP, (float)t);
         }
 
+        // apply positin & rotation to target transform
         target.transform.position = pos;
         target.transform.rotation = rot;
     }
 
+    /// <summary>
+    /// Regenerates the splines
+    /// Useful if the control points have changed.
+    /// </summary>
     private void RefreshSplines()
     {
-        //Vector3[] xyz = (from o in controlPoints select o.transform.position).ToArray();
         Vector3[] xyz = controlPoints.ToArray();
         double[] x = Array.ConvertAll(Enumerable.Range(0, controlPoints.Count).ToArray(), item => (double)item);
-        //List<float> dists = Enumerable.Zip(xyz, xyz.Skip(1), (a, b) => (a - b).magnitude).ToList();
-        //dists.Insert(0, 0f);
-        //dists.Sort();
-        //double[] x = Array.ConvertAll<float, double>(dists.ToArray(), item => (double)item);
+
+        // Split up interpolation value term into xyz axis
         double[] yx = Array.ConvertAll((from o in controlPoints select o.x).ToArray(), item => (double)item);
         double[] yy = Array.ConvertAll((from o in controlPoints select o.y).ToArray(), item => (double)item);
         double[] yz = Array.ConvertAll((from o in controlPoints select o.z).ToArray(), item => (double)item);
 
-        // rotationCP = (from o in controlPoints select o.transform.rotation).ToArray();
-
-        //positionCP[0] = CubicSpline.InterpolateNaturalSorted(x, yx);
-        //positionCP[1] = CubicSpline.InterpolateNaturalSorted(x, yy);
-        //positionCP[2] = CubicSpline.InterpolateNaturalSorted(x, yz);
-
+        // Generate splines for each separate axis
         positionCP[0] = CubicSpline.InterpolateAkima(x, yx);
         positionCP[1] = CubicSpline.InterpolateAkima(x, yy);
         positionCP[2] = CubicSpline.InterpolateAkima(x, yz);
 
-        lastPos = new Vector3((float)positionCP[0].Interpolate(0), (float)positionCP[1].Interpolate(0), (float)positionCP[2].Interpolate(0));
+        // update lastpos (to avoid janky movement)
+        last_pos = new Vector3((float)positionCP[0].Interpolate(0), (float)positionCP[1].Interpolate(0), (float)positionCP[2].Interpolate(0));
 
     }
 
+    /// <summary>
+    /// Implements smoothed linear interpolation for quaternions
+    /// </summary>
+    /// <param name="controlPoints">the control point rotations used for slerping</param>
+    /// <param name="t">the evaluation point</param>
+    /// <returns>the interpolated rotation</returns>
     Quaternion PSlerp(Quaternion[] controlPoints, float t)
     {
         UnityEngine.Assertions.Assert.IsNotNull(controlPoints);
@@ -149,7 +151,6 @@ public class FollowPath : MonoBehaviour
         Quaternion q1 = controlPoints[i];
         Quaternion q2 = controlPoints[i + 1];
 
-        // return Quaternion.Slerp(q1, q2, ct - i);
         return QuaternionUtil.SmoothDamp(target.transform.rotation, q2, ref rotationRef, 1f / (float)speed);
     }
 }

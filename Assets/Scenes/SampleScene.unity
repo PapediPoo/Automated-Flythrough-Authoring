@@ -1272,8 +1272,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 124883544}
-  m_LocalRotation: {x: 0.3661178, y: 0.26888287, z: -0.11137492, w: 0.8838866}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0.0800217, y: 0.29001683, z: -0.024342995, w: 0.9533595}
+  m_LocalPosition: {x: -2.6014988, y: -8.3504925, z: -3.8802009}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1426742410}
@@ -11071,7 +11071,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.37734425, y: 0.26744273, z: -0.114790075, w: 0.8791524}
+  m_LocalRotation: {x: 0.37734425, y: 0.26744273, z: -0.11479008, w: 0.8791524}
   m_LocalPosition: {x: -3.1756418, y: 13.2, z: -7.736548}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -16267,8 +16267,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1482061141}
-  m_LocalRotation: {x: 0.35200953, y: 0.27062073, z: -0.10708313, w: 0.8895993}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0.35200953, y: 0.27062067, z: -0.10708311, w: 0.8895993}
+  m_LocalPosition: {x: 0, y: -0.0000009536743, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 216918134}
@@ -16810,8 +16810,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1501665641}
-  m_LocalRotation: {x: 0.37734422, y: 0.26744273, z: -0.11479006, w: 0.8791525}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0.37734422, y: 0.26744273, z: -0.11479005, w: 0.8791525}
+  m_LocalPosition: {x: 0, y: -0.0000009536743, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1489108612}
@@ -20419,8 +20419,6 @@ MonoBehaviour:
   controlpoint_container: {fileID: 1805425354}
   controlpoint_prefab: {fileID: 1168467658598017725, guid: 6b30d15d32bb3624aab0d7077ecb8af2,
     type: 3}
-  _debugHeight: 0
-  _debugType: 2
   refine_every: 0.5
 --- !u!1001 &1839028354
 PrefabInstance:

@@ -7,16 +7,6 @@ using MathNet.Numerics.LinearAlgebra;
 using MathNet.Numerics.Optimization;
 using RSUtils;
 
-public enum ScanDisplayType
-{
-    none,
-    bitmap,
-    distanceTransform,
-    visibility,
-    tour,
-    trajectory
-}
-
 /// <summary>
 /// Implements a pipeline that generates a flythrough of an area. The area is defined using the bbox of a collider.
 /// The different parameters of this component let you adjust how the flythrough is generated.
@@ -25,7 +15,7 @@ public enum ScanDisplayType
 /// - Make visibility metric generation more performant
 /// - Add "masking" to visibility metric, So that points that have already been seen are masked out.
 /// 
-/// Version: 0.5
+/// Version: 0.15
 /// Author: Robin Schmidiger
 /// Date: July 2021
 /// </summary>
@@ -48,28 +38,13 @@ public class FlythroughGenerator : MonoBehaviour
     [SerializeField]
     public Transform controlpoint_container;
     public GameObject controlpoint_prefab;
-
-    [Header("debug")]
-    [Range(0, .99f)]
-    public float _debugHeight = 0.5f;
-    public ScanDisplayType _debugType = ScanDisplayType.bitmap;
-
+    [Header("Realtime Optimization")]
     public float refine_every = 0.5f;
     private float refine_counter = 0f;
 
-    void Start()
-    {
-        //GenerateMaps();
-        //FindControlPoints();
-        //PlanTour();
-        //for(int i = 0; i < trajectory_settings.max_iterations; i++)
-        //{
-        //    RefineTrajectory();
-        //}
-        //ApplyPath();  
-        //FindObjectOfType<FollowPath>().enabled = true;
-    }
-
+    /// <summary>
+    /// Does a single step of the trajectory optimization if the trajectory has been initialized. Also updates the line renderer
+    /// </summary>
     private void Update()
     {
         refine_counter += Time.deltaTime;
@@ -77,25 +52,38 @@ public class FlythroughGenerator : MonoBehaviour
         {
             RefineTrajectory();
             refine_counter -= refine_every;
+            UpdateLineRenderer(FindObjectOfType<LineRenderer>());
         }
     }
 
+    /// <summary>
+    /// Generates the maps for finding the control points
+    /// </summary>
     public void GenerateMaps()
     {
         map_container = new ScannerHandler().Invoke((GetComponent<Collider>(), map_settings.cell_size, map_settings.mask));
     }
 
+    /// <summary>
+    /// Finds the control points according to the settings based on the generated maps
+    /// </summary>
     public void FindControlPoints()
     {
         var cp = new ControlPointHandler().Invoke((map_container, control_point_settings));
         ObjectContainer.ToObjectContainer(cp, controlpoint_container, controlpoint_prefab, true, control_point_layer);
     }
 
+    /// <summary>
+    /// Creates an initial guess for the trajectory optimization
+    /// </summary>
     public void PlanTour()
     {
         trajectory_container = new TrajectoryInitializationHandler().Invoke((controlpoint_container, trajectory_settings, map_container));
     }
 
+    /// <summary>
+    /// Copies the optimized trajectory to the followpath component
+    /// </summary>
     public void ApplyPath()
     {
         var fp = FindObjectOfType<FollowPath>();
@@ -109,115 +97,8 @@ public class FlythroughGenerator : MonoBehaviour
     }
 
     /// <summary>
-    /// Draws the different maps, control points, etc using Unity gizmos
+    /// Does one step of the trajectory optimization
     /// </summary>
-    private void OnDrawGizmosSelected()
-    {
-        /*
-         * Note: you will see this a lot:
-         *  if (Mathf.FloorToInt(_debugHeight * rsgrid.GetLengths().At(1)) == (int)i.At(1)) {
-                Gizmos.DrawCube(RSUtils.Utils.VToV3(x), new Vector3(1, 0.1f, 1) * (float)(rsgrid.GetCellSize()));
-            }
-         * 
-         * What this does is: if the current height is the debug height, draw the gizmos on the current height
-         * TODO: Make it readable
-         */
-
-        switch (_debugType)
-        {
-            /// display bitmap
-            case ScanDisplayType.bitmap:
-                if (map_container.bitmap != null)
-                {
-                    Func<Vector<double>, Vector<float>, double> f = (x, i) =>
-                    {
-                        Gizmos.color = Color.white;
-                        if (map_container.bitmap[(int)i.At(0), (int)i.At(1), (int)i.At(2)] && Mathf.FloorToInt(_debugHeight * map_container.rsgrid.GetLengths().At(1)) == (int)i.At(1))
-                        {
-                            Gizmos.DrawCube(Utils.VToV3(x), new Vector3(1, 0.1f, 1) * (float)(map_container.rsgrid.GetCellSize()));
-                        }
-                        return -1d;
-                    };
-                    map_container.rsgrid.ForAllIndexed(f, true);
-                }
-                break;
-
-            // display visibility map
-            case ScanDisplayType.visibility:
-                if (map_container.visibility != null)
-                {
-                    Func<Vector<double>, Vector<float>, double> f = (x, i) =>
-                    {
-                        float c = map_container.visibility[(int)i.At(0), (int)i.At(1), (int)i.At(2)] * 3f;
-                        Gizmos.color = new Color(1f - c, c, 0f);
-                        if (Mathf.FloorToInt(_debugHeight * map_container.rsgrid.GetLengths().At(1)) == (int)i.At(1)) {
-                            Gizmos.DrawCube(Utils.VToV3(x), new Vector3(1, 0.1f, 1) * (float)(map_container.rsgrid.GetCellSize()));
-                        }
-
-                        return -1d;
-                    };
-                    map_container.rsgrid.ForAllIndexed(f, true);
-                }
-                break;
-
-            // display distance transform
-            case ScanDisplayType.distanceTransform:
-                if(map_container.distancetransform != null)
-                {
-                    Func<Vector<double>, Vector<float>, double> f = (x, i) =>
-                    {
-                        //float c = (float)distancetransformmap.GetValue((int)i.At(0), (int)i.At(1), (int)i.At(2));
-                        //Gizmos.color = c == 0f ? Color.white : new Color(1f / c, 1f / c, 1f / c);
-
-                        //Gizmos.DrawSphere(RSUtils.Utils.VToV3(x), (float)(rsgrid.GetCellSize() / 2f));
-                        if (Mathf.FloorToInt(_debugHeight * map_container.rsgrid.GetLengths().At(1)) == (int)i.At(1))
-                        {
-                            float cl = 1f / (0.01f + map_container.rsgrid.GetLerp(map_container.rsgrid.GetIndex(x), map_container.distancetransform, 0.01f));
-                            Gizmos.color = new Color(cl * 0.05f, 0, 0);
-                            Gizmos.DrawCube(Utils.VToV3(x), new Vector3(1, 0.1f, 1) * (float)map_container.rsgrid.GetCellSize());
-                        }
-
-                        return -1d;
-                    };
-                    map_container.rsgrid.ForAllIndexed(f, true);
-                }
-                break;
-            case ScanDisplayType.tour:
-                Gizmos.color = Color.red;
-                var tour = trajectory_container.tour;
-                if (tour != null)
-                {
-                    for (int i = 1; i < tour.Count; i++)
-                    {
-                        Gizmos.DrawLine(RSUtils.Utils.VToV3(tour[i-1]), RSUtils.Utils.VToV3(tour[i]));
-                    }
-                    Gizmos.color = Color.white;
-                    foreach (var p in tour)
-                    {
-                        Gizmos.DrawSphere(Utils.VToV3(p), 0.1f);
-                    }
-                }
-                break;
-            case ScanDisplayType.trajectory:
-                var trajectory = trajectory_container.trajectory;
-                if (trajectory != null)
-                {
-                    Gizmos.color = Color.blue;
-                    for (int i = 3; i < trajectory.Count; i+=3)
-                    {
-                        Vector3 p1 = new Vector3((float)trajectory[i - 3], (float)trajectory[i - 2], (float)trajectory[i - 1]);
-                        Vector3 p2 = new Vector3((float)trajectory[i], (float)trajectory[i + 1], (float)trajectory[i + 2]);
-                        Gizmos.DrawLine(p1, p2);
-                    }
-                }
-                break;
-
-            // display green tiles at debug height
-            default:
-                break;
-        }
-    }
-
     public void RefineTrajectory()
     {
         var toh = new TrajectoryOptimizationHandler();
@@ -226,11 +107,19 @@ public class FlythroughGenerator : MonoBehaviour
         {
             trajectory_container.trajectory = toh.Invoke((trajectory_container.trajectory, trajectory_container.lbfgs, trajectory_container.objective));
         }
-        UpdateLineRenderer(FindObjectOfType<LineRenderer>());
     }
 
+    /// <summary>
+    /// overwrites the specified line renderer with the points of the flythrough trajectory
+    /// </summary>
+    /// <param name="lr">The line renderer to be used</param>
     private void UpdateLineRenderer(LineRenderer lr)
     {
+        if(lr == null)
+        {
+            return;
+        }
+
         var trajectory = trajectory_container.trajectory;
 
 
@@ -308,8 +197,6 @@ public class FlythroughGeneratorEditor : Editor
     /// </summary>
     public override void OnInspectorGUI()
     {
-
-
         base.OnInspectorGUI();
         FlythroughGenerator fg = (FlythroughGenerator)target;
 
@@ -328,6 +215,14 @@ public class FlythroughGeneratorEditor : Editor
         if(GUILayout.Button("Plan Tour"))
         {
             fg.PlanTour();
+        }
+
+        if (GUILayout.Button("Optimize Trajectory"))
+        {
+            for (int i = 0; i < fg.trajectory_settings.max_iterations; i++)
+            {
+                fg.RefineTrajectory();
+            }
         }
 
         if (GUILayout.Button("Apply To FollowPath"))

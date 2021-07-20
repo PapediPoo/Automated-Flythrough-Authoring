@@ -5,6 +5,14 @@ using MathNet.Numerics.LinearAlgebra;
 
 namespace RSUtils
 {
+    /// <summary>
+    /// Wrapper class that takes an enumerable of points and turns it into a list of gameobjects with an in-scene representation
+    /// Useful if a list of positions has to be exposed to the user.
+    /// 
+    /// Author: Robin Schmidiger
+    /// Date: July 2021
+    /// Version: 0.3
+    /// </summary>
     public class ObjectContainer : Object
     {
         /// <summary>
@@ -61,6 +69,14 @@ namespace RSUtils
             }
         }
 
+        /// <summary>
+        /// Turns a list of positional vectors into a list of gameobjects
+        /// </summary>
+        /// <param name="vectors">the reference list of positional vectors</param>
+        /// <param name="target">the target transform that functions as the list parent</param>
+        /// <param name="prefab">The prefab to be instantiated, null = primitive object</param>
+        /// <param name="clear">Whether the target's children should be cleared first</param>
+        /// <param name="layer">the layer to instantiate the gameobjects on</param>
         public static void ToObjectContainer(List<Vector<double>> vectors, Transform target, GameObject prefab=null, bool clear = true, int layer = 0)
         {
             if (clear)

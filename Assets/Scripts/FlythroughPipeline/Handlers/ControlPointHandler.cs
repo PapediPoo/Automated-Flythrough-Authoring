@@ -6,6 +6,13 @@ using System;
 using MathNet.Numerics.LinearAlgebra;
 using RSUtils;
 
+/// <summary>
+/// Pipeline handler for generating control points from maps
+/// 
+/// Author: Robin Schmidiger
+/// Date: July 2021
+/// Version: 0.11
+/// </summary>
 public class ControlPointHandler : IHandler<(MapContainer container, ControlPointSettings settings), List<Vector<double>>>
 {
     /// <summary>

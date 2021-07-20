@@ -8,6 +8,10 @@ public enum ProgramState
     PlayMode
 }
 
+/// <summary>
+/// Controls the overall state of the program.
+/// Depending on the current state of the program it enables/disables specified gameobjects.
+/// </summary>
 public class ProgramMaster : MonoBehaviour
 {
     private ProgramState current_state;
@@ -20,18 +24,18 @@ public class ProgramMaster : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // Disable all containers
         editmode_container.SetActive(false);
         playmode_container.SetActive(false);
 
+         // Set the default state to play mode.
         ChangeState(ProgramState.EditMode);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    /// <summary>
+    /// changes the currently active state of the program master
+    /// </summary>
+    /// <param name="next_state">The state to be switched to</param>
     public void ChangeState(string next_state)
     {
         switch (next_state)
@@ -45,10 +49,15 @@ public class ProgramMaster : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// changes the currently active state of the program master
+    /// </summary>
+    /// <param name="next_state">The state to be switched to</param>
     public void ChangeState(ProgramState next_state)
     {
         print("changed state to: " + next_state.ToString());
 
+        // Disable the container for the last state
         switch (current_state)
         {
             case ProgramState.EditMode:
@@ -59,8 +68,10 @@ public class ProgramMaster : MonoBehaviour
                 break;
         }
 
+        // update the current state
         current_state = next_state;
 
+        // enable the container for the next state
         switch (current_state)
         {
             case ProgramState.EditMode:

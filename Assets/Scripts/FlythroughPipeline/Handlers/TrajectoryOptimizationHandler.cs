@@ -10,7 +10,13 @@ using System.Linq;
 using System;
 
 
-//public class TrajectoryOptimizationHandler : IHandler<(List<Vector<double>>, int, IUnconstrainedMinimizer, IObjectiveFunction), List<Vector<double>>>
+/// <summary>
+/// The pipeline handler responsible for optimizing the flythough trajectory
+/// 
+/// Author: Robin Schmidiger
+/// Date: July 2021
+/// Version: 0.32
+/// </summary>
 public class TrajectoryOptimizationHandler : IHandler<(Vector<double>, LBFGS, IObjectiveFunction), Vector<double>>
 {
     public struct HeightAtPointContainer
@@ -252,9 +258,9 @@ public class TrajectoryOptimizationHandler : IHandler<(Vector<double>, LBFGS, IO
             time.Add(current_dist);
         }
 
-        var lix = LinearSpline.Interpolate(time, control_points.ConvertAll(x => (double)x.At(0)));
-        var liy = LinearSpline.Interpolate(time, control_points.ConvertAll(x => (double)x.At(1)));
-        var liz = LinearSpline.Interpolate(time, control_points.ConvertAll(x => (double)x.At(2)));
+        var lix = LinearSpline.Interpolate(time, control_points.ConvertAll(x => x.At(0)));
+        var liy = LinearSpline.Interpolate(time, control_points.ConvertAll(x => x.At(1)));
+        var liz = LinearSpline.Interpolate(time, control_points.ConvertAll(x => x.At(2)));
 
         double[] init_guess = new double[3 * num_optimization_points];
         for(int i = 0; i < num_optimization_points; i++)
