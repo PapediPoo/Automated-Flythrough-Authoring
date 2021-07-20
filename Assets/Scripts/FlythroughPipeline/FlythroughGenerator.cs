@@ -113,7 +113,7 @@ public class FlythroughGenerator : MonoBehaviour
     /// overwrites the specified line renderer with the points of the flythrough trajectory
     /// </summary>
     /// <param name="lr">The line renderer to be used</param>
-    private void UpdateLineRenderer(LineRenderer lr)
+    public void UpdateLineRenderer(LineRenderer lr)
     {
         if(lr == null)
         {
@@ -138,60 +138,6 @@ public class FlythroughGenerator : MonoBehaviour
 [CustomEditor(typeof(FlythroughGenerator))]
 public class FlythroughGeneratorEditor : Editor
 {
-    static int tick_count = 0;
-
-    /// <summary>
-    /// Adds the trajectory optimization to the editor-mode update routine
-    /// </summary>
-    private void OnEnable()
-    {
-        EditorApplication.update += Update;
-    }
-
-    /// <summary>
-    /// Removes trajectory optimization from editor update routine
-    /// </summary>
-    private void OnDisable()
-    {
-        EditorApplication.update -= Update;
-    }
-
-    /// <summary>
-    /// Des a single optimization step of the trajectory optimization every few "ticks"
-    /// Since i.e. time.deltaTime don't work in edit-mode, the tick counting speed depends on the machine
-    /// </summary>
-    void Update()
-    {
-        //if(++tick_count > 100)
-        //{
-        //    tick_count = 0;
-        //    ((FlythroughGenerator)target).RefineTrajectory();
-
-        //    UpdateLineRenderer(FindObjectOfType<LineRenderer>());
-        //}
-    }
-
-    /// <summary>
-    /// adds the points of the generated trajectory to the indicated line renderer
-    /// </summary>
-    /// <param name="lr">The line renderer component</param>
-    private void UpdateLineRenderer(LineRenderer lr)
-    {
-        FlythroughGenerator fg = (FlythroughGenerator)target;
-        var trajectory = fg.trajectory_container.trajectory;
-
-
-        if (lr != null && trajectory != null)
-        {
-            lr.positionCount = trajectory.Count / 3;
-            for (int i = 0; i < trajectory.Count; i += 3)
-            {
-                lr.SetPosition(i / 3, new Vector3((float)trajectory[i], (float)trajectory[i + 1], (float)trajectory[i + 2]));
-            }
-        }
-    }
-
-
     /// <summary>
     /// Redraws the inspector as usual, but adds additionals buttons for the flythrough generation
     /// </summary>
@@ -215,6 +161,7 @@ public class FlythroughGeneratorEditor : Editor
         if(GUILayout.Button("Plan Tour"))
         {
             fg.PlanTour();
+            fg.UpdateLineRenderer(FindObjectOfType<LineRenderer>());
         }
 
         if (GUILayout.Button("Optimize Trajectory"))
@@ -223,6 +170,7 @@ public class FlythroughGeneratorEditor : Editor
             {
                 fg.RefineTrajectory();
             }
+            fg.UpdateLineRenderer(FindObjectOfType<LineRenderer>());
         }
 
         if (GUILayout.Button("Apply To FollowPath"))

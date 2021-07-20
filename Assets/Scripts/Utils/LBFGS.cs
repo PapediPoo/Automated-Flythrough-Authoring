@@ -9,8 +9,8 @@ namespace RSUtils
     public class LBFGS
     {
         int max_m;
-        int max_iter;
-        int iter;
+        //int max_iter;
+        //int iter;
 
         List<Vector<double>> s;
         List<Vector<double>> y;
@@ -22,8 +22,8 @@ namespace RSUtils
         public LBFGS(int m, int max_iter)
         {
             this.max_m = m;
-            this.max_iter = max_iter;
-            this.iter = 0;
+            //this.max_iter = max_iter;
+            //this.iter = 0;
 
             s = new List<Vector<double>>();
             y = new List<Vector<double>>();
@@ -34,10 +34,10 @@ namespace RSUtils
         }
         public Vector<double> FindMinimum(IObjectiveFunction objective, Vector<double> initialGuess)
         {
-            if(iter >= max_iter)
-            {
-                return initialGuess;
-            }
+            //if(iter >= max_iter)
+            //{
+            //    return initialGuess;
+            //}
 
             objective.EvaluateAt(initialGuess);
 
@@ -94,7 +94,7 @@ namespace RSUtils
                 y.RemoveAt(0);
             }
 
-            iter++;
+            //iter++;
 
             // Debug.Log(s.Count);
             // Debug.Log(x_k1.At(0));

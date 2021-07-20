@@ -11,7 +11,7 @@ public struct TrajectorySettings
     public bool backtrack;
     public LayerMask mask;
 
-    [Range(0.05f, 1)]
+    [Range(0.01f, 1)]
     public double distance_weight;
     [Range(0, 1)]
     public double velocity_weight;

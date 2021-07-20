@@ -11,7 +11,7 @@ using UnityEngine;
 /// </summary>
 public class RuntimeHandlerController : MonoBehaviour
 {
-    Camera cam;
+    public Camera cam;
     public RuntimeHandle.RuntimeTransformHandle rth;    // The runtime transform handler to be updated
     public float max_dist = 100f;   // The maximum distance for an object to be to be considered by the script (in pixels)
 
@@ -30,7 +30,11 @@ public class RuntimeHandlerController : MonoBehaviour
         // Iterate over all child objects, find closest one, assign the runtime transform handler to it.
         foreach(Transform cp in transform)
         {
-            var d = (Input.mousePosition - cam.WorldToScreenPoint(cp.position)).magnitude;
+            var u = Input.mousePosition;
+            var v = cam.WorldToScreenPoint(cp.position);
+            v.z = 0;
+
+            var d = (u - v).magnitude;
             if (d < min_dist && d < max_dist)
             {
                 min_dist = d;
@@ -39,12 +43,12 @@ public class RuntimeHandlerController : MonoBehaviour
         }
         if (final_selection != null)
         {
-            rth.enabled = true;
+            //rth.enabled = true;
             rth.target = final_selection;
         }
         else
         {
-            rth.enabled = false;
+            //rth.enabled = false;
         }
 
     }
