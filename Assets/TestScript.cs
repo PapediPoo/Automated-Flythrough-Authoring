@@ -16,7 +16,7 @@ public class TestScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        container = TrajectoryOptimizationHandler.DistanceAtPointAlloc(0.5f, 25f, 10);
+        //container = TrajectoryOptimizationHandler.DistanceAtPointAlloc(0.5f, 25f, 10);
     }
 
     // Update is called once per frame
@@ -27,10 +27,10 @@ public class TestScript : MonoBehaviour
 
     private void FixedUpdate()
     {
-        var valgrad = TrajectoryOptimizationHandler.DistanceAtPoint(transform.position, container, settings);
+        //var valgrad = TrajectoryOptimizationHandler.DistanceAtPoint(transform.position, container, settings);
 
-        gradient = valgrad.Item2;
-        distance = valgrad.Item1;
+        //gradient = valgrad.Item2;
+        //distance = valgrad.Item1;
 
         //if(Physics.SphereCast(transform.position, MAX_DISTANCE, dir, out rch, dist))
         //{
@@ -45,6 +45,6 @@ public class TestScript : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
-        Gizmos.DrawLine(transform.position, transform.position + (distance * gradient));
+        //Gizmos.DrawLine(transform.position, transform.position + (distance * gradient));
     }
 }

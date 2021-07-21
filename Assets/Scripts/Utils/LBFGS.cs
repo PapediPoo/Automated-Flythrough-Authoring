@@ -19,7 +19,7 @@ namespace RSUtils
         List<double> rho;
 
 
-        public LBFGS(int m, int max_iter)
+        public LBFGS(int m)
         {
             this.max_m = m;
             //this.max_iter = max_iter;

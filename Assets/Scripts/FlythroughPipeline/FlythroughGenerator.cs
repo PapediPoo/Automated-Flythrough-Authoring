@@ -26,14 +26,18 @@ public class FlythroughGenerator : MonoBehaviour
     [SerializeField]
     public MapSettings map_settings;
     public MapContainer map_container;
+    private ScannerHandler scanner_handler;
 
     [SerializeField]
     public ControlPointSettings control_point_settings;
     public int control_point_layer = 0;
+    private ControlPointHandler control_point_handler;
 
     [SerializeField]
     public TrajectorySettings trajectory_settings;
     public TrajectoryContainer trajectory_container;
+    private TrajectoryInitializationHandler trajectory_initialization_handler;
+    private TrajectoryOptimizationHandler trajectory_optimization_handler;
 
     [SerializeField]
     public Transform controlpoint_container;
@@ -41,6 +45,14 @@ public class FlythroughGenerator : MonoBehaviour
     [Header("Realtime Optimization")]
     public float refine_every = 0.5f;
     private float refine_counter = 0f;
+
+    private void Start()
+    {
+        scanner_handler = new ScannerHandler();
+        control_point_handler = new ControlPointHandler();
+        trajectory_initialization_handler = new TrajectoryInitializationHandler();
+        trajectory_optimization_handler = new TrajectoryOptimizationHandler();
+    }
 
     /// <summary>
     /// Does a single step of the trajectory optimization if the trajectory has been initialized. Also updates the line renderer
@@ -61,7 +73,7 @@ public class FlythroughGenerator : MonoBehaviour
     /// </summary>
     public void GenerateMaps()
     {
-        map_container = new ScannerHandler().Invoke((GetComponent<Collider>(), map_settings.cell_size, map_settings.mask));
+        map_container = scanner_handler.Invoke((GetComponent<Collider>(), map_settings.cell_size, map_settings.mask));
     }
 
     /// <summary>
@@ -69,7 +81,7 @@ public class FlythroughGenerator : MonoBehaviour
     /// </summary>
     public void FindControlPoints()
     {
-        var cp = new ControlPointHandler().Invoke((map_container, control_point_settings));
+        var cp = control_point_handler.Invoke((map_container, control_point_settings));
         ObjectContainer.ToObjectContainer(cp, controlpoint_container, controlpoint_prefab, true, control_point_layer);
     }
 
@@ -78,7 +90,7 @@ public class FlythroughGenerator : MonoBehaviour
     /// </summary>
     public void PlanTour()
     {
-        trajectory_container = new TrajectoryInitializationHandler().Invoke((controlpoint_container, trajectory_settings, map_container));
+        trajectory_container = trajectory_initialization_handler.Invoke((controlpoint_container, trajectory_settings));
     }
 
     /// <summary>
@@ -101,11 +113,9 @@ public class FlythroughGenerator : MonoBehaviour
     /// </summary>
     public void RefineTrajectory()
     {
-        var toh = new TrajectoryOptimizationHandler();
-
         if (trajectory_container.trajectory != null)
         {
-            trajectory_container.trajectory = toh.Invoke((trajectory_container.trajectory, trajectory_container.lbfgs, trajectory_container.objective));
+            trajectory_container.trajectory = trajectory_optimization_handler.Invoke((trajectory_container.trajectory, trajectory_container.lbfgs, trajectory_container.objective));
         }
     }
 
