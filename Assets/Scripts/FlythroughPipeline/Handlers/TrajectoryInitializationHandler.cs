@@ -50,6 +50,7 @@ public class TrajectoryInitializationHandler : IHandler<(Transform, TrajectorySe
     }
     public TrajectoryContainer Invoke((Transform, TrajectorySettings) input)
     {
+        // TODO: Reduce allocation / reuse data structures
         Transform object_container = input.Item1;
         TrajectorySettings ts = input.Item2;
         TrajectoryContainer tc;
@@ -57,6 +58,7 @@ public class TrajectoryInitializationHandler : IHandler<(Transform, TrajectorySe
         var ls = ObjectContainer.FromObjectContainer(object_container).ConvertAll(x => Utils.V3ToV(x));
         tc.tour = tph.Invoke((ls, ts));
         tc.lbfgs = lbfgs;
+
         tc.trajectory = CPToInitGuess(tc.tour, ts.num_trajectory_points);
 
         ofc = ObjectiveFunctionAlloc(tc.tour, ts);
@@ -70,8 +72,9 @@ public class TrajectoryInitializationHandler : IHandler<(Transform, TrajectorySe
 
     public TrajectoryContainer Rebuild(Transform object_container)
     {
-        ofc = UpdateObjectiveFunctionContainer(ofc, , ts);
-        tc.objective = BuildObjectiveFunction(ofc, ts);
+        var ls = ObjectContainer.FromObjectContainer(object_container).ConvertAll(x => Utils.V3ToV(x));
+        //ofc = UpdateObjectiveFunctionContainer(ofc, , ts);
+        //tc.objective = BuildObjectiveFunction(ofc, ts);
 
         return tc;
     }

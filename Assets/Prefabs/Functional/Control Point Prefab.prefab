@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7184153658572348904}
   m_Layer: 0
   m_Name: Control Point Prefab
-  m_TagString: Untagged
+  m_TagString: Control Point
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

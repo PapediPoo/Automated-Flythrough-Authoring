@@ -52,6 +52,9 @@ public class FlythroughGenerator : MonoBehaviour
         control_point_handler = new ControlPointHandler();
         trajectory_initialization_handler = new TrajectoryInitializationHandler();
         trajectory_optimization_handler = new TrajectoryOptimizationHandler();
+
+        GenerateMaps();
+        FindControlPoints();
     }
 
     /// <summary>
@@ -64,7 +67,6 @@ public class FlythroughGenerator : MonoBehaviour
         {
             RefineTrajectory();
             refine_counter -= refine_every;
-            UpdateLineRenderer(FindObjectOfType<LineRenderer>());
         }
     }
 
@@ -90,7 +92,14 @@ public class FlythroughGenerator : MonoBehaviour
     /// </summary>
     public void PlanTour()
     {
+        //bool initialized = trajectory_container.trajectory == null;
+        //var tmp = trajectory_container.trajectory;
+
         trajectory_container = trajectory_initialization_handler.Invoke((controlpoint_container, trajectory_settings));
+        //if (!initialized)
+        //{
+        //    trajectory_container.trajectory = tmp;
+        //}
     }
 
     /// <summary>
@@ -116,76 +125,6 @@ public class FlythroughGenerator : MonoBehaviour
         if (trajectory_container.trajectory != null)
         {
             trajectory_container.trajectory = trajectory_optimization_handler.Invoke((trajectory_container.trajectory, trajectory_container.lbfgs, trajectory_container.objective));
-        }
-    }
-
-    /// <summary>
-    /// overwrites the specified line renderer with the points of the flythrough trajectory
-    /// </summary>
-    /// <param name="lr">The line renderer to be used</param>
-    public void UpdateLineRenderer(LineRenderer lr)
-    {
-        if(lr == null)
-        {
-            return;
-        }
-
-        var trajectory = trajectory_container.trajectory;
-
-
-        if (lr != null && trajectory != null)
-        {
-            lr.positionCount = trajectory.Count / 3;
-            for (int i = 0; i < trajectory.Count; i += 3)
-            {
-                lr.SetPosition(i / 3, new Vector3((float)trajectory[i], (float)trajectory[i + 1], (float)trajectory[i + 2]));
-            }
-        }
-    }
-
-}
-
-[CustomEditor(typeof(FlythroughGenerator))]
-public class FlythroughGeneratorEditor : Editor
-{
-    /// <summary>
-    /// Redraws the inspector as usual, but adds additionals buttons for the flythrough generation
-    /// </summary>
-    public override void OnInspectorGUI()
-    {
-        base.OnInspectorGUI();
-        FlythroughGenerator fg = (FlythroughGenerator)target;
-
-        // Generates all the maps in the area of the grid
-        if (GUILayout.Button("Generate Maps"))
-        {
-            fg.GenerateMaps();  
-        }
-
-        // calculate the control points
-        if (GUILayout.Button("Find Control Points"))
-        {
-            fg.FindControlPoints();
-        }
-
-        if(GUILayout.Button("Plan Tour"))
-        {
-            fg.PlanTour();
-            fg.UpdateLineRenderer(FindObjectOfType<LineRenderer>());
-        }
-
-        if (GUILayout.Button("Optimize Trajectory"))
-        {
-            for (int i = 0; i < fg.trajectory_settings.max_iterations; i++)
-            {
-                fg.RefineTrajectory();
-            }
-            fg.UpdateLineRenderer(FindObjectOfType<LineRenderer>());
-        }
-
-        if (GUILayout.Button("Apply To FollowPath"))
-        {
-            fg.ApplyPath();
         }
     }
 }

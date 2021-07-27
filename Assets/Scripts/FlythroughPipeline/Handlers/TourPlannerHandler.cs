@@ -17,6 +17,29 @@ using QuikGraph.Algorithms;
 /// </summary>
 public class TourPlannerHandler : IHandler<(List<Vector<double>>, TrajectorySettings), List<Vector<double>>>
 {
+    private Dictionary<Edge<int>, NavMeshPath> paths;
+    private UndirectedGraph<int, Edge<int>> qgraph;
+    private Dictionary<Edge<int>, float> qcost;
+
+    private UndirectedGraph<int, Edge<int>> mstgraph;
+
+    // Alloc data structures for travellign salesman approx
+    List<int> coarsetour;
+    List<Vector<double>> finetour;
+    bool[] labels;
+
+    public TourPlannerHandler()
+    {
+        // Allocate space for data structures
+        paths = new Dictionary<Edge<int>, NavMeshPath>();   // Holds all pairwise paths between all control points
+        qgraph = new UndirectedGraph<int, Edge<int>>();     // Holds a representation of the graph induced by the control points. nodes correspond to control points
+        qcost = new Dictionary<Edge<int>, float>();         // Assigns a cost to each edge in the graph. the cost is the distance between the nodes
+
+        mstgraph = new UndirectedGraph<int, Edge<int>>();
+        coarsetour = new List<int>();
+        finetour = new List<Vector<double>>();
+    }
+
     /// <summary>
     /// Takes a list of control points and a trajectory settings struct and generates a list of points that corresponds to the initial guess of a flythough-trajectory.
     /// Note
@@ -38,10 +61,9 @@ public class TourPlannerHandler : IHandler<(List<Vector<double>>, TrajectorySett
         List<Vector<double>> coarseCPs = input.Item1;
         TrajectorySettings settings = input.Item2;
 
-        // Allocate space for data structures
-        var paths = new Dictionary<Edge<int>, NavMeshPath>();   // Holds all pairwise paths between all control points
-        var qgraph = new UndirectedGraph<int, Edge<int>>();     // Holds a representation of the graph induced by the control points. nodes correspond to control points
-        var qcost = new Dictionary<Edge<int>, float>();         // Assigns a cost to each edge in the graph. the cost is the distance between the nodes
+        //paths.Clear();
+        //qgraph.Clear();
+        //qcost.Clear();
 
         qgraph.AddVertexRange(Enumerable.Range(0, coarseCPs.Count));    // foreach control point add a node to the graph
         NavMeshHit nmhu;
@@ -61,8 +83,22 @@ public class TourPlannerHandler : IHandler<(List<Vector<double>>, TrajectorySett
                 Vector3 v = nmhv.position;
 
                 // generate path uv on navmesh
-                NavMeshPath p = new NavMeshPath();
-                if(!NavMesh.CalculatePath(u, v, NavMesh.AllAreas, p))
+                NavMeshPath p;
+                qgraph.TryGetEdge(i, j, out Edge<int> e);
+                if(e != null)
+                {
+                    paths.TryGetValue(e, out p);
+                }
+                else
+                {
+                    p = new NavMeshPath();
+                    e = new Edge<int>(i, j);
+
+                    qgraph.AddEdge(e);
+                    paths.Add(e, p);
+                }
+
+                if (!NavMesh.CalculatePath(u, v, NavMesh.AllAreas, p))
                 {
                     Debug.LogWarning("Path generation unsuccessful");
                 }
@@ -76,22 +112,19 @@ public class TourPlannerHandler : IHandler<(List<Vector<double>>, TrajectorySett
                     }
 
                     // add the resulting path to qgraph, qcost and paths data structures
-                    var e = new Edge<int>(i, j);
-                    qgraph.AddEdge(e);
-                    qcost.Add(e, w);
-                    paths.Add(e, p);
+                    qcost[e] = w;
                 }
             }
         }
 
         // Calculate the MST of qgraph
-        var mstgraph = new UndirectedGraph<int, Edge<int>>();
+        mstgraph.Clear();
         mstgraph.AddVerticesAndEdgeRange(qgraph.MinimumSpanningTreeKruskal(e => qcost[e]));
 
         // Alloc data structures for travellign salesman approx
-        var coarsetour = new List<int>();
-        var finetour = new List<Vector<double>>();
-        var labels = new bool[coarseCPs.Count];
+        coarsetour.Clear();
+        finetour.Clear();
+        labels = new bool[coarseCPs.Count];
 
         // Implementation of a simple DFS with backtracking
         void DFS(int v)
@@ -100,7 +133,7 @@ public class TourPlannerHandler : IHandler<(List<Vector<double>>, TrajectorySett
             coarsetour.Add(v);
             foreach(int w in mstgraph.AdjacentVertices(v))
             {
-                if (!labels[w])
+                if (w < coarseCPs.Count && !labels[w])
                 {
                     DFS(w);
                 }
