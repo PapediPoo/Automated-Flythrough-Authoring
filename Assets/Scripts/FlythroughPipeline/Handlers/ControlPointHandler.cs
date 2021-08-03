@@ -54,6 +54,16 @@ public class ControlPointHandler : IHandler<(MapContainer container, ControlPoin
             points = l.Skip(1).ToList();
         }
 
+        RaycastHit rch;
+        for(int i=0;i<cpoints.Count;i++)
+        {
+            var cp = cpoints[i];
+            Vector3 v3 = Utils.VToV3(cp);
+            if(Physics.Raycast(v3, Vector3.down, out rch)){
+                cpoints[i] = Utils.V3ToV(rch.point + Vector3.up, cp);
+            }
+        }
+
         return cpoints;
     }
 

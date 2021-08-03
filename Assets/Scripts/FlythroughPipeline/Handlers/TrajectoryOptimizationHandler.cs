@@ -17,7 +17,7 @@ using System;
 /// Date: July 2021
 /// Version: 0.32
 /// </summary>
-public class TrajectoryOptimizationHandler : IHandler<(Vector<double>, LBFGS, IObjectiveFunction), Vector<double>>
+public class TrajectoryOptimizationHandler : IHandler<(Vector<double>, LBFGS, IObjectiveFunction), IEnumerable<Vector<double>>>
 {
     public struct HeightAtPointContainer
     {
@@ -36,16 +36,20 @@ public class TrajectoryOptimizationHandler : IHandler<(Vector<double>, LBFGS, IO
         public Collider[] cols;
     }
 
-    public Vector<double> Invoke((Vector<double>, LBFGS, IObjectiveFunction) input)
+    public IEnumerable<Vector<double>> Invoke((Vector<double>, LBFGS, IObjectiveFunction) input)
     {
         var control_points = input.Item1;
         var objective = input.Item3;
 
         var algorithm = input.Item2;
 
-        var result = algorithm.FindMinimum(objective, control_points);
+        foreach(var r in algorithm.FindMinimum(objective, control_points))
+        {
+            yield return r;
+        }
+        //var result = algorithm.FindMinimum(objective, control_points);
 
         //return result.MinimizingPoint;
-        return result;
+        //return result;
     }
 }

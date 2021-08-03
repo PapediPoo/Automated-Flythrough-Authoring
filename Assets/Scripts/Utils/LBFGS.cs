@@ -9,19 +9,23 @@ namespace RSUtils
     public class LBFGS
     {
         int max_m;
+        double grad_threshold;
+        public bool terminated;
         //int max_iter;
         //int iter;
 
         List<Vector<double>> s;
         List<Vector<double>> y;
+        readonly List<double> alpha;
+        readonly List<double> rho;
 
-        List<double> alpha;
-        List<double> rho;
 
 
-        public LBFGS(int m)
+        public LBFGS(int m, double gradient_termination_threshold)
         {
             this.max_m = m;
+            this.grad_threshold = gradient_termination_threshold;
+            terminated = false;
             //this.max_iter = max_iter;
             //this.iter = 0;
 
@@ -30,17 +34,27 @@ namespace RSUtils
 
             alpha = new List<double>();
             rho = new List<double>();
-
         }
-        public Vector<double> FindMinimum(IObjectiveFunction objective, Vector<double> initialGuess)
+        public IEnumerable<Vector<double>> FindMinimum(IObjectiveFunction objective, Vector<double> initialGuess)
         {
+            while (terminated)
+            {
+                yield return initialGuess;
+            }
+
             //if(iter >= max_iter)
             //{
             //    return initialGuess;
             //}
-
             objective.EvaluateAt(initialGuess);
 
+            yield return initialGuess;
+
+            if(objective.Gradient.L1Norm() < grad_threshold * initialGuess.Count)
+            {
+                Debug.Log("LBFGS optimizer terminated: gradient threshold criterium");
+                terminated = true;
+            }
 
             int m = s.Count;
             var q = objective.Gradient;
@@ -51,7 +65,7 @@ namespace RSUtils
             {
                 var rho_i = 1d / y[i].DotProduct(s[i]);
                 var alpha_i = rho_i * s[i].DotProduct(q);
-                q = q - (alpha_i * y[i]);
+                q -= (alpha_i * y[i]);
 
                 alpha.Add(alpha_i);
                 rho.Add(rho_i);
@@ -79,8 +93,19 @@ namespace RSUtils
             var x_k = initialGuess;
             var g_k = objective.Gradient;
             //var x_k1 = initialGuess - (z * 0.333);
-            var x_k1 = LineSearch(objective, initialGuess, -z);
-            objective.EvaluateAt(x_k1);
+            Vector<double> x_k1 = initialGuess;
+            yield return initialGuess;
+
+            foreach (var tmp in LineSearch(objective, initialGuess, -z))
+            {
+                x_k1 = tmp;
+
+                yield return initialGuess;
+            }
+            //var x_k1 = LineSearch(objective, initialGuess, -z);
+            //objective.EvaluateAt(x_k1);
+            //yield return initialGuess;
+
             var g_k1 = objective.Gradient;
 
 
@@ -94,18 +119,13 @@ namespace RSUtils
                 y.RemoveAt(0);
             }
 
-            //iter++;
-
-            // Debug.Log(s.Count);
-            // Debug.Log(x_k1.At(0));
-
             //return initialGuess;
-            return x_k1;
+            yield return x_k1;
         }
 
-        private Vector<double> LineSearch(IObjectiveFunction objective, Vector<double> position, Vector<double> direction)
+        private IEnumerable<Vector<double>> LineSearch(IObjectiveFunction objective, Vector<double> position, Vector<double> direction)
         {
-            objective = objective.CreateNew();
+            // objective = objective.CreateNew();
             double factor = 1;
 
             //if (!objective.Point.Equals(position))
@@ -113,17 +133,27 @@ namespace RSUtils
             //    objective.EvaluateAt(position);
             //}
             double init_val = objective.Value;
+            var init_point = objective.Point;
             double next_val;
+            int MAX_ITERATIONS = 5;
+            int current_iteration = 0;
 
             do
             {
+                yield return init_point;
                 objective.EvaluateAt(position + (factor * direction));
                 next_val = objective.Value;
                 factor *= 0.5d;
-            } while (next_val >= init_val);
+                current_iteration++;
+            } while (next_val >= init_val && current_iteration <= MAX_ITERATIONS);
             // objective.EvaluateAt(position + (factor * direction));
 
-            return objective.Point;
+            yield return objective.Point;
+        }
+
+        public void Reset()
+        {
+            terminated = false;
         }
     }
 }

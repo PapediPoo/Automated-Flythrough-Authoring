@@ -7,6 +7,7 @@ using RSUtils;
 
 public struct TrajectoryContainer
 {
+    public List<Vector<double>> control_points;
     public List<Vector<double>> tour;
     public Vector<double> trajectory;
     public IObjectiveFunction objective;

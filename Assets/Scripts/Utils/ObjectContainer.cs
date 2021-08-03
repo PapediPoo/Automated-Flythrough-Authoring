@@ -38,7 +38,7 @@ namespace RSUtils
                 obj.name = v.ToString();
                 obj.transform.localScale = Vector3.one * 0.2f;
                 obj.transform.parent = target;
-                obj.transform.position = v;
+                obj.transform.localPosition = v;
             }
         }
         /// <summary>
@@ -64,7 +64,7 @@ namespace RSUtils
                 obj.name = (i/3).ToString();
                 obj.transform.localScale = Vector3.one * 0.2f;
                 obj.transform.parent = target;
-                obj.transform.position = new Vector3((float)trajectory[i], (float)trajectory[i + 1], (float)trajectory[i + 2]);
+                obj.transform.localPosition = new Vector3((float)trajectory[i], (float)trajectory[i + 1], (float)trajectory[i + 2]);
                 obj.layer = layer;
             }
         }
@@ -96,7 +96,7 @@ namespace RSUtils
                     obj.name = v3.ToString();
                     obj.transform.localScale = Vector3.one * 0.2f;
                     obj.transform.parent = target;
-                    obj.transform.position = v3;
+                    obj.transform.localPosition = v3;
                     obj.layer = layer;
                 }
                 else
@@ -130,7 +130,7 @@ namespace RSUtils
 
             foreach (Transform child in target)
             {
-                vector3s.Add(child.position);
+                vector3s.Add(child.localPosition);
             }
 
             return vector3s;

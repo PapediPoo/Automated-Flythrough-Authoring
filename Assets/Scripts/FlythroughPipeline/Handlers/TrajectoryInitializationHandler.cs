@@ -8,7 +8,7 @@ using MathNet.Numerics.LinearAlgebra;
 using MathNet.Numerics.Optimization;
 using MathNet.Numerics.Interpolation;
 
-public class TrajectoryInitializationHandler : IHandler<(Transform, TrajectorySettings), TrajectoryContainer>
+public class TrajectoryInitializationHandler : IHandler<(List<Vector<double>>, TrajectorySettings), TrajectoryContainer>
 {
 
     public struct HeightAtPointContainer
@@ -43,23 +43,23 @@ public class TrajectoryInitializationHandler : IHandler<(Transform, TrajectorySe
     TrajectoryContainer tc;
     TrajectorySettings ts;
 
-    public TrajectoryInitializationHandler()
+    public TrajectoryInitializationHandler(TrajectorySettings settings)
     {
         tph = new TourPlannerHandler();
-        lbfgs = new LBFGS(10);
+        lbfgs = new LBFGS(10, settings.lbfgs_gradient_termination_threshold);
     }
-    public TrajectoryContainer Invoke((Transform, TrajectorySettings) input)
+    public TrajectoryContainer Invoke((List<Vector<double>>, TrajectorySettings) input)
     {
         // TODO: Reduce allocation / reuse data structures
-        Transform object_container = input.Item1;
         TrajectorySettings ts = input.Item2;
         TrajectoryContainer tc;
+        tc.control_points = input.Item1;
 
-        var ls = ObjectContainer.FromObjectContainer(object_container).ConvertAll(x => Utils.V3ToV(x));
-        tc.tour = tph.Invoke((ls, ts));
+        //var ls = ObjectContainer.FromObjectContainer(object_container).ConvertAll(x => Utils.V3ToV(x));
+        tc.tour = tph.Invoke((tc.control_points, ts));
         tc.lbfgs = lbfgs;
 
-        tc.trajectory = CPToInitGuess(tc.tour, ts.num_trajectory_points);
+        tc.trajectory = CPToInitGuess(tc.tour, ts.trajectory_point_count);
 
         ofc = ObjectiveFunctionAlloc(tc.tour, ts);
         tc.objective = BuildObjectiveFunction(ofc, ts);
@@ -70,19 +70,10 @@ public class TrajectoryInitializationHandler : IHandler<(Transform, TrajectorySe
         return tc;
     }
 
-    public TrajectoryContainer Rebuild(Transform object_container)
-    {
-        var ls = ObjectContainer.FromObjectContainer(object_container).ConvertAll(x => Utils.V3ToV(x));
-        //ofc = UpdateObjectiveFunctionContainer(ofc, , ts);
-        //tc.objective = BuildObjectiveFunction(ofc, ts);
-
-        return tc;
-    }
-
     public static ObjectiveFunctionContainer ObjectiveFunctionAlloc(List<Vector<double>> control_points, TrajectorySettings settings)
     {
-        int n = settings.num_trajectory_points * 3;
-        var init_guess = CPToInitGuess(control_points, settings.num_trajectory_points);
+        int n = settings.trajectory_point_count * 3;
+        var init_guess = CPToInitGuess(control_points, settings.trajectory_point_count);
 
         var (Ad, fd, Gd, fgd) = GenerateDistanceMatrices(n, init_guess);
 
@@ -100,11 +91,11 @@ public class TrajectoryInitializationHandler : IHandler<(Transform, TrajectorySe
         ofc.Gv = Gv;
         ofc.Aa = Aa;
         ofc.Ga = Ga;
-        ofc.Dc = DistanceAtPointAlloc(.5f, 25f, 10);
-        ofc.Hc = HeightAtPointAlloc(5f, 10f, settings.desired_height);
+        ofc.Dc = DistanceAtPointAlloc(.25f, 100f, 10);
+        ofc.Hc = HeightAtPointAlloc(5f, settings.desired_height * 2f, settings.desired_height);
 
-        ofc.trajectory_point_array = new Vector<double>[settings.num_trajectory_points];
-        for (int i = 0; i < settings.num_trajectory_points; i++)
+        ofc.trajectory_point_array = new Vector<double>[settings.trajectory_point_count];
+        for (int i = 0; i < settings.trajectory_point_count; i++)
         {
             ofc.trajectory_point_array[i] = Vector<double>.Build.Dense(3);
         }
@@ -112,26 +103,14 @@ public class TrajectoryInitializationHandler : IHandler<(Transform, TrajectorySe
         return ofc;
     }
 
-    public static ObjectiveFunctionContainer UpdateObjectiveFunctionContainer(ObjectiveFunctionContainer ofc, List<Vector<double>> control_points, TrajectorySettings settings)
-    {
-        var init_guess = CPToInitGuess(control_points, settings.num_trajectory_points);
-        var (Ad, fd, Gd, fgd) = GenerateDistanceMatrices(ofc.n, init_guess);
-        ofc.Ad = Ad;
-        ofc.fd = fd;
-        ofc.Gd = Gd;
-        ofc.fgd = fgd;
-
-        return ofc;
-    }
-
     public static IObjectiveFunction BuildObjectiveFunction(ObjectiveFunctionContainer ofc, TrajectorySettings settings)
     {
-        int n = settings.num_trajectory_points * 3;
+        int n = settings.trajectory_point_count * 3;
 
         var objective = ObjectiveFunction.Gradient(x =>
         {
             var X = Matrix<double>.Build.Dense(n, 1, x.ToArray());
-            for (int i = 0; i < settings.num_trajectory_points; i++)
+            for (int i = 0; i < settings.trajectory_point_count; i++)
             {
                 x.CopySubVectorTo(ofc.trajectory_point_array[i], 3 * i, 0, 3);
             }
@@ -191,6 +170,7 @@ public class TrajectoryInitializationHandler : IHandler<(Transform, TrajectorySe
 
         RaycastHit rch;
         float current_height;
+        //current_height = container.MAX_DIST;
         if (Physics.Raycast(point, Vector3.down, out rch, container.MAX_DIST, settings.mask.value))
         {
             current_height = rch.distance;

@@ -22,20 +22,18 @@ public class FollowPath : MonoBehaviour
     public GameObject target;
     public bool lookForward = true;
     private Vector3 last_pos;
-    public float max_rot_speed = 30f;
+    public float max_rot_speed = 180f;
+    private bool ready;
 
     CubicSpline[] positionCP = new CubicSpline[3];
     Quaternion[] rotationCP;
     Quaternion rotationRef;
     // public float rotationSmooth = 2f;
 
-    // Start is called before the first frame update
-    void Start()
+    // Called once upon program start
+    private void Start()
     {
-        RefreshSplines();
-
-        target.transform.rotation = Quaternion.LookRotation(controlPoints[1] - controlPoints.First(), Vector3.up);
-        last_pos = controlPoints.First();
+        ready = false;
     }
 
     /// <summary>
@@ -44,8 +42,17 @@ public class FollowPath : MonoBehaviour
     /// </summary>
     public void Restart()
     {
-        Start();
+        if(controlPoints.Count < 5)
+        {
+            return;
+        }
+
+        RefreshSplines();
+
+        target.transform.rotation = Quaternion.LookRotation(controlPoints[1] - controlPoints.First(), Vector3.up);
+        last_pos = controlPoints.First();
         t = 0f;
+        ready = true;
     }
 
     /// <summary>
@@ -67,6 +74,10 @@ public class FollowPath : MonoBehaviour
     /// </summary>
     void Update()
     {
+        if (!ready)
+        {
+            return;
+        }
 
         // Do optimization on the stepsize to make the move speed approximatively constant
         stepSize = (float)speed * Time.deltaTime;   // Initial guess for optimization
@@ -116,6 +127,11 @@ public class FollowPath : MonoBehaviour
     /// </summary>
     private void RefreshSplines()
     {
+        if(controlPoints.Count < 5)
+        {
+            return;
+        }
+
         Vector3[] xyz = controlPoints.ToArray();
         double[] x = Array.ConvertAll(Enumerable.Range(0, controlPoints.Count).ToArray(), item => (double)item);
 

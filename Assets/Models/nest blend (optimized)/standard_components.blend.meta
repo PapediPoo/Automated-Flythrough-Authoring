@@ -7,6 +7,11 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Aluminium
+    second: {fileID: 2100000, guid: 780e8b03329bedd45ac7444b4ceca2cb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Basic Material 003
     second: {fileID: 2100000, guid: 42b330503087e7240be2185f823b7644, type: 2}
   - first:
@@ -14,6 +19,11 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: Material_541
     second: {fileID: 2100000, guid: 05731c64d69cf844a91e6b6cac399a26, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Metal
+    second: {fileID: 2100000, guid: 780e8b03329bedd45ac7444b4ceca2cb, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -34,8 +44,33 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: New material 002_3
     second: {fileID: 2100000, guid: 42b330503087e7240be2185f823b7644, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: White Wall
+    second: {fileID: 2100000, guid: 05731c64d69cf844a91e6b6cac399a26, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Wood 1
+    second: {fileID: 2100000, guid: 42b330503087e7240be2185f823b7644, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Wood 2
+    second: {fileID: 2100000, guid: 42b330503087e7240be2185f823b7644, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Wooden floor
+    second: {fileID: 2100000, guid: be74d7939a8752d48a071782adb17efa, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Zinc
+    second: {fileID: 2100000, guid: 5059f6243320f74448f8e427e12cf945, type: 2}
   materials:
-    materialImportMode: 0
+    materialImportMode: 2
     materialName: 0
     materialSearch: 1
     materialLocation: 1

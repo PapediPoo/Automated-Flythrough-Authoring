@@ -30,7 +30,6 @@ public class FlythroughGenerator : MonoBehaviour
 
     [SerializeField]
     public ControlPointSettings control_point_settings;
-    public int control_point_layer = 0;
     private ControlPointHandler control_point_handler;
 
     [SerializeField]
@@ -39,35 +38,21 @@ public class FlythroughGenerator : MonoBehaviour
     private TrajectoryInitializationHandler trajectory_initialization_handler;
     private TrajectoryOptimizationHandler trajectory_optimization_handler;
 
-    [SerializeField]
-    public Transform controlpoint_container;
-    public GameObject controlpoint_prefab;
     [Header("Realtime Optimization")]
     public float refine_every = 0.5f;
-    private float refine_counter = 0f;
+    private bool modified;
 
     private void Start()
     {
         scanner_handler = new ScannerHandler();
         control_point_handler = new ControlPointHandler();
-        trajectory_initialization_handler = new TrajectoryInitializationHandler();
+        trajectory_initialization_handler = new TrajectoryInitializationHandler(trajectory_settings);
         trajectory_optimization_handler = new TrajectoryOptimizationHandler();
 
         GenerateMaps();
         FindControlPoints();
-    }
-
-    /// <summary>
-    /// Does a single step of the trajectory optimization if the trajectory has been initialized. Also updates the line renderer
-    /// </summary>
-    private void Update()
-    {
-        refine_counter += Time.deltaTime;
-        if (refine_counter >= refine_every)
-        {
-            RefineTrajectory();
-            refine_counter -= refine_every;
-        }
+        PlanTour();
+        StartCoroutine("RefineTrajectory");
     }
 
     /// <summary>
@@ -76,6 +61,7 @@ public class FlythroughGenerator : MonoBehaviour
     public void GenerateMaps()
     {
         map_container = scanner_handler.Invoke((GetComponent<Collider>(), map_settings.cell_size, map_settings.mask));
+        print("scanning done");
     }
 
     /// <summary>
@@ -83,8 +69,8 @@ public class FlythroughGenerator : MonoBehaviour
     /// </summary>
     public void FindControlPoints()
     {
-        var cp = control_point_handler.Invoke((map_container, control_point_settings));
-        ObjectContainer.ToObjectContainer(cp, controlpoint_container, controlpoint_prefab, true, control_point_layer);
+        trajectory_container.control_points = control_point_handler.Invoke((map_container, control_point_settings));
+        print("control points done");
     }
 
     /// <summary>
@@ -92,14 +78,14 @@ public class FlythroughGenerator : MonoBehaviour
     /// </summary>
     public void PlanTour()
     {
-        //bool initialized = trajectory_container.trajectory == null;
-        //var tmp = trajectory_container.trajectory;
-
-        trajectory_container = trajectory_initialization_handler.Invoke((controlpoint_container, trajectory_settings));
-        //if (!initialized)
+        //if(crt != null)
         //{
-        //    trajectory_container.trajectory = tmp;
+        //    StopCoroutine(crt);
         //}
+        trajectory_container = trajectory_initialization_handler.Invoke((trajectory_container.control_points, trajectory_settings));
+        trajectory_container.lbfgs.Reset();
+        modified = true;
+        print("tour planning done");
     }
 
     /// <summary>
@@ -120,11 +106,42 @@ public class FlythroughGenerator : MonoBehaviour
     /// <summary>
     /// Does one step of the trajectory optimization
     /// </summary>
-    public void RefineTrajectory()
+    IEnumerator RefineTrajectory()
     {
-        if (trajectory_container.trajectory != null)
+        var wfs = new WaitForSeconds(refine_every);
+        for (; ; )
         {
-            trajectory_container.trajectory = trajectory_optimization_handler.Invoke((trajectory_container.trajectory, trajectory_container.lbfgs, trajectory_container.objective));
+            if (trajectory_container.trajectory != null)
+            {
+                Vector<double> tmp = trajectory_container.trajectory;
+                foreach(var t in trajectory_optimization_handler.Invoke((trajectory_container.trajectory, trajectory_container.lbfgs, trajectory_container.objective)))
+                {
+                    tmp = t;
+                    yield return wfs;
+                }
+                if (modified)
+                {
+                    modified = false;
+                }
+                else
+                {
+                    trajectory_container.trajectory = tmp;
+                }
+                //trajectory_container.trajectory = trajectory_optimization_handler.Invoke((trajectory_container.trajectory, trajectory_container.lbfgs, trajectory_container.objective));
+            }
+            yield return wfs;
+        }
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        if(trajectory_container.control_points != null)
+        {
+            foreach(var cp in trajectory_container.control_points)
+            {
+                Gizmos.DrawSphere(Utils.VToV3(cp), 1f);
+                print(Utils.VToV3(cp));
+            }
         }
     }
 }

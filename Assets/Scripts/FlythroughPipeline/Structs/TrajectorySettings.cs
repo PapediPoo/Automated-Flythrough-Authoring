@@ -5,11 +5,12 @@ using UnityEngine;
 [System.Serializable]
 public struct TrajectorySettings
 {
-    public int num_trajectory_points;
+    public int trajectory_point_count;
     public int max_iterations;
     public float desired_height;
     public bool backtrack;
     public LayerMask mask;
+    public double lbfgs_gradient_termination_threshold;
 
     [Range(0.01f, 1)]
     public double distance_weight;
