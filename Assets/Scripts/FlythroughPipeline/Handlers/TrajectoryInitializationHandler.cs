@@ -91,7 +91,7 @@ public class TrajectoryInitializationHandler : IHandler<(List<Vector<double>>, T
         ofc.Gv = Gv;
         ofc.Aa = Aa;
         ofc.Ga = Ga;
-        ofc.Dc = DistanceAtPointAlloc(.25f, 100f, 10);
+        ofc.Dc = DistanceAtPointAlloc(.5f, 100f, 10);
         ofc.Hc = HeightAtPointAlloc(5f, settings.desired_height * 2f, settings.desired_height);
 
         ofc.trajectory_point_array = new Vector<double>[settings.trajectory_point_count];
