@@ -1,6 +1,6 @@
 Using pre-set license
 Built from '2020.3/release' branch; Version is '2020.3.1f1 (77a89f25062f) revision 7841951'; Using compiler version '192528614'; Build Type 'Release'
-OS: 'Windows 10 Home; OS build 19042.1110; Version 2009; 64bit' Language: 'en' Physical Memory: 32718 MB
+OS: 'Windows 10 Home; OS build 19042.1165; Version 2009; 64bit' Language: 'en' Physical Memory: 32718 MB
 BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1, IsPro: 0
 
  COMMAND LINE ARGUMENTS:
@@ -15,12 +15,12 @@ F:/Documents/Git/Bsc Project
 -logFile
 Logs/AssetImportWorker0.log
 -srvPort
-58105
+55496
 Successfully changed project path to: F:/Documents/Git/Bsc Project
 F:/Documents/Git/Bsc Project
 Using Asset Import Pipeline V2.
-Refreshing native plugins compatible for Editor in 113.57 ms, found 16 plugins.
-Preloading 1 native plugins for Editor in 0.69 ms.
+Refreshing native plugins compatible for Editor in 117.20 ms, found 16 plugins.
+Preloading 1 native plugins for Editor in 0.74 ms.
 Initialize engine version: 2020.3.1f1 (77a89f25062f)
 [Subsystems] Discovering subsystems at path D:/Program/Unity/2020.3.1f1/Editor/Data/Resources/UnitySubsystems
 [Subsystems] Discovering subsystems at path F:/Documents/Git/Bsc Project/Assets
@@ -36,26 +36,26 @@ Initialize mono
 Mono path[0] = 'D:/Program/Unity/2020.3.1f1/Editor/Data/Managed'
 Mono path[1] = 'D:/Program/Unity/2020.3.1f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit'
 Mono config path = 'D:/Program/Unity/2020.3.1f1/Editor/Data/MonoBleedingEdge/etc'
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56892
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56428
 Begin MonoManager ReloadAssembly
 Registering precompiled unity dll's ...
 Register platform support module: D:/Program/Unity/2020.3.1f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
-Registered in 0.000986 seconds.
+Registered in 0.000979 seconds.
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 103.79 ms, found 16 plugins.
+Refreshing native plugins compatible for Editor in 104.46 ms, found 16 plugins.
 Preloading 1 native plugins for Editor in 0.07 ms.
 Invoked RoslynAnalysisRunner static constructor.
 RoslynAnalysisRunner will not be running.
 RoslynAnalysisRunner has terminated.
 Mono: successfully reloaded assembly
-- Completed reload, in  0.901 seconds
+- Completed reload, in  0.928 seconds
 Platform modules already initialized, skipping
 Registering precompiled user dll's ...
-Registered in 0.009781 seconds.
+Registered in 0.010309 seconds.
 Begin MonoManager ReloadAssembly
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 99.48 ms, found 16 plugins.
-Preloading 1 native plugins for Editor in 0.06 ms.
+Refreshing native plugins compatible for Editor in 105.31 ms, found 16 plugins.
+Preloading 1 native plugins for Editor in 0.07 ms.
 [XR] [Mixed Reality OpenXR Mesh]: RegisterLifecycleProvider.
 [XR] [Mixed Reality OpenXR Input]: RegisterLifecycleProvider.
 Invoked RoslynAnalysisRunner static constructor.
@@ -63,184 +63,136 @@ RoslynAnalysisRunner will not be running.
 RoslynAnalysisRunner has terminated.
 [XR] Error loading subsystem: Display (1) (header mismatch?)
 Mono: successfully reloaded assembly
-- Completed reload, in  2.712 seconds
+- Completed reload, in  2.805 seconds
 Platform modules already initialized, skipping
 ========================================================================
 Worker process is ready to serve import requests
 Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
 Launched and connected shader compiler UnityShaderCompiler.exe after 0.03 seconds
-Refreshing native plugins compatible for Editor in 2.28 ms, found 16 plugins.
-Preloading 1 native plugins for Editor in 0.09 ms.
+Refreshing native plugins compatible for Editor in 1.47 ms, found 16 plugins.
+Preloading 1 native plugins for Editor in 0.05 ms.
 Unloading 6078 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 265.2 MB.
-System memory in use after: 264.9 MB.
+System memory in use before: 267.0 MB.
+System memory in use after: 266.7 MB.
 
-Unloading 948 unused Assets to reduce memory usage. Loaded Objects now: 6422.
-Total: 5.195000 ms (FindLiveObjects: 0.634500 ms CreateObjectMapping: 0.173400 ms MarkObjects: 3.259100 ms  DeleteObjects: 1.127000 ms)
-
-========================================================================
-Received Import Request.
-  path: Assets/Models/nest blend (optimized)/mesh_mould.blend
-  artifactKey: Guid(f551f8a01996e71478f756db546c7fd8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Models/nest blend (optimized)/mesh_mould.blend using Guid(f551f8a01996e71478f756db546c7fd8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd8a14987a34e01b13bd6422781e7345a') in 0.320665 seconds
-  Import took 0.329190 seconds .
+Unloading 948 unused Assets to reduce memory usage. Loaded Objects now: 6423.
+Total: 5.254600 ms (FindLiveObjects: 0.630900 ms CreateObjectMapping: 0.168700 ms MarkObjects: 3.294000 ms  DeleteObjects: 1.159900 ms)
 
 ========================================================================
 Received Import Request.
-  Time since last request: 21.865439 seconds.
-  path: Assets/Models/nest blend (optimized)/mesh_mould.blend
-  artifactKey: Guid(f551f8a01996e71478f756db546c7fd8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Models/nest blend (optimized)/mesh_mould.blend using Guid(f551f8a01996e71478f756db546c7fd8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '146ba37bfa1cc99f471c0c3c88e03407') in 0.018231 seconds
-  Import took 0.026856 seconds .
+  path: Assets/Materials/Crossection Materials
+  artifactKey: Guid(efee8d6dfaaa28f42b6c1bc8d4e1b50b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/Crossection Materials using Guid(efee8d6dfaaa28f42b6c1bc8d4e1b50b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5b67508b0e6b7c80a8f624175449c86e') in 0.027143 seconds
+  Import took 0.036043 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 211.624500 seconds.
-  path: Assets/Models/nest blend (optimized)/mesh_mould.blend
-  artifactKey: Guid(f551f8a01996e71478f756db546c7fd8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Models/nest blend (optimized)/mesh_mould.blend using Guid(f551f8a01996e71478f756db546c7fd8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a5756600312eafc36d8ae214fa038203') in 0.018865 seconds
-  Import took 0.027848 seconds .
+  Time since last request: 22.715202 seconds.
+  path: Assets/Materials/slab.mat
+  artifactKey: Guid(6c069e67f46aa1147a93260636c583d9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/slab.mat using Guid(6c069e67f46aa1147a93260636c583d9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b925b0219ca3d0cb27decda3f4c3e00c') in 0.176879 seconds
+  Import took 0.185547 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 41.011144 seconds.
-  path: Assets/Models/nest blend (optimized)/mesh_mould.blend
-  artifactKey: Guid(f551f8a01996e71478f756db546c7fd8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Models/nest blend (optimized)/mesh_mould.blend using Guid(f551f8a01996e71478f756db546c7fd8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '997b4bfe4b1c2063b8a60eb8bed9ad92') in 0.017559 seconds
-  Import took 0.025875 seconds .
+  Time since last request: 387.718795 seconds.
+  path: Assets/Materials/Crossection Materials/Cross Section Shader.shadergraph
+  artifactKey: Guid(3f59063d11301664487401b489a2d6b2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/Crossection Materials/Cross Section Shader.shadergraph using Guid(3f59063d11301664487401b489a2d6b2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6d24bbc728cbb8768a39d0d248cde6b7') in 0.006222 seconds
+  Import took 0.015338 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 725.061472 seconds.
-  path: Assets/Models/nest blend (optimized)/SDCFacade.blend
-  artifactKey: Guid(ccdc1e2a654cea347bfad0c4474cea4e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Models/nest blend (optimized)/SDCFacade.blend using Guid(ccdc1e2a654cea347bfad0c4474cea4e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e56b2b7d52163d1828bfd9314bbf03c3') in 0.035062 seconds
-  Import took 0.044132 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 48.313504 seconds.
-  path: Assets/Models/nest blend (optimized)/mesh_mould.blend
-  artifactKey: Guid(f551f8a01996e71478f756db546c7fd8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Models/nest blend (optimized)/mesh_mould.blend using Guid(f551f8a01996e71478f756db546c7fd8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0fd98c9891586ed83d5898def2cf2e40') in 0.018358 seconds
-  Import took 0.026891 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 695.225294 seconds.
-  path: Assets/Models/nest blend (optimized)/mesh_mould.blend
-  artifactKey: Guid(f551f8a01996e71478f756db546c7fd8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Models/nest blend (optimized)/mesh_mould.blend using Guid(f551f8a01996e71478f756db546c7fd8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'fd01b7f1639e092528b3c3ce73e5774d') in 0.019676 seconds
-  Import took 0.028677 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 12.245895 seconds.
-  path: Assets/Models/nest blend (optimized)/mesh_mould.blend
-  artifactKey: Guid(f551f8a01996e71478f756db546c7fd8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Models/nest blend (optimized)/mesh_mould.blend using Guid(f551f8a01996e71478f756db546c7fd8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4a6bfca754cbbce107cd9aa84f2de75a') in 0.018565 seconds
-  Import took 0.028306 seconds .
+  Time since last request: 0.000324 seconds.
+  path: Assets/Materials/Crossection Materials/Cross Section Shader.shadergraph
+  artifactKey: Guid(3f59063d11301664487401b489a2d6b2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/Crossection Materials/Cross Section Shader.shadergraph using Guid(3f59063d11301664487401b489a2d6b2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6d24bbc728cbb8768a39d0d248cde6b7') in 0.002022 seconds
+  Import took 0.010467 seconds .
 
 ========================================================================
 Received Prepare
 Registering precompiled user dll's ...
-Registered in 0.011234 seconds.
+Registered in 0.010804 seconds.
 Begin MonoManager ReloadAssembly
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 1.72 ms, found 16 plugins.
-Preloading 1 native plugins for Editor in 0.06 ms.
+Refreshing native plugins compatible for Editor in 1.51 ms, found 16 plugins.
+Preloading 1 native plugins for Editor in 0.05 ms.
 Invoked RoslynAnalysisRunner static constructor.
 RoslynAnalysisRunner will not be running.
 RoslynAnalysisRunner has terminated.
 Mono: successfully reloaded assembly
-- Completed reload, in  2.354 seconds
+- Completed reload, in  2.270 seconds
 Platform modules already initialized, skipping
 Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
-Refreshing native plugins compatible for Editor in 1.64 ms, found 16 plugins.
+Refreshing native plugins compatible for Editor in 1.60 ms, found 16 plugins.
 Preloading 1 native plugins for Editor in 0.06 ms.
 Unloading 5842 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 254.8 MB.
-System memory in use after: 254.7 MB.
+System memory in use before: 256.4 MB.
+System memory in use after: 256.3 MB.
 
-Unloading 942 unused Assets to reduce memory usage. Loaded Objects now: 6478.
-Total: 6.167400 ms (FindLiveObjects: 0.867200 ms CreateObjectMapping: 0.281500 ms MarkObjects: 3.788000 ms  DeleteObjects: 1.229600 ms)
+Unloading 942 unused Assets to reduce memory usage. Loaded Objects now: 6508.
+Total: 4.955000 ms (FindLiveObjects: 0.619200 ms CreateObjectMapping: 0.168600 ms MarkObjects: 3.081600 ms  DeleteObjects: 1.084600 ms)
 
 ========================================================================
 Received Prepare
 Registering precompiled user dll's ...
-Registered in 0.010497 seconds.
+Registered in 0.010056 seconds.
 Begin MonoManager ReloadAssembly
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 1.61 ms, found 16 plugins.
-Preloading 1 native plugins for Editor in 0.06 ms.
+Refreshing native plugins compatible for Editor in 1.53 ms, found 16 plugins.
+Preloading 1 native plugins for Editor in 0.05 ms.
 Invoked RoslynAnalysisRunner static constructor.
 RoslynAnalysisRunner will not be running.
 RoslynAnalysisRunner has terminated.
 Mono: successfully reloaded assembly
-- Completed reload, in  2.351 seconds
+- Completed reload, in  2.274 seconds
 Platform modules already initialized, skipping
 Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
 Refreshing native plugins compatible for Editor in 1.58 ms, found 16 plugins.
 Preloading 1 native plugins for Editor in 0.05 ms.
 Unloading 5842 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 255.0 MB.
-System memory in use after: 254.9 MB.
+System memory in use before: 256.5 MB.
+System memory in use after: 256.5 MB.
 
-Unloading 942 unused Assets to reduce memory usage. Loaded Objects now: 6486.
-Total: 5.750400 ms (FindLiveObjects: 0.692700 ms CreateObjectMapping: 0.181500 ms MarkObjects: 3.571600 ms  DeleteObjects: 1.303200 ms)
+Unloading 942 unused Assets to reduce memory usage. Loaded Objects now: 6516.
+Total: 5.258600 ms (FindLiveObjects: 0.644100 ms CreateObjectMapping: 0.173300 ms MarkObjects: 3.352900 ms  DeleteObjects: 1.087000 ms)
+
+========================================================================
+Received Import Request.
+  Time since last request: 5134.904284 seconds.
+  path: Assets/Materials/Wood Pack/wood3/wood3.mat
+  artifactKey: Guid(5e2bdad96d560fa4bbe6b3d1d070b1e8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/Wood Pack/wood3/wood3.mat using Guid(5e2bdad96d560fa4bbe6b3d1d070b1e8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3a4619842e100c70870976790eb2d742') in 0.149426 seconds
+  Import took 0.158690 seconds .
 
 ========================================================================
 Received Prepare
 Registering precompiled user dll's ...
-Registered in 0.010035 seconds.
+Registered in 0.010720 seconds.
 Begin MonoManager ReloadAssembly
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 1.60 ms, found 16 plugins.
-Preloading 1 native plugins for Editor in 0.08 ms.
-Invoked RoslynAnalysisRunner static constructor.
-RoslynAnalysisRunner will not be running.
-RoslynAnalysisRunner has terminated.
-Mono: successfully reloaded assembly
-- Completed reload, in  2.382 seconds
-Platform modules already initialized, skipping
-Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
-Refreshing native plugins compatible for Editor in 1.66 ms, found 16 plugins.
-Preloading 1 native plugins for Editor in 0.06 ms.
-Unloading 5842 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 255.1 MB.
-System memory in use after: 255.0 MB.
-
-Unloading 942 unused Assets to reduce memory usage. Loaded Objects now: 6494.
-Total: 6.033900 ms (FindLiveObjects: 0.867900 ms CreateObjectMapping: 0.216100 ms MarkObjects: 3.732400 ms  DeleteObjects: 1.216400 ms)
-
-========================================================================
-Received Prepare
-Registering precompiled user dll's ...
-Registered in 0.010257 seconds.
-Begin MonoManager ReloadAssembly
-Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 1.57 ms, found 16 plugins.
+Refreshing native plugins compatible for Editor in 1.77 ms, found 16 plugins.
 Preloading 1 native plugins for Editor in 0.06 ms.
 Invoked RoslynAnalysisRunner static constructor.
 RoslynAnalysisRunner will not be running.
 RoslynAnalysisRunner has terminated.
 Mono: successfully reloaded assembly
-- Completed reload, in  2.389 seconds
+- Completed reload, in  2.511 seconds
 Platform modules already initialized, skipping
 Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
-Refreshing native plugins compatible for Editor in 1.57 ms, found 16 plugins.
-Preloading 1 native plugins for Editor in 0.06 ms.
+Refreshing native plugins compatible for Editor in 1.70 ms, found 16 plugins.
+Preloading 1 native plugins for Editor in 0.07 ms.
 Unloading 5842 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 255.1 MB.
-System memory in use after: 255.1 MB.
+System memory in use before: 256.7 MB.
+System memory in use after: 256.6 MB.
 
-Unloading 942 unused Assets to reduce memory usage. Loaded Objects now: 6502.
-Total: 6.799300 ms (FindLiveObjects: 1.073200 ms CreateObjectMapping: 0.392100 ms MarkObjects: 4.045000 ms  DeleteObjects: 1.287800 ms)
+Unloading 942 unused Assets to reduce memory usage. Loaded Objects now: 6560.
+Total: 5.990700 ms (FindLiveObjects: 0.777500 ms CreateObjectMapping: 0.189400 ms MarkObjects: 3.801800 ms  DeleteObjects: 1.220700 ms)
 
 ========================================================================
 Received Prepare
 Registering precompiled user dll's ...
-Registered in 0.010001 seconds.
+Registered in 0.010266 seconds.
 Begin MonoManager ReloadAssembly
 Native extension for WindowsStandalone target not found
 Refreshing native plugins compatible for Editor in 1.78 ms, found 16 plugins.
@@ -249,22 +201,166 @@ Invoked RoslynAnalysisRunner static constructor.
 RoslynAnalysisRunner will not be running.
 RoslynAnalysisRunner has terminated.
 Mono: successfully reloaded assembly
-- Completed reload, in  2.416 seconds
+- Completed reload, in  2.467 seconds
 Platform modules already initialized, skipping
 Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
-Refreshing native plugins compatible for Editor in 1.73 ms, found 16 plugins.
+Refreshing native plugins compatible for Editor in 1.70 ms, found 16 plugins.
 Preloading 1 native plugins for Editor in 0.06 ms.
 Unloading 5842 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 255.2 MB.
-System memory in use after: 255.1 MB.
+System memory in use before: 256.9 MB.
+System memory in use after: 256.8 MB.
 
-Unloading 942 unused Assets to reduce memory usage. Loaded Objects now: 6510.
-Total: 5.686300 ms (FindLiveObjects: 0.729900 ms CreateObjectMapping: 0.238900 ms MarkObjects: 3.535900 ms  DeleteObjects: 1.181000 ms)
+Unloading 942 unused Assets to reduce memory usage. Loaded Objects now: 6568.
+Total: 5.912900 ms (FindLiveObjects: 0.842800 ms CreateObjectMapping: 0.179800 ms MarkObjects: 3.669900 ms  DeleteObjects: 1.218700 ms)
 
 ========================================================================
 Received Prepare
 Registering precompiled user dll's ...
-Registered in 0.010138 seconds.
+Registered in 0.010441 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 1.98 ms, found 16 plugins.
+Preloading 1 native plugins for Editor in 0.08 ms.
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  2.455 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Refreshing native plugins compatible for Editor in 1.60 ms, found 16 plugins.
+Preloading 1 native plugins for Editor in 0.06 ms.
+Unloading 5842 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 256.9 MB.
+System memory in use after: 256.8 MB.
+
+Unloading 942 unused Assets to reduce memory usage. Loaded Objects now: 6576.
+Total: 6.052200 ms (FindLiveObjects: 0.696200 ms CreateObjectMapping: 0.176600 ms MarkObjects: 3.924500 ms  DeleteObjects: 1.253600 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.010936 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 1.53 ms, found 16 plugins.
+Preloading 1 native plugins for Editor in 0.06 ms.
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  2.304 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Refreshing native plugins compatible for Editor in 1.57 ms, found 16 plugins.
+Preloading 1 native plugins for Editor in 0.05 ms.
+Unloading 5842 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 257.0 MB.
+System memory in use after: 256.9 MB.
+
+Unloading 942 unused Assets to reduce memory usage. Loaded Objects now: 6584.
+Total: 5.445400 ms (FindLiveObjects: 0.650400 ms CreateObjectMapping: 0.169400 ms MarkObjects: 3.461700 ms  DeleteObjects: 1.162800 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.010181 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 1.56 ms, found 16 plugins.
+Preloading 1 native plugins for Editor in 0.05 ms.
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  2.330 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Refreshing native plugins compatible for Editor in 2.08 ms, found 16 plugins.
+Preloading 1 native plugins for Editor in 0.08 ms.
+Unloading 5842 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 257.0 MB.
+System memory in use after: 256.9 MB.
+
+Unloading 942 unused Assets to reduce memory usage. Loaded Objects now: 6592.
+Total: 6.300200 ms (FindLiveObjects: 0.806000 ms CreateObjectMapping: 0.161600 ms MarkObjects: 4.149900 ms  DeleteObjects: 1.181200 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.010194 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 1.69 ms, found 16 plugins.
+Preloading 1 native plugins for Editor in 0.07 ms.
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  2.485 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Refreshing native plugins compatible for Editor in 1.76 ms, found 16 plugins.
+Preloading 1 native plugins for Editor in 0.06 ms.
+Unloading 5842 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 257.0 MB.
+System memory in use after: 256.9 MB.
+
+Unloading 942 unused Assets to reduce memory usage. Loaded Objects now: 6600.
+Total: 5.750700 ms (FindLiveObjects: 0.726200 ms CreateObjectMapping: 0.320800 ms MarkObjects: 3.455200 ms  DeleteObjects: 1.246500 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.010747 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 1.64 ms, found 16 plugins.
+Preloading 1 native plugins for Editor in 0.07 ms.
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  2.531 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Refreshing native plugins compatible for Editor in 1.74 ms, found 16 plugins.
+Preloading 1 native plugins for Editor in 0.05 ms.
+Unloading 5842 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 257.0 MB.
+System memory in use after: 256.9 MB.
+
+Unloading 942 unused Assets to reduce memory usage. Loaded Objects now: 6608.
+Total: 6.554700 ms (FindLiveObjects: 0.723400 ms CreateObjectMapping: 0.159500 ms MarkObjects: 4.233500 ms  DeleteObjects: 1.436600 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.010440 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 1.97 ms, found 16 plugins.
+Preloading 1 native plugins for Editor in 0.08 ms.
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  2.471 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Refreshing native plugins compatible for Editor in 1.75 ms, found 16 plugins.
+Preloading 1 native plugins for Editor in 0.06 ms.
+Unloading 5842 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 257.1 MB.
+System memory in use after: 257.0 MB.
+
+Unloading 942 unused Assets to reduce memory usage. Loaded Objects now: 6616.
+Total: 6.191500 ms (FindLiveObjects: 0.673100 ms CreateObjectMapping: 0.153900 ms MarkObjects: 4.186000 ms  DeleteObjects: 1.177000 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.010559 seconds.
 Begin MonoManager ReloadAssembly
 Native extension for WindowsStandalone target not found
 Refreshing native plugins compatible for Editor in 1.55 ms, found 16 plugins.
@@ -273,952 +369,40 @@ Invoked RoslynAnalysisRunner static constructor.
 RoslynAnalysisRunner will not be running.
 RoslynAnalysisRunner has terminated.
 Mono: successfully reloaded assembly
-- Completed reload, in  2.254 seconds
+- Completed reload, in  2.294 seconds
 Platform modules already initialized, skipping
 Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
-Refreshing native plugins compatible for Editor in 1.65 ms, found 16 plugins.
-Preloading 1 native plugins for Editor in 0.06 ms.
+Refreshing native plugins compatible for Editor in 2.56 ms, found 16 plugins.
+Preloading 1 native plugins for Editor in 0.07 ms.
 Unloading 5842 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 255.2 MB.
-System memory in use after: 255.1 MB.
+System memory in use before: 257.1 MB.
+System memory in use after: 257.0 MB.
 
-Unloading 942 unused Assets to reduce memory usage. Loaded Objects now: 6518.
-Total: 5.804300 ms (FindLiveObjects: 0.640900 ms CreateObjectMapping: 0.172100 ms MarkObjects: 3.787600 ms  DeleteObjects: 1.202200 ms)
+Unloading 942 unused Assets to reduce memory usage. Loaded Objects now: 6624.
+Total: 5.891600 ms (FindLiveObjects: 0.736200 ms CreateObjectMapping: 0.209900 ms MarkObjects: 3.715200 ms  DeleteObjects: 1.228700 ms)
 
 ========================================================================
 Received Prepare
 Registering precompiled user dll's ...
-Registered in 0.010306 seconds.
+Registered in 0.010229 seconds.
 Begin MonoManager ReloadAssembly
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 1.58 ms, found 16 plugins.
-Preloading 1 native plugins for Editor in 0.06 ms.
-Invoked RoslynAnalysisRunner static constructor.
-RoslynAnalysisRunner will not be running.
-RoslynAnalysisRunner has terminated.
-Mono: successfully reloaded assembly
-- Completed reload, in  2.361 seconds
-Platform modules already initialized, skipping
-Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
-Refreshing native plugins compatible for Editor in 1.67 ms, found 16 plugins.
-Preloading 1 native plugins for Editor in 0.07 ms.
-Unloading 5842 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 255.3 MB.
-System memory in use after: 255.2 MB.
-
-Unloading 942 unused Assets to reduce memory usage. Loaded Objects now: 6526.
-Total: 5.764700 ms (FindLiveObjects: 0.697800 ms CreateObjectMapping: 0.169000 ms MarkObjects: 3.714200 ms  DeleteObjects: 1.181700 ms)
-
-========================================================================
-Received Prepare
-Registering precompiled user dll's ...
-Registered in 0.010091 seconds.
-Begin MonoManager ReloadAssembly
-Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 1.67 ms, found 16 plugins.
-Preloading 1 native plugins for Editor in 0.07 ms.
-Invoked RoslynAnalysisRunner static constructor.
-RoslynAnalysisRunner will not be running.
-RoslynAnalysisRunner has terminated.
-Mono: successfully reloaded assembly
-- Completed reload, in  2.366 seconds
-Platform modules already initialized, skipping
-Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
-Refreshing native plugins compatible for Editor in 1.86 ms, found 16 plugins.
-Preloading 1 native plugins for Editor in 0.07 ms.
-Unloading 5842 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 255.3 MB.
-System memory in use after: 255.2 MB.
-
-Unloading 942 unused Assets to reduce memory usage. Loaded Objects now: 6534.
-Total: 6.604000 ms (FindLiveObjects: 0.698200 ms CreateObjectMapping: 0.171100 ms MarkObjects: 4.191800 ms  DeleteObjects: 1.540800 ms)
-
-========================================================================
-Received Import Request.
-  Time since last request: 6521.890526 seconds.
-  path: Assets/Models/nest blend (optimized)/mesh_mould.blend
-  artifactKey: Guid(f551f8a01996e71478f756db546c7fd8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Models/nest blend (optimized)/mesh_mould.blend using Guid(f551f8a01996e71478f756db546c7fd8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a86b1a9278ae4b5c16ac1975add1d4b5') in 0.169917 seconds
-  Import took 0.179102 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 278.693544 seconds.
-  path: Assets/Materials/Concrete textures pack/pattern 17/normal.tga
-  artifactKey: Guid(dac2a28fc94762d4ca44b2bc4684a2aa) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Materials/Concrete textures pack/pattern 17/normal.tga using Guid(dac2a28fc94762d4ca44b2bc4684a2aa) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '71fcbb0fc5551cf038f03bd4cf3981bc') in 0.022322 seconds
-  Import took 0.032017 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000136 seconds.
-  path: Assets/Materials/Concrete textures pack/pattern 17/preview.jpg
-  artifactKey: Guid(aa7b5d03c68f6bd42a4fe089a643ee0a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Materials/Concrete textures pack/pattern 17/preview.jpg using Guid(aa7b5d03c68f6bd42a4fe089a643ee0a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '502e8cb57cde3f115a586fdb9defb5f6') in 0.048613 seconds
-  Import took 0.056359 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000201 seconds.
-  path: Assets/Materials/Concrete textures pack/pattern 17/normal.tga
-  artifactKey: Guid(dac2a28fc94762d4ca44b2bc4684a2aa) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Materials/Concrete textures pack/pattern 17/normal.tga using Guid(dac2a28fc94762d4ca44b2bc4684a2aa) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '71fcbb0fc5551cf038f03bd4cf3981bc') in 0.010075 seconds
-  Import took 0.018960 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000194 seconds.
-  path: Assets/Materials/Concrete textures pack/pattern 17/preview.jpg
-  artifactKey: Guid(aa7b5d03c68f6bd42a4fe089a643ee0a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Materials/Concrete textures pack/pattern 17/preview.jpg using Guid(aa7b5d03c68f6bd42a4fe089a643ee0a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '502e8cb57cde3f115a586fdb9defb5f6') in 0.009831 seconds
-  Import took 0.018938 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 468.874469 seconds.
-  path: Assets/Models/nest blend (optimized)/floor.blend
-  artifactKey: Guid(3aa1ff19b31e3c74b9e2f51348eff101) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Models/nest blend (optimized)/floor.blend using Guid(3aa1ff19b31e3c74b9e2f51348eff101) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ff387144a019ee6c76f66d00dd4e36fd') in 0.089831 seconds
-  Import took 0.101144 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.003970 seconds.
-  path: Assets/Models/nest blend (optimized)/floor.blend
-  artifactKey: Guid(3aa1ff19b31e3c74b9e2f51348eff101) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Models/nest blend (optimized)/floor.blend using Guid(3aa1ff19b31e3c74b9e2f51348eff101) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ff387144a019ee6c76f66d00dd4e36fd') in 0.076949 seconds
-  Import took 0.086420 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 126.129411 seconds.
-  path: Assets/Scenes/VR Interaction/ReflectionProbe-1.exr
-  artifactKey: Guid(baae64a4da093234d9a668234be597a7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scenes/VR Interaction/ReflectionProbe-1.exr using Guid(baae64a4da093234d9a668234be597a7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a29db18c3d15b18faca2ffe53598b046') in 0.019439 seconds
-  Import took 0.028452 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000188 seconds.
-  path: Assets/Samples/Mixed Reality Toolkit Examples/2.7.2/Demos - EyeTracking/DemoVisualizer/Textures/tex_drawCanvasForHeatmap.png
-  artifactKey: Guid(032b34b8af7ad2940a2b8f6b4071f7a2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Samples/Mixed Reality Toolkit Examples/2.7.2/Demos - EyeTracking/DemoVisualizer/Textures/tex_drawCanvasForHeatmap.png using Guid(032b34b8af7ad2940a2b8f6b4071f7a2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '445e9baf82ebd420d6c274c83573fb41') in 0.017223 seconds
-  Import took 0.026423 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000144 seconds.
-  path: Assets/Samples/Mixed Reality Toolkit Examples/2.7.2/Demos - EyeTracking/DemoScrollPanZoom/Textures/tex_icon_scrolling.png
-  artifactKey: Guid(234e0efde09a18441a4d26b8d08a8092) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Samples/Mixed Reality Toolkit Examples/2.7.2/Demos - EyeTracking/DemoScrollPanZoom/Textures/tex_icon_scrolling.png using Guid(234e0efde09a18441a4d26b8d08a8092) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f717621af863048270aa2da86b3ddb1f') in 0.013317 seconds
-  Import took 0.022267 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000189 seconds.
-  path: Assets/Samples/Mixed Reality Toolkit Examples/2.7.2/Demos - EyeTracking/DemoTargetSelections/Textures/tex_mrtk_tile.psd
-  artifactKey: Guid(aeb8024f4fa897547a30f2f450c0c230) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Samples/Mixed Reality Toolkit Examples/2.7.2/Demos - EyeTracking/DemoTargetSelections/Textures/tex_mrtk_tile.psd using Guid(aeb8024f4fa897547a30f2f450c0c230) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0ddff3b37ba9044e2002fb4a68c88b62') in 0.015547 seconds
-  Import took 0.024122 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000172 seconds.
-  path: Assets/Materials/Textures/Scratches_glossiness.jpg
-  artifactKey: Guid(120086f777b9f844aacda05e5add3b82) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Materials/Textures/Scratches_glossiness.jpg using Guid(120086f777b9f844aacda05e5add3b82) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6d771f8a4cd940fe66e1ba2d8c6424a1') in 0.015965 seconds
-  Import took 0.024966 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000166 seconds.
-  path: Assets/Samples/Mixed Reality Toolkit Examples/2.7.2/Demos - EyeTracking/General/Textures/tex_blurred_circle.psd
-  artifactKey: Guid(371d0f977306f054aae6177ae97ce9a2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Samples/Mixed Reality Toolkit Examples/2.7.2/Demos - EyeTracking/General/Textures/tex_blurred_circle.psd using Guid(371d0f977306f054aae6177ae97ce9a2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7aa8ff661778c8c18444dba84fcc0463') in 0.036667 seconds
-  Import took 0.045266 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000170 seconds.
-  path: Assets/Samples/Mixed Reality Toolkit Examples/2.7.2/Demos - EyeTracking/DemoVisualizer/Textures/tex_picture1.jpg
-  artifactKey: Guid(fb78b1743e281154bb8f15f565a65a07) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Samples/Mixed Reality Toolkit Examples/2.7.2/Demos - EyeTracking/DemoVisualizer/Textures/tex_picture1.jpg using Guid(fb78b1743e281154bb8f15f565a65a07) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4331ccbb46dd7181ae2d8e192a7407a1') in 0.013635 seconds
-  Import took 0.021542 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000173 seconds.
-  path: Assets/Materials/02_3d Models/uploads_files_2084417_cozinha.fbm/решетка bmp.jpg
-  artifactKey: Guid(c28f383b83943784890d813b288bf746) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Materials/02_3d Models/uploads_files_2084417_cozinha.fbm/решетка bmp.jpg using Guid(c28f383b83943784890d813b288bf746) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e17f166ea5a252c2e058ec40e6b6de0f') in 0.009864 seconds
-  Import took 0.018122 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000178 seconds.
-  path: Assets/Samples/Mixed Reality Toolkit Examples/2.7.2/Demos - EyeTracking/DemoVisualizer/Textures/tex_icon_StopRecording.png
-  artifactKey: Guid(c10bf9f91b15d994aa69284726549fa8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Samples/Mixed Reality Toolkit Examples/2.7.2/Demos - EyeTracking/DemoVisualizer/Textures/tex_icon_StopRecording.png using Guid(c10bf9f91b15d994aa69284726549fa8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '12d2bf8faa25b05b94636e65803be05b') in 0.013957 seconds
-  Import took 0.022508 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000142 seconds.
-  path: Assets/Materials/02_3d Models/text2/sheet detaill1.jpg
-  artifactKey: Guid(9f5b6d5e04f67f849939f5b54de64cd6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Materials/02_3d Models/text2/sheet detaill1.jpg using Guid(9f5b6d5e04f67f849939f5b54de64cd6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '03574d9f7109b903ed014e6bdf88a435') in 0.013338 seconds
-  Import took 0.021012 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000171 seconds.
-  path: Assets/Samples/Mixed Reality Toolkit Examples/2.7.2/Demos - EyeTracking/DemoScrollPanZoom/Textures/tex_PanAndZoom_map.png
-  artifactKey: Guid(a287f0899516f5e46a2709d3973c2337) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Samples/Mixed Reality Toolkit Examples/2.7.2/Demos - EyeTracking/DemoScrollPanZoom/Textures/tex_PanAndZoom_map.png using Guid(a287f0899516f5e46a2709d3973c2337) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '66f969d41956642c6cb75524aef36de7') in 0.016472 seconds
-  Import took 0.024676 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000173 seconds.
-  path: Assets/Materials/Kitchen textures pack/решетка bmp.jpg
-  artifactKey: Guid(3ab62676a04d2314380cf115b3b1e041) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Materials/Kitchen textures pack/решетка bmp.jpg using Guid(3ab62676a04d2314380cf115b3b1e041) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f0abc23813f7b38a633eea8574593cc8') in 0.008549 seconds
-  Import took 0.017314 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000218 seconds.
-  path: Assets/Samples/Mixed Reality Toolkit Examples/2.7.2/Demos - EyeTracking/DemoVisualizer/Textures/tex_heatramp.png
-  artifactKey: Guid(7c5fa517d56081d498194884b7b0a30e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Samples/Mixed Reality Toolkit Examples/2.7.2/Demos - EyeTracking/DemoVisualizer/Textures/tex_heatramp.png using Guid(7c5fa517d56081d498194884b7b0a30e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '06bf42089c177af0ddef74cf749accf3') in 0.012458 seconds
-  Import took 0.021846 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000182 seconds.
-  path: Assets/Samples/Mixed Reality Toolkit Examples/2.7.2/Demos - EyeTracking/General/Textures/tex_circle_plain.psd
-  artifactKey: Guid(1745b43e19a8d7541a42fc1eec63a4d6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Samples/Mixed Reality Toolkit Examples/2.7.2/Demos - EyeTracking/General/Textures/tex_circle_plain.psd using Guid(1745b43e19a8d7541a42fc1eec63a4d6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '20dc92c7ed0728ca409d13e68f5a478f') in 0.013657 seconds
-  Import took 0.023699 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000178 seconds.
-  path: Assets/Samples/Mixed Reality Toolkit Examples/2.7.2/Demos - EyeTracking/DemoVisualizer/Textures/tex_icon_LoadData.png
-  artifactKey: Guid(3565ca4f628fe354ea11de03cef414d3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Samples/Mixed Reality Toolkit Examples/2.7.2/Demos - EyeTracking/DemoVisualizer/Textures/tex_icon_LoadData.png using Guid(3565ca4f628fe354ea11de03cef414d3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e861c688813c1485a85ff551e37971be') in 0.014508 seconds
-  Import took 0.023410 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000163 seconds.
-  path: Assets/Samples/Mixed Reality Toolkit Examples/2.7.2/Demos - EyeTracking/General/Textures/tex_circle_midborder.psd
-  artifactKey: Guid(359a4a57094b0564eaee2eb77e6708e1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Samples/Mixed Reality Toolkit Examples/2.7.2/Demos - EyeTracking/General/Textures/tex_circle_midborder.psd using Guid(359a4a57094b0564eaee2eb77e6708e1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '801e488ca8c57b0b83d9259566433141') in 0.012974 seconds
-  Import took 0.021259 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000189 seconds.
-  path: Assets/Samples/Mixed Reality Toolkit Examples/2.7.2/Demos - EyeTracking/DemoVisualizer/Textures/tex_icon_Play.png
-  artifactKey: Guid(43920eacafd1aad4f9d8bd2a68ca4ed5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Samples/Mixed Reality Toolkit Examples/2.7.2/Demos - EyeTracking/DemoVisualizer/Textures/tex_icon_Play.png using Guid(43920eacafd1aad4f9d8bd2a68ca4ed5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '611ae1d23780ea8e236110724962a0e0') in 0.013649 seconds
-  Import took 0.021799 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000138 seconds.
-  path: Assets/Samples/Mixed Reality Toolkit Examples/2.7.2/Demos - EyeTracking/DemoVisualizer/Textures/tex_icon_StartRecording.png
-  artifactKey: Guid(d2483c9eef6a2514297d1504036e6d2f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Samples/Mixed Reality Toolkit Examples/2.7.2/Demos - EyeTracking/DemoVisualizer/Textures/tex_icon_StartRecording.png using Guid(d2483c9eef6a2514297d1504036e6d2f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8bf56822ee5df937946adea8221aa934') in 0.013609 seconds
-  Import took 0.022072 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000175 seconds.
-  path: Assets/Samples/Mixed Reality Toolkit Examples/2.7.2/Demos - EyeTracking/DemoVisualizer/Textures/tex_picture2.jpg
-  artifactKey: Guid(d06776b6c3e4d6e4bb275a957cd7ce9c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Samples/Mixed Reality Toolkit Examples/2.7.2/Demos - EyeTracking/DemoVisualizer/Textures/tex_picture2.jpg using Guid(d06776b6c3e4d6e4bb275a957cd7ce9c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e798c96916b531671e2d527947d5853b') in 0.012595 seconds
-  Import took 0.020551 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000142 seconds.
-  path: Assets/Materials/02_3d Models/text2/triangles_1.jpg
-  artifactKey: Guid(5846f98d1a08bb94295e01bf6a11a02e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Materials/02_3d Models/text2/triangles_1.jpg using Guid(5846f98d1a08bb94295e01bf6a11a02e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b004ec6fd388a1f02190eee7ee1ae79a') in 0.013449 seconds
-  Import took 0.021479 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000140 seconds.
-  path: Assets/Materials/Kitchen textures pack/решетка.jpg
-  artifactKey: Guid(c5573cd2f154b614a861cd9a1a6a7700) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Materials/Kitchen textures pack/решетка.jpg using Guid(c5573cd2f154b614a861cd9a1a6a7700) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'aebd821d16af683dee7ac425a6d759c2') in 0.008887 seconds
-  Import took 0.017592 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000182 seconds.
-  path: Assets/Samples/Mixed Reality Toolkit Examples/2.7.2/Demos - EyeTracking/General/Textures/tex_circle_border2.psd
-  artifactKey: Guid(27adcdb1ca8af98448f7d645587575d3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Samples/Mixed Reality Toolkit Examples/2.7.2/Demos - EyeTracking/General/Textures/tex_circle_border2.psd using Guid(27adcdb1ca8af98448f7d645587575d3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '793e864c4b11c37d61811ffa907380de') in 0.013736 seconds
-  Import took 0.021532 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000179 seconds.
-  path: Assets/Materials/Textures/sheet detaill1.jpg
-  artifactKey: Guid(475832fdf02eb1f459436cbaf462bfca) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Materials/Textures/sheet detaill1.jpg using Guid(475832fdf02eb1f459436cbaf462bfca) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a7c127c2703437aeaad53e75fa4558a4') in 0.005230 seconds
-  Import took 0.014146 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000167 seconds.
-  path: Assets/Scenes/Nest/ReflectionProbe-1.exr
-  artifactKey: Guid(5ed287020f79fe542bdaba6ee26522f5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scenes/Nest/ReflectionProbe-1.exr using Guid(5ed287020f79fe542bdaba6ee26522f5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '62e8b427c3465a1da86da490d58a4ca7') in 0.011711 seconds
-  Import took 0.020302 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000148 seconds.
-  path: Assets/Samples/Mixed Reality Toolkit Examples/2.7.2/Demos - EyeTracking/DemoScrollPanZoom/Textures/tex_icon_panzoom.png
-  artifactKey: Guid(0fb93582447aa2c4db00f1f5b4c8f3ba) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Samples/Mixed Reality Toolkit Examples/2.7.2/Demos - EyeTracking/DemoScrollPanZoom/Textures/tex_icon_panzoom.png using Guid(0fb93582447aa2c4db00f1f5b4c8f3ba) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00fad8a3a49ad315e25c42425958423c') in 0.015528 seconds
-  Import took 0.024005 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000159 seconds.
-  path: Assets/Samples/Mixed Reality Toolkit Examples/2.7.2/Demos - EyeTracking/DemoScrollPanZoom/Textures/tex_PanAndZoom_text.png
-  artifactKey: Guid(b190ddfc90544334cbf077f4eb42de50) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Samples/Mixed Reality Toolkit Examples/2.7.2/Demos - EyeTracking/DemoScrollPanZoom/Textures/tex_PanAndZoom_text.png using Guid(b190ddfc90544334cbf077f4eb42de50) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd98fdac8aa6ea6fd87ccc272c605cf63') in 0.014648 seconds
-  Import took 0.024264 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000165 seconds.
-  path: Assets/Materials/Textures/WalnutVermontsample.jpg
-  artifactKey: Guid(2d5ee628fa6ee87448a0883620697b45) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Materials/Textures/WalnutVermontsample.jpg using Guid(2d5ee628fa6ee87448a0883620697b45) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0096ed5bbe13901c07f58baf810061bf') in 0.014876 seconds
-  Import took 0.023853 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000220 seconds.
-  path: Assets/Materials/02_3d Models/Textures/Scratches_glossiness.jpg
-  artifactKey: Guid(dc0f65fe977cb92418538dfd99c4a6c0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Materials/02_3d Models/Textures/Scratches_glossiness.jpg using Guid(dc0f65fe977cb92418538dfd99c4a6c0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1545c9f479ada6be910e9e66437ec904') in 0.008864 seconds
-  Import took 0.018746 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000180 seconds.
-  path: Assets/Samples/Mixed Reality Toolkit Examples/2.7.2/Demos - EyeTracking/DemoVisualizer/Textures/tex_icon_Pause.png
-  artifactKey: Guid(a281308b46e5ea34fa9fcb3f5060b315) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Samples/Mixed Reality Toolkit Examples/2.7.2/Demos - EyeTracking/DemoVisualizer/Textures/tex_icon_Pause.png using Guid(a281308b46e5ea34fa9fcb3f5060b315) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6bef93a7741856ee49d1cfc881faf6e5') in 0.013206 seconds
-  Import took 0.021544 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000181 seconds.
-  path: Assets/Scenes/VR Interaction/ReflectionProbe-1.exr
-  artifactKey: Guid(baae64a4da093234d9a668234be597a7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scenes/VR Interaction/ReflectionProbe-1.exr using Guid(baae64a4da093234d9a668234be597a7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a29db18c3d15b18faca2ffe53598b046') in 0.010316 seconds
-  Import took 0.019420 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000180 seconds.
-  path: Assets/Materials/02_3d Models/uploads_files_2084417_cozinha.fbm/решетка.jpg
-  artifactKey: Guid(5560b0f71e1d56f4bb5ecb313a55b1a2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Materials/02_3d Models/uploads_files_2084417_cozinha.fbm/решетка.jpg using Guid(5560b0f71e1d56f4bb5ecb313a55b1a2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '61f6a7ceca6054bba6757e1cb956161f') in 0.008160 seconds
-  Import took 0.018095 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000172 seconds.
-  path: Assets/Materials/Fur textures pack/Fur 06/preview.jpg
-  artifactKey: Guid(8de4feeb263bdca4095e70e0fade897b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Materials/Fur textures pack/Fur 06/preview.jpg using Guid(8de4feeb263bdca4095e70e0fade897b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5caf84f98402c1582f49af9fbb75415a') in 0.012409 seconds
-  Import took 0.020858 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000201 seconds.
-  path: Assets/Scenes/SampleScene/ReflectionProbe-0.exr
-  artifactKey: Guid(4ce1177f9705129459fb537004f2b7db) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scenes/SampleScene/ReflectionProbe-0.exr using Guid(4ce1177f9705129459fb537004f2b7db) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a1428c3152d23f2a87b05039e2217a23') in 0.017085 seconds
-  Import took 0.025584 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000182 seconds.
-  path: Assets/Materials/Concrete textures pack/pattern 08/preview.jpg
-  artifactKey: Guid(43b803fa02a13fe4baf62f168d83c8a9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Materials/Concrete textures pack/pattern 08/preview.jpg using Guid(43b803fa02a13fe4baf62f168d83c8a9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c6cacfeaa537bcf61dee68704e3a9a67') in 0.012398 seconds
-  Import took 0.021111 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000190 seconds.
-  path: Assets/Materials/Cement textures pack/patchy_cement1_Ambient_Occlusion.png
-  artifactKey: Guid(bd21bf167ee35df4aba0926b58c44808) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Materials/Cement textures pack/patchy_cement1_Ambient_Occlusion.png using Guid(bd21bf167ee35df4aba0926b58c44808) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f4fdf873eafc930e5dfbae81ccf9811c') in 0.010125 seconds
-  Import took 0.019509 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000181 seconds.
-  path: Assets/Materials/Concrete textures pack/pattern 19/normal.tga
-  artifactKey: Guid(0de756e42b8c5514a998ecc02de04449) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Materials/Concrete textures pack/pattern 19/normal.tga using Guid(0de756e42b8c5514a998ecc02de04449) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4090de16a180fcda59707a6eda53bd25') in 0.009947 seconds
-  Import took 0.018422 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000215 seconds.
-  path: Assets/Materials/Concrete textures pack/pattern 20/normal.tga
-  artifactKey: Guid(7a8be65734a93fc49aca732fcf50e57e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Materials/Concrete textures pack/pattern 20/normal.tga using Guid(7a8be65734a93fc49aca732fcf50e57e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '677fd634d86e4edd0db618a9e1ca0dc5') in 0.008287 seconds
-  Import took 0.017203 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000174 seconds.
-  path: Assets/Materials/Cement textures pack/patchy_cement1_Base_Color.png
-  artifactKey: Guid(25fd7529cce40ad428e894b5d45263dc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Materials/Cement textures pack/patchy_cement1_Base_Color.png using Guid(25fd7529cce40ad428e894b5d45263dc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2aed1e3e5ac977883e82ed6bae96842d') in 0.009843 seconds
-  Import took 0.018752 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000160 seconds.
-  path: Assets/Materials/02_3d Models/Textures/leather_medium_grain_Normal.tif
-  artifactKey: Guid(7cbbaf3c1d2d2004e8f4d02dcdddce61) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Materials/02_3d Models/Textures/leather_medium_grain_Normal.tif using Guid(7cbbaf3c1d2d2004e8f4d02dcdddce61) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8f68e1b8af2e7c62a29a7e438a4f8df4') in 0.021588 seconds
-  Import took 0.029983 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000177 seconds.
-  path: Assets/Scenes/Nest/ReflectionProbe-0.exr
-  artifactKey: Guid(626dfc55652d74a42b760439db7c912a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scenes/Nest/ReflectionProbe-0.exr using Guid(626dfc55652d74a42b760439db7c912a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'fbde145690dc8c935c01541f1f88a28c') in 0.013292 seconds
-  Import took 0.021590 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000161 seconds.
-  path: Assets/Materials/Concrete textures pack/pattern 11/normal.tga
-  artifactKey: Guid(fbcf021c5f50bd24cbe41780e59d027b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Materials/Concrete textures pack/pattern 11/normal.tga using Guid(fbcf021c5f50bd24cbe41780e59d027b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '37c4acfba456ffe726ea05ea191240f9') in 0.010142 seconds
-  Import took 0.018153 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000167 seconds.
-  path: Assets/Materials/Textures/patchy_cement1_Base_Color.png
-  artifactKey: Guid(bd9244e728a03fd42ad49e82885be373) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Materials/Textures/patchy_cement1_Base_Color.png using Guid(bd9244e728a03fd42ad49e82885be373) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a2da2c8b2f93cb4d19b6b661d5acb13d') in 0.008822 seconds
-  Import took 0.017337 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000193 seconds.
-  path: Assets/Scenes/VR Interaction/ReflectionProbe-0.exr
-  artifactKey: Guid(73621eb99b2c1234692e63cf67747176) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scenes/VR Interaction/ReflectionProbe-0.exr using Guid(73621eb99b2c1234692e63cf67747176) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bb8e0bab682447e1079eb0a2c55cebc9') in 0.010853 seconds
-  Import took 0.019677 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000179 seconds.
-  path: Assets/Materials/Concrete textures pack/pattern 08/normal.tga
-  artifactKey: Guid(b9198e7b8cb3f5342a8c154efbaff1d8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Materials/Concrete textures pack/pattern 08/normal.tga using Guid(b9198e7b8cb3f5342a8c154efbaff1d8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6f40063cf40a5799cbd37d43b1d42ec8') in 0.009698 seconds
-  Import took 0.018392 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000169 seconds.
-  path: Assets/Materials/Textures/noise_2.2.jpg
-  artifactKey: Guid(97660d8f9d8e99146a6bc4c44e4453c9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Materials/Textures/noise_2.2.jpg using Guid(97660d8f9d8e99146a6bc4c44e4453c9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3f06f156ef63c9d13f1a190ca4006403') in 0.015318 seconds
-  Import took 0.025127 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000175 seconds.
-  path: Assets/Scenes/VR Interaction/Lightmap-0_comp_light.exr
-  artifactKey: Guid(3909c46445cf60344b7ee738bfb78a08) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scenes/VR Interaction/Lightmap-0_comp_light.exr using Guid(3909c46445cf60344b7ee738bfb78a08) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '991c9a9a104273c74b10efe0251cd52c') in 0.020411 seconds
-  Import took 0.028711 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000170 seconds.
-  path: Assets/Materials/Concrete textures pack/pattern 19/preview.jpg
-  artifactKey: Guid(47af16f51bd2a4b499774895c9be3dcb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Materials/Concrete textures pack/pattern 19/preview.jpg using Guid(47af16f51bd2a4b499774895c9be3dcb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'aca8f9f0eead5e50bb7d7c53f674e032') in 0.012513 seconds
-  Import took 0.021442 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000184 seconds.
-  path: Assets/Materials/Kitchen textures pack/panel.png
-  artifactKey: Guid(76e57f53686de1e4982b34ed2757dff7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Materials/Kitchen textures pack/panel.png using Guid(76e57f53686de1e4982b34ed2757dff7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '71d10d74692c1be234a5fbea82912706') in 0.012165 seconds
-  Import took 0.021300 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000228 seconds.
-  path: Assets/Materials/Concrete textures pack/pattern 11/preview.jpg
-  artifactKey: Guid(141a53777240c2644b20b45c14cdb504) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Materials/Concrete textures pack/pattern 11/preview.jpg using Guid(141a53777240c2644b20b45c14cdb504) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9a93bf910ca719b4a2c7148bb74d5705') in 0.012606 seconds
-  Import took 0.021899 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000174 seconds.
-  path: Assets/Materials/02_3d Models/text2/noise_2.2.jpg
-  artifactKey: Guid(1aaadfbd8796c13478aaec256f8c19de) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Materials/02_3d Models/text2/noise_2.2.jpg using Guid(1aaadfbd8796c13478aaec256f8c19de) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '39af9f3cc1c5cb73084263cdd2dbcf85') in 0.009628 seconds
-  Import took 0.018099 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000180 seconds.
-  path: Assets/Materials/Fur textures pack/Fur 06/normal.tga
-  artifactKey: Guid(298077f8bd9b1354a826d1f11635c45c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Materials/Fur textures pack/Fur 06/normal.tga using Guid(298077f8bd9b1354a826d1f11635c45c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '01c0c956700eb635df450a8d9a3cc402') in 0.014625 seconds
-  Import took 0.023431 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000172 seconds.
-  path: Assets/Materials/02_3d Models/uploads_files_2084417_cozinha.fbm/panel.png
-  artifactKey: Guid(f4d31ea4dd18e2347ae05172d39219cf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Materials/02_3d Models/uploads_files_2084417_cozinha.fbm/panel.png using Guid(f4d31ea4dd18e2347ae05172d39219cf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ceb887f835e7c339ea7efde54bc7bcd8') in 0.005944 seconds
-  Import took 0.014387 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000168 seconds.
-  path: Assets/Materials/02_3d Models/text2/noise_3.png
-  artifactKey: Guid(9edb00213df5bb84daf5c55ef5185811) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Materials/02_3d Models/text2/noise_3.png using Guid(9edb00213df5bb84daf5c55ef5185811) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '280fc9352151fd2fae219a88b27bf0a1') in 0.014445 seconds
-  Import took 0.023843 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000176 seconds.
-  path: Assets/Materials/Textures/noise_3.png
-  artifactKey: Guid(2c4ea1988991b93419a341931ac19372) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Materials/Textures/noise_3.png using Guid(2c4ea1988991b93419a341931ac19372) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3c2643177a409ca09712b9c7855cd505') in 0.009230 seconds
-  Import took 0.017810 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000176 seconds.
-  path: Assets/Samples/Mixed Reality Toolkit Examples/2.7.2/Demos - EyeTracking/DemoTargetSelections/Textures/notification_box_5x1.psd
-  artifactKey: Guid(f4e134493897b014da71a44287f51520) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Samples/Mixed Reality Toolkit Examples/2.7.2/Demos - EyeTracking/DemoTargetSelections/Textures/notification_box_5x1.psd using Guid(f4e134493897b014da71a44287f51520) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a551abf8af6f43521e6b9707f5e08efe') in 0.013301 seconds
-  Import took 0.022046 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000181 seconds.
-  path: Assets/Materials/Concrete textures pack/pattern 20/preview.jpg
-  artifactKey: Guid(24ac637c34a5abb4798a57b62a329104) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Materials/Concrete textures pack/pattern 20/preview.jpg using Guid(24ac637c34a5abb4798a57b62a329104) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7a2fbd308ac0ce824542ed356af253d6') in 0.011865 seconds
-  Import took 0.020081 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000139 seconds.
-  path: Assets/Materials/02_3d Models/text2/dirt_noise.jpg
-  artifactKey: Guid(81761caa68e87604bb993ba3f910135f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Materials/02_3d Models/text2/dirt_noise.jpg using Guid(81761caa68e87604bb993ba3f910135f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e056132e662dcf677d5c00a44a7b934c') in 0.012571 seconds
-  Import took 0.021778 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000170 seconds.
-  path: Assets/Textures/leather_medium_grain_Glossiness.jpg
-  artifactKey: Guid(0f301325db88627479fd83b7e4b55124) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Textures/leather_medium_grain_Glossiness.jpg using Guid(0f301325db88627479fd83b7e4b55124) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e30e862fdc1136d93b3ae939786cf9e0') in 0.013660 seconds
-  Import took 0.022227 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000147 seconds.
-  path: Assets/Materials/02_3d Models/Textures/leather_medium_grain_Diffuse.jpg
-  artifactKey: Guid(6f58f599030d8b7489cef3d2f577c19d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Materials/02_3d Models/Textures/leather_medium_grain_Diffuse.jpg using Guid(6f58f599030d8b7489cef3d2f577c19d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'afb6507a8ecf56da4b1c64638ccc5820') in 0.014362 seconds
-  Import took 0.024141 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000164 seconds.
-  path: Assets/Materials/02_3d Models/Textures/leather_medium_grain_Glossiness.jpg
-  artifactKey: Guid(f54cc94cb82214146bbd8dd317b870f7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Materials/02_3d Models/Textures/leather_medium_grain_Glossiness.jpg using Guid(f54cc94cb82214146bbd8dd317b870f7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '68eae543f86c7740e3a6bc678b676131') in 0.006322 seconds
-  Import took 0.014581 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000169 seconds.
-  path: Assets/Materials/Textures/leather_medium_grain_Diffuse.jpg
-  artifactKey: Guid(78ce9eda73bffa34dac2f66cf5cc0df3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Materials/Textures/leather_medium_grain_Diffuse.jpg using Guid(78ce9eda73bffa34dac2f66cf5cc0df3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9f29bf7ae560107c310a6f863dab15e3') in 0.006541 seconds
-  Import took 0.015357 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000203 seconds.
-  path: Assets/Materials/Textures/leather_medium_grain_Height.tif
-  artifactKey: Guid(44ff5c4331571ec4ca49c5e07aac61b9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Materials/Textures/leather_medium_grain_Height.tif using Guid(44ff5c4331571ec4ca49c5e07aac61b9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7324a2032efe5d3772115e49989ebf6b') in 0.014537 seconds
-  Import took 0.023601 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000167 seconds.
-  path: Assets/Textures/leather_medium_grain_Diffuse.jpg
-  artifactKey: Guid(c7748586cd2dc4649b6d6f91c39f0f34) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Textures/leather_medium_grain_Diffuse.jpg using Guid(c7748586cd2dc4649b6d6f91c39f0f34) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3050973c903496bc06f1be9e9c14aca9') in 0.006440 seconds
-  Import took 0.015391 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000152 seconds.
-  path: Assets/Textures/leather_medium_grain_Height.tif
-  artifactKey: Guid(e576af34ba2a65f4d8ab73f88b5bd2a1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Textures/leather_medium_grain_Height.tif using Guid(e576af34ba2a65f4d8ab73f88b5bd2a1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f3ad4907f050858a3eb9dd1f41d28c91') in 0.005956 seconds
-  Import took 0.014094 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000143 seconds.
-  path: Assets/TextMesh Pro/Sprites/EmojiOne.png
-  artifactKey: Guid(dffef66376be4fa480fb02b19edbe903) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/TextMesh Pro/Sprites/EmojiOne.png using Guid(dffef66376be4fa480fb02b19edbe903) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6e5213e7c2c387501539e8db7f08ad5b') in 0.009061 seconds
-  Import took 0.017582 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000177 seconds.
-  path: Assets/Materials/Textures/leather_medium_grain_Normal.tif
-  artifactKey: Guid(99ab77c4ad261f642ba2ee42b46f0795) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Materials/Textures/leather_medium_grain_Normal.tif using Guid(99ab77c4ad261f642ba2ee42b46f0795) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5a247a42f211d44ea82476747dc1381a') in 0.009980 seconds
-  Import took 0.018534 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000167 seconds.
-  path: Assets/Textures/leather_medium_grain_Normal.tif
-  artifactKey: Guid(7622b654011464b4194b8d5399f9801c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Textures/leather_medium_grain_Normal.tif using Guid(7622b654011464b4194b8d5399f9801c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ca336cbe595b380158ccd80b68f03331') in 0.009549 seconds
-  Import took 0.018608 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000162 seconds.
-  path: Assets/Materials/02_3d Models/Textures/leather_medium_grain_Height.tif
-  artifactKey: Guid(55f31d8915a1947489dbd5f4032f7faa) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Materials/02_3d Models/Textures/leather_medium_grain_Height.tif using Guid(55f31d8915a1947489dbd5f4032f7faa) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6ce9ee0180c09285b2bc015cc19d4aa1') in 0.006223 seconds
-  Import took 0.016063 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000146 seconds.
-  path: Assets/Materials/Textures/leather_medium_grain_Glossiness.jpg
-  artifactKey: Guid(6e168ebbb35884d42a0eb38d7b91bba1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Materials/Textures/leather_medium_grain_Glossiness.jpg using Guid(6e168ebbb35884d42a0eb38d7b91bba1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'dfcdf17e52c02f9c0eda5535ba37d33d') in 0.006206 seconds
-  Import took 0.015050 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000159 seconds.
-  path: Assets/Materials/02_3d Models/uploads_files_2084417_cozinha.fbm/quick-step_readyflor_tasmanian_oak_3_strip.jpg
-  artifactKey: Guid(f5aee168f638b04468d355193e9adbc0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Materials/02_3d Models/uploads_files_2084417_cozinha.fbm/quick-step_readyflor_tasmanian_oak_3_strip.jpg using Guid(f5aee168f638b04468d355193e9adbc0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f3fde6675c0f2fb05ec228daa28820c6') in 0.013341 seconds
-  Import took 0.021629 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000167 seconds.
-  path: Assets/Materials/Cement textures pack/patchy_cement1_Normal.png
-  artifactKey: Guid(7e199656dd8351d4eb27b2530bd4c9b3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Materials/Cement textures pack/patchy_cement1_Normal.png using Guid(7e199656dd8351d4eb27b2530bd4c9b3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '678712d90b2f3e98092cf38efa540a55') in 0.010679 seconds
-  Import took 0.019020 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000165 seconds.
-  path: Assets/Scenes/VR Interaction/Lightmap-0_comp_dir.png
-  artifactKey: Guid(0d454da0bfe6819438611d691da59266) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scenes/VR Interaction/Lightmap-0_comp_dir.png using Guid(0d454da0bfe6819438611d691da59266) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '422e1743cc26b1dba80e2b0eaf185a89') in 0.011641 seconds
-  Import took 0.020130 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000146 seconds.
-  path: Assets/Materials/Textures/WalnutVermontsample refl.jpg
-  artifactKey: Guid(50715ea32c3fc97449247223a1a0087c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Materials/Textures/WalnutVermontsample refl.jpg using Guid(50715ea32c3fc97449247223a1a0087c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '59b0139548bc41214cabeed162f7d952') in 0.012708 seconds
-  Import took 0.022234 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000260 seconds.
-  path: Assets/Materials/Textures/patchy_cement1_Ambient_Occlusion.png
-  artifactKey: Guid(e230ecd269351df41a41db5ca7a04683) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Materials/Textures/patchy_cement1_Ambient_Occlusion.png using Guid(e230ecd269351df41a41db5ca7a04683) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6eaab93fe96453ad9b56a5afc0fa7f41') in 0.010070 seconds
-  Import took 0.018472 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000188 seconds.
-  path: Assets/Materials/Textures/patchy_cement1_Normal.png
-  artifactKey: Guid(61178c4e69534da4888411cdeac77adc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Materials/Textures/patchy_cement1_Normal.png using Guid(61178c4e69534da4888411cdeac77adc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '418188f7302792de2cb4130b9d3e7676') in 0.011238 seconds
-  Import took 0.019861 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000232 seconds.
-  path: Assets/Materials/Textures/dirt_noise.jpg
-  artifactKey: Guid(7d3f29af1c4a8c74a8acb9dd21ea58b4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Materials/Textures/dirt_noise.jpg using Guid(7d3f29af1c4a8c74a8acb9dd21ea58b4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b67f3872acfe134bf3c5c690321aa8ff') in 0.009902 seconds
-  Import took 0.018721 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000182 seconds.
-  path: Assets/Samples/Mixed Reality Toolkit Examples/2.7.2/Demos - UX/Interactables/Textures/PhysicalTouch.png
-  artifactKey: Guid(40aaa49670becd54a9a133bfcf2012fb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Samples/Mixed Reality Toolkit Examples/2.7.2/Demos - UX/Interactables/Textures/PhysicalTouch.png using Guid(40aaa49670becd54a9a133bfcf2012fb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '648c5b2c05d4f4a9a80712e0eac86efd') in 0.012046 seconds
-  Import took 0.020902 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000189 seconds.
-  path: Assets/Materials/02_3d Models/maps/WalnutVermontsample.jpg
-  artifactKey: Guid(be04d3f1ff878da4c9e01f0f24931be6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Materials/02_3d Models/maps/WalnutVermontsample.jpg using Guid(be04d3f1ff878da4c9e01f0f24931be6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '521c615737cfe0b390e9de51160e31b7') in 0.007768 seconds
-  Import took 0.016651 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000165 seconds.
-  path: Assets/Samples/Mixed Reality Toolkit Examples/2.7.2/Demos - UX/Interactables/Textures/PhysicalTouch.png
-  artifactKey: Guid(40aaa49670becd54a9a133bfcf2012fb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Samples/Mixed Reality Toolkit Examples/2.7.2/Demos - UX/Interactables/Textures/PhysicalTouch.png using Guid(40aaa49670becd54a9a133bfcf2012fb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '648c5b2c05d4f4a9a80712e0eac86efd') in 0.004959 seconds
-  Import took 0.013017 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000195 seconds.
-  path: Assets/Textures/Scratches_glossiness.jpg
-  artifactKey: Guid(d2f49a329967b194baaa574fafbffcc7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Textures/Scratches_glossiness.jpg using Guid(d2f49a329967b194baaa574fafbffcc7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '60c999bc204ac6f9a730f86e5836d2bb') in 0.009252 seconds
-  Import took 0.018320 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000146 seconds.
-  path: Assets/Samples/Mixed Reality Toolkit Examples/2.7.2/Demos - Gltf/Models/Avocado/glTF/Avocado_baseColor.png
-  artifactKey: Guid(5aae989ddfef780428a5cd02032aa367) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Samples/Mixed Reality Toolkit Examples/2.7.2/Demos - Gltf/Models/Avocado/glTF/Avocado_baseColor.png using Guid(5aae989ddfef780428a5cd02032aa367) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2e7146d6d043ac023a297131578fac05') in 0.015939 seconds
-  Import took 0.024765 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000151 seconds.
-  path: Assets/Samples/Mixed Reality Toolkit Examples/2.7.2/Demos - EyeTracking/General/Textures/tex_blank_tile.png
-  artifactKey: Guid(88dc5d12c5821bf4d99edd588f6c19e6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Samples/Mixed Reality Toolkit Examples/2.7.2/Demos - EyeTracking/General/Textures/tex_blank_tile.png using Guid(88dc5d12c5821bf4d99edd588f6c19e6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2b10ab10fda16ce43375e316cfc96304') in 0.013530 seconds
-  Import took 0.021412 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000163 seconds.
-  path: Assets/Samples/Mixed Reality Toolkit Examples/2.7.2/Demos - EyeTracking/DemoVisualizer/Textures/tex_icon_vis.png
-  artifactKey: Guid(4e350af98c6bcda4aaa145e8b6c7c503) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Samples/Mixed Reality Toolkit Examples/2.7.2/Demos - EyeTracking/DemoVisualizer/Textures/tex_icon_vis.png using Guid(4e350af98c6bcda4aaa145e8b6c7c503) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '612963726195328b4cfe58e329ada498') in 0.013337 seconds
-  Import took 0.021366 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000186 seconds.
-  path: Assets/Materials/Kitchen textures pack/quick-step_readyflor_tasmanian_oak_3_strip.jpg
-  artifactKey: Guid(548a5c3364d1b204b88dfc9658cb2585) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Materials/Kitchen textures pack/quick-step_readyflor_tasmanian_oak_3_strip.jpg using Guid(548a5c3364d1b204b88dfc9658cb2585) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8ad0b9e7666d897b7ef77daffd02a3a5') in 0.009222 seconds
-  Import took 0.018063 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000160 seconds.
-  path: Assets/Materials/Textures/triangles_1.jpg
-  artifactKey: Guid(352d192cd00553c44b561ff7e205f1b1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Materials/Textures/triangles_1.jpg using Guid(352d192cd00553c44b561ff7e205f1b1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a43f987cf4189922bbd81ee3f4c57a01') in 0.008052 seconds
-  Import took 0.016748 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000141 seconds.
-  path: Assets/Materials/02_3d Models/maps/WalnutVermontsample refl.jpg
-  artifactKey: Guid(54211bd3985d001468b92c33dc4c7356) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Materials/02_3d Models/maps/WalnutVermontsample refl.jpg using Guid(54211bd3985d001468b92c33dc4c7356) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'cb1d2712c1b8b81baaaeae7a1eecf27d') in 0.005806 seconds
-  Import took 0.014230 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 1026.721015 seconds.
-  path: Assets/Materials/Original Wood Textures/Wood Texture 14/Wood Texture 14.mat
-  artifactKey: Guid(f03a6306859a0e2479fb8cc6d0553baf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Materials/Original Wood Textures/Wood Texture 14/Wood Texture 14.mat using Guid(f03a6306859a0e2479fb8cc6d0553baf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '576b91a2b8e128478aac73ad68b6f1fc') in 0.032960 seconds
-  Import took 0.042376 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 20.883142 seconds.
-  path: Assets/Materials/Concrete textures pack/pattern 03/Concrete pattern 03.mat
-  artifactKey: Guid(52c9083b299dfa3479caa56bb9f0a98c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Materials/Concrete textures pack/pattern 03/Concrete pattern 03.mat using Guid(52c9083b299dfa3479caa56bb9f0a98c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '05875c1af8e9f0331f47db6936315ef1') in 0.013148 seconds
-  Import took 0.021722 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 9.777638 seconds.
-  path: Assets/XR/Settings/Open XR Package Settings.asset
-  artifactKey: Guid(46ad39e56b39bc0409785f4dae569413) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/XR/Settings/Open XR Package Settings.asset using Guid(46ad39e56b39bc0409785f4dae569413) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b1e74bdcfb767f35e07828570c04783d') in 0.017247 seconds
-  Import took 0.027241 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000167 seconds.
-  path: Assets/Samples/Mixed Reality Toolkit Examples/2.7.2/Demos - EyeTracking/General/Prefabs/EyeTrackingDemos ManagerComponents.prefab
-  artifactKey: Guid(fda837e43ea42874b8a9941a5968b1d1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Samples/Mixed Reality Toolkit Examples/2.7.2/Demos - EyeTracking/General/Prefabs/EyeTrackingDemos ManagerComponents.prefab using Guid(fda837e43ea42874b8a9941a5968b1d1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '71db368d1f04aa0c3801d613bdda6cdd') in 0.138885 seconds
-  Import took 0.148784 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000181 seconds.
-  path: Assets/Samples/Mixed Reality Toolkit Examples/2.7.2/Demos - EyeTracking/DemoTargetPositioning/Prefabs/EyeTrackingDemoSliderVertical.prefab
-  artifactKey: Guid(1a4bbe24b109c6e4aa21a517ad27ba95) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Samples/Mixed Reality Toolkit Examples/2.7.2/Demos - EyeTracking/DemoTargetPositioning/Prefabs/EyeTrackingDemoSliderVertical.prefab using Guid(1a4bbe24b109c6e4aa21a517ad27ba95) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '66fe795cafd3277060643c9122ba7051') in 0.062331 seconds
-  Import took 0.071181 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000172 seconds.
-  path: Assets/Samples/Mixed Reality Toolkit Examples/2.7.2/Demos - EyeTracking/DemoTargetPositioning/Prefabs/EyeTrackingDemoSliderHorizontal.prefab
-  artifactKey: Guid(71b8b2acb3a8f344abf91c2b102b0d74) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Samples/Mixed Reality Toolkit Examples/2.7.2/Demos - EyeTracking/DemoTargetPositioning/Prefabs/EyeTrackingDemoSliderHorizontal.prefab using Guid(71b8b2acb3a8f344abf91c2b102b0d74) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6a32c1ba993ff471c6094c5db7273863') in 0.018144 seconds
-  Import took 0.026504 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000128 seconds.
-  path: Assets/Prefabs/Furniture/chair GE240.prefab
-  artifactKey: Guid(8c7143da67d838049997bb453dcc02c7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/Furniture/chair GE240.prefab using Guid(8c7143da67d838049997bb453dcc02c7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd2336f148b497d7dc1975179b445c5d7') in 0.071354 seconds
-  Import took 0.080004 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000204 seconds.
-  path: Assets/Samples/Mixed Reality Toolkit Examples/2.7.2/Demos - EyeTracking/General/Prefabs/EyeTrackingDemos SceneDescriptionPanel.prefab
-  artifactKey: Guid(427730042d0a7ac41b1d81947f081754) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Samples/Mixed Reality Toolkit Examples/2.7.2/Demos - EyeTracking/General/Prefabs/EyeTrackingDemos SceneDescriptionPanel.prefab using Guid(427730042d0a7ac41b1d81947f081754) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e6274d4e0d1273aa77c9aa2a5a4e02a5') in 0.066230 seconds
-  Import took 0.074611 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000186 seconds.
-  path: Assets/Samples/Mixed Reality Toolkit Examples/2.7.2/Demos - Input/Scenes/InputData/EyeGizmo.prefab
-  artifactKey: Guid(b554d9edc9077ad4ab7a4f8496087069) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Samples/Mixed Reality Toolkit Examples/2.7.2/Demos - Input/Scenes/InputData/EyeGizmo.prefab using Guid(b554d9edc9077ad4ab7a4f8496087069) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c8d9c1dc238dcca93a84ee0460f02cdf') in 0.011254 seconds
-  Import took 0.019356 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.359848 seconds.
-  path: Assets/Materials/__sorted/glass - kinh.mat
-  artifactKey: Guid(91cce7d824c6a0c4aa5e1dcbf69db45b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Materials/__sorted/glass - kinh.mat using Guid(91cce7d824c6a0c4aa5e1dcbf69db45b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5981624d64cc2dc1abd2a6fec36cb670') in 0.010240 seconds
-  Import took 0.018812 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 72.873796 seconds.
-  path: Assets/Materials/Wooden Floor Pack/Materials/Wooden Floor 5.mat
-  artifactKey: Guid(be74d7939a8752d48a071782adb17efa) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Materials/Wooden Floor Pack/Materials/Wooden Floor 5.mat using Guid(be74d7939a8752d48a071782adb17efa) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c10cd216e450fd588e8a58c60eb9db31') in 0.015053 seconds
-  Import took 0.031542 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.002615 seconds.
-  path: Assets/Materials/Wooden Floor Pack/Materials/Wooden Floor 5.mat
-  artifactKey: Guid(be74d7939a8752d48a071782adb17efa) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Materials/Wooden Floor Pack/Materials/Wooden Floor 5.mat using Guid(be74d7939a8752d48a071782adb17efa) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c10cd216e450fd588e8a58c60eb9db31') in 0.014663 seconds
-  Import took 0.024924 seconds .
-
-========================================================================
-Received Prepare
-Registering precompiled user dll's ...
-Registered in 0.012214 seconds.
-Begin MonoManager ReloadAssembly
-Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 2.02 ms, found 16 plugins.
+Refreshing native plugins compatible for Editor in 1.71 ms, found 16 plugins.
 Preloading 1 native plugins for Editor in 0.08 ms.
 Invoked RoslynAnalysisRunner static constructor.
 RoslynAnalysisRunner will not be running.
 RoslynAnalysisRunner has terminated.
 Mono: successfully reloaded assembly
-- Completed reload, in  2.555 seconds
+- Completed reload, in  2.454 seconds
 Platform modules already initialized, skipping
 Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
-Refreshing native plugins compatible for Editor in 1.56 ms, found 16 plugins.
-Preloading 1 native plugins for Editor in 0.05 ms.
-Unloading 5843 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 256.2 MB.
-System memory in use after: 256.0 MB.
-
-Unloading 1010 unused Assets to reduce memory usage. Loaded Objects now: 6625.
-Total: 8.367500 ms (FindLiveObjects: 0.851600 ms CreateObjectMapping: 0.178200 ms MarkObjects: 4.567900 ms  DeleteObjects: 2.766500 ms)
-
-========================================================================
-Received Prepare
-Registering precompiled user dll's ...
-Registered in 0.010535 seconds.
-Begin MonoManager ReloadAssembly
-Native extension for WindowsStandalone target not found
 Refreshing native plugins compatible for Editor in 1.63 ms, found 16 plugins.
-Preloading 1 native plugins for Editor in 0.07 ms.
-Invoked RoslynAnalysisRunner static constructor.
-RoslynAnalysisRunner will not be running.
-RoslynAnalysisRunner has terminated.
-Mono: successfully reloaded assembly
-- Completed reload, in  2.597 seconds
-Platform modules already initialized, skipping
-Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
-Refreshing native plugins compatible for Editor in 1.85 ms, found 16 plugins.
-Preloading 1 native plugins for Editor in 0.08 ms.
+Preloading 1 native plugins for Editor in 0.06 ms.
 Unloading 5842 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 256.2 MB.
-System memory in use after: 256.1 MB.
+System memory in use before: 257.2 MB.
+System memory in use after: 257.1 MB.
 
-Unloading 942 unused Assets to reduce memory usage. Loaded Objects now: 6633.
-Total: 9.392000 ms (FindLiveObjects: 1.331500 ms CreateObjectMapping: 0.660800 ms MarkObjects: 5.546700 ms  DeleteObjects: 1.851100 ms)
+Unloading 942 unused Assets to reduce memory usage. Loaded Objects now: 6632.
+Total: 5.870700 ms (FindLiveObjects: 0.691000 ms CreateObjectMapping: 0.170100 ms MarkObjects: 3.839000 ms  DeleteObjects: 1.169000 ms)
 
 AssetImportWorkerClient::OnTransportError - code=2 error=End of file

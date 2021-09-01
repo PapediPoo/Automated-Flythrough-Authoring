@@ -47,6 +47,8 @@ public class FlythroughGizmoDrawer : MonoBehaviour
 
     public float render_height = 1f;
 
+    public List<Material> cross_section_materials = new List<Material>();
+
     public void ChangeRenderHeight(PinchSlider slider)
     {
         render_height = Mathf.Lerp(-3f, 5f, slider.SliderValue);
@@ -200,7 +202,7 @@ public class FlythroughGizmoDrawer : MonoBehaviour
         }
         line_renderer.enabled = draw_line;
 
-        if(rhs != null) rhs.SetActive(draw_tiles);
+        // if(rhs != null) rhs.SetActive(draw_tiles);
     }
 
     public void CommitCPChanges()
@@ -229,6 +231,11 @@ public class FlythroughGizmoDrawer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        foreach(Material m in cross_section_materials)
+        {
+            m.SetFloat("Vector1_24f0fe65288441ad9422b8f2b4765bdb", Mathf.Lerp(13, 22, Mathf.InverseLerp(-3, 5, render_height) + 0.05f));
+        }
+
         if (ready)
         {
             // CommitCPChanges();

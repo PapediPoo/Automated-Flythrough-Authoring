@@ -61,9 +61,9 @@ public class TourPlannerHandler : IHandler<(List<Vector<double>>, TrajectorySett
         List<Vector<double>> coarseCPs = input.Item1;
         TrajectorySettings settings = input.Item2;
 
-        //paths.Clear();
-        //qgraph.Clear();
-        //qcost.Clear();
+        paths.Clear();
+        qgraph.Clear();
+        qcost.Clear();
 
         qgraph.AddVertexRange(Enumerable.Range(0, coarseCPs.Count));    // foreach control point add a node to the graph
         NavMeshHit nmhu;
@@ -83,20 +83,26 @@ public class TourPlannerHandler : IHandler<(List<Vector<double>>, TrajectorySett
                 Vector3 v = nmhv.position;
 
                 // generate path uv on navmesh
-                NavMeshPath p;
-                qgraph.TryGetEdge(i, j, out Edge<int> e);
-                if(e != null)
-                {
-                    paths.TryGetValue(e, out p);
-                }
-                else
-                {
-                    p = new NavMeshPath();
-                    e = new Edge<int>(i, j);
+                //NavMeshPath p;
+                //qgraph.TryGetEdge(i, j, out Edge<int> e);
+                //if(e != null)
+                //{
+                //    paths.TryGetValue(e, out p);
+                //}
+                //else
+                //{
+                //    p = new NavMeshPath();
+                //    e = new Edge<int>(i, j);
 
-                    qgraph.AddEdge(e);
-                    paths.Add(e, p);
-                }
+                //    qgraph.AddEdge(e);
+                //    paths.Add(e, p);
+                //}
+
+                var p = new NavMeshPath();
+                var e = new Edge<int>(i, j);
+
+                qgraph.AddEdge(e);
+                paths.Add(e, p);
 
                 if (!NavMesh.CalculatePath(u, v, NavMesh.AllAreas, p))
                 {
