@@ -91,7 +91,8 @@ public class TrajectoryInitializationHandler : IHandler<(List<Vector<double>>, T
         ofc.Gv = Gv;
         ofc.Aa = Aa;
         ofc.Ga = Ga;
-        ofc.Dc = DistanceAtPointAlloc(.5f, 100f, 10);
+        //ofc.Dc = DistanceAtPointAlloc((float)settings.collision_max_dist, (float)settings.collision_weight, 25);
+        ofc.Dc = DistanceAtPointAlloc((float)settings.collision_max_dist, 25);
         ofc.Hc = HeightAtPointAlloc(5f, settings.desired_height * 2f, settings.desired_height);
 
         ofc.trajectory_point_array = new Vector<double>[settings.trajectory_point_count];
@@ -183,13 +184,14 @@ public class TrajectoryInitializationHandler : IHandler<(List<Vector<double>>, T
         return (container.f(current_height), Vector3.up * container.df(current_height));
     }
 
-    public static DistanceAtPointContainer DistanceAtPointAlloc(float MAX_DIST, float MAX_VAL, int collider_buffer_size)
+    //public static DistanceAtPointContainer DistanceAtPointAlloc(float MAX_DIST, float MAX_VAL, int collider_buffer_size)
+    public static DistanceAtPointContainer DistanceAtPointAlloc(float MAX_DIST, int collider_buffer_size)
     {
         var f = new Func<float, float>(y =>
         {
             if (y < MAX_DIST)
             {
-                return (y - MAX_DIST) * (y - MAX_DIST) * MAX_VAL / (MAX_DIST * MAX_DIST);
+                return (y - MAX_DIST) * (y - MAX_DIST) / (MAX_DIST * MAX_DIST);
             }
             else
             {
@@ -201,7 +203,7 @@ public class TrajectoryInitializationHandler : IHandler<(List<Vector<double>>, T
         {
             if (y < MAX_DIST)
             {
-                return (y - MAX_DIST) * (2 * MAX_VAL) / (MAX_DIST * MAX_DIST);
+                return (y - MAX_DIST) * (2) / (MAX_DIST * MAX_DIST);
             }
             else
             {
@@ -213,7 +215,8 @@ public class TrajectoryInitializationHandler : IHandler<(List<Vector<double>>, T
         container.f = f;
         container.df = df;
         container.MAX_DIST = MAX_DIST;
-        container.MAX_VALUE = MAX_VAL;
+        container.MAX_VALUE = 1;
+        //container.MAX_VALUE = MAX_VAL;
         container.cols = new Collider[collider_buffer_size];
 
         return container;

@@ -11,7 +11,7 @@ public struct ControlPointSettings
     public float visibility_weight;
     [Range(0f, 1f)]
     public float distance_weight;
-    [Range(0f, 1f)]
+    [Range(0f, 3f)]
     public float cp_distance_weight;
     public int num_control_points;
 }

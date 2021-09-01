@@ -41,7 +41,7 @@ public class ControlPointHandler : IHandler<(MapContainer container, ControlPoin
             var v = (input.settings.visibility_weight * (1f - TryGet(i, input.container.visibility, x => x, Mathf.Epsilon)))
             + (input.settings.bitmap_weight * TryGet(i, input.container.bitmap, x => x ? 1 : 0, 1))
             + (input.settings.distance_weight * TryGet(i, input.container.distancetransform, x => Mathf.Clamp01(1f / x), Mathf.Epsilon))
-            + (input.settings.cp_distance_weight * (1f - Mathf.InverseLerp(0f, 10f, GetMinCPDistance(p, cpoints))));
+            + (input.settings.cp_distance_weight * (1f - Mathf.InverseLerp(0f, 15f, GetMinCPDistance(p, cpoints))));
             return v * 100;
         };
 

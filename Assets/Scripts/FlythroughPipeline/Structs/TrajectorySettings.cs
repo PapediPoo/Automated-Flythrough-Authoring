@@ -16,11 +16,14 @@ public struct TrajectorySettings
     public double distance_weight;
     [Range(0, 1)]
     public double velocity_weight;
-    [Range(0, 1)]
+    [Range(0, 10)]
     public double acceleration_weight;
-    [Range(0, 1)]
+    [Range(0, 100)]
     public double collision_weight;
     [Range(0, 1)]
     public double height_weight;
+
+    [Range(0, 1)]
+    public double collision_max_dist;
 
 }

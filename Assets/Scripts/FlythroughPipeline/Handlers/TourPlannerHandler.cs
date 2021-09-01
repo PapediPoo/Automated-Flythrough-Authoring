@@ -98,6 +98,11 @@ public class TourPlannerHandler : IHandler<(List<Vector<double>>, TrajectorySett
                 //    paths.Add(e, p);
                 //}
 
+                if (u.magnitude >= Mathf.Infinity || v.magnitude >= Mathf.Infinity)
+                {
+                    continue;
+                }
+
                 var p = new NavMeshPath();
                 var e = new Edge<int>(i, j);
 

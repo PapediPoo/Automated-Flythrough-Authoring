@@ -21,6 +21,7 @@ public class FollowPath : MonoBehaviour
     private float stepSize;
     public GameObject target;
     public bool lookForward = true;
+    public bool overrideUp = false;
     private Vector3 last_pos;
     public float max_rot_speed = 180f;
     private bool ready;
@@ -53,6 +54,11 @@ public class FollowPath : MonoBehaviour
         last_pos = controlPoints.First();
         t = 0f;
         ready = true;
+    }
+
+    public void Disable()
+    {
+        ready = false;
     }
 
     /// <summary>
@@ -106,7 +112,16 @@ public class FollowPath : MonoBehaviour
         // calculate viewing direction
         if (lookForward)
         {
-            var target_rot = QuaternionUtil.SmoothDamp(target.transform.rotation, Quaternion.LookRotation(pos - last_pos, Vector3.up), ref rotationRef, (float)Time.deltaTime / (stepSize));
+            Quaternion target_rot;
+
+            if (overrideUp)
+            {
+                target_rot = QuaternionUtil.SmoothDamp(target.transform.rotation, Quaternion.LookRotation(pos - last_pos, Vector3.up), ref rotationRef, (float)Time.deltaTime / (stepSize));
+            }
+            else
+            {
+                target_rot = QuaternionUtil.SmoothDamp(target.transform.rotation, Quaternion.LookRotation(Vector3.ProjectOnPlane(pos - last_pos, Vector3.up), Vector3.up), ref rotationRef, (float)Time.deltaTime / (stepSize));
+            }
 
             rot = Quaternion.RotateTowards(target.transform.rotation, target_rot, Time.deltaTime * max_rot_speed);
             last_pos = pos;
