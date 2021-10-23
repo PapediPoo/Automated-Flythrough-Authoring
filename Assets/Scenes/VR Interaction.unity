@@ -20,7 +20,7 @@ RenderSettings:
   m_FogDensity: 0.01
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
+  m_AmbientSkyColor: {r: 0.0007314645, g: 0.0007314645, b: 0.0007314645, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
@@ -32,13 +32,13 @@ RenderSettings:
   m_FlareFadeSpeed: 3
   m_HaloTexture: {fileID: 0}
   m_SpotCookie: {fileID: 10001, guid: 0000000000000000e000000000000000, type: 0}
-  m_DefaultReflectionMode: 0
+  m_DefaultReflectionMode: 1
   m_DefaultReflectionResolution: 128
   m_ReflectionBounces: 1
-  m_ReflectionIntensity: 1
+  m_ReflectionIntensity: 0
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 929356079}
-  m_IndirectSpecularColor: {r: 0.3605746, g: 0.45143563, b: 0.61385304, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 0}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -8142,6 +8142,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ButtonBackground
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 02e129bb83b7d2d40a23e1a487f18eac,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 02e129bb83b7d2d40a23e1a487f18eac, type: 3}
 --- !u!1 &740092731
@@ -10673,7 +10678,7 @@ PrefabInstance:
     - target: {fileID: 865163502733406901, guid: 94a4b48739ef8dd4caec122f4ce3794d,
         type: 3}
       propertyPath: trajectory_settings.lbfgs_gradient_termination_threshold
-      value: 0.1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 865163502733406902, guid: 94a4b48739ef8dd4caec122f4ce3794d,
         type: 3}
@@ -14596,6 +14601,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -7030219592342931679, guid: 1ac35ba82e5d0b74a86804cfa4a8c31e,
         type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -7030219592342931679, guid: 1ac35ba82e5d0b74a86804cfa4a8c31e,
+        type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
@@ -14632,6 +14642,11 @@ PrefabInstance:
     - target: {fileID: -3457403363335765620, guid: 1ac35ba82e5d0b74a86804cfa4a8c31e,
         type: 3}
       propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -3419104507117567457, guid: 1ac35ba82e5d0b74a86804cfa4a8c31e,
+        type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -3419104507117567457, guid: 1ac35ba82e5d0b74a86804cfa4a8c31e,
@@ -14697,7 +14712,7 @@ PrefabInstance:
     - target: {fileID: 618634104221473885, guid: 1ac35ba82e5d0b74a86804cfa4a8c31e,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 618634104221473885, guid: 1ac35ba82e5d0b74a86804cfa4a8c31e,
         type: 3}
@@ -14772,6 +14787,11 @@ PrefabInstance:
     - target: {fileID: 5883756861645495037, guid: 1ac35ba82e5d0b74a86804cfa4a8c31e,
         type: 3}
       propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6135211502295850177, guid: 1ac35ba82e5d0b74a86804cfa4a8c31e,
+        type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6135211502295850177, guid: 1ac35ba82e5d0b74a86804cfa4a8c31e,
@@ -17567,7 +17587,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 416caa6b57bb22c40ab9f1a4c12b304e, type: 2}
+  - {fileID: 2100000, guid: 1ad68daec9ac6374cb32214e55dc158e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -18224,7 +18244,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1473380687}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5a2a9c34df4095f47b9ca8f975175f5b, type: 3}
   m_Name: 
@@ -19662,7 +19682,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1525644714}
-  m_LocalRotation: {x: 0.00000055799205, y: 0.7071069, z: -0.70710677, w: 0.0000005662441}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: -0.7071068, w: 0}
   m_LocalPosition: {x: -0.9080001, y: 0.21600002, z: -1.1510001}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
@@ -20622,7 +20642,7 @@ PrefabInstance:
     - target: {fileID: 4250563013431722933, guid: 76e01f88a94f50a41a001d5f08c2acff,
         type: 3}
       propertyPath: m_Name
-      value: Nest Colliders
+      value: Nest Colliders Proxy
       objectReference: {fileID: 0}
     - target: {fileID: 4250563013431722933, guid: 76e01f88a94f50a41a001d5f08c2acff,
         type: 3}
@@ -21877,7 +21897,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1680657815
 Transform:
   m_ObjectHideFlags: 0
@@ -21886,8 +21906,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1680657814}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.113, y: -0.285, z: 0.155}
-  m_LocalScale: {x: 0.3305281, y: 0.69971746, z: 0.23844}
+  m_LocalPosition: {x: 0.113, y: -0.285, z: 0.0202}
+  m_LocalScale: {x: 0.3305281, y: 0.69971746, z: 0.01}
   m_Children: []
   m_Father: {fileID: 2009477017}
   m_RootOrder: 9
@@ -24905,7 +24925,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   control_point_prefab: {fileID: 1168467658598017725, guid: 6b30d15d32bb3624aab0d7077ecb8af2,
     type: 3}
-  fgd: {fileID: 1670248899}
 --- !u!1 &1969638066
 GameObject:
   m_ObjectHideFlags: 0

@@ -33,6 +33,8 @@ public class FlythroughGizmoDrawer : MonoBehaviour
     private Material gizmo_material;
     [SerializeField]
     private GameObject control_point_prefab;
+    [SerializeField]
+    public Vector3 control_point_init_size = Vector3.one;
 
     public Transform relative_to = null;
 
@@ -187,6 +189,7 @@ public class FlythroughGizmoDrawer : MonoBehaviour
             obj.transform.parent = relative_to;
             //obj.transform.localScale = Vector3.one * 0.5f;
             obj.transform.localPosition = v3;
+            obj.transform.localScale = control_point_init_size;
         }
     }
 

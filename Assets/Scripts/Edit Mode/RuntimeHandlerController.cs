@@ -35,12 +35,16 @@ public class RuntimeHandlerController : MonoBehaviour
             v.z = 0;
 
             var d = (u - v).magnitude;
+
+            // if closer than previous closest, overwrite
             if (d < min_dist && d < max_dist)
             {
                 min_dist = d;
                 final_selection = cp;
             }
         }
+
+        // if a closest object has been found, assign the handler to it
         if (final_selection != null)
         {
             //rth.enabled = true;
