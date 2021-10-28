@@ -63,6 +63,7 @@ public class TrajectoryInitializationHandler : IHandler<(List<Vector<double>>, T
 
         ofc = ObjectiveFunctionAlloc(tc.tour, ts);
         tc.objective = BuildObjectiveFunction(ofc, ts);
+        tc.objective_worker = new ObjectiveFunctionWorker(tc.tour, ts);
 
         this.tc = tc;
         this.ts = ts;

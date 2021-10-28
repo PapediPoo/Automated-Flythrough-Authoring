@@ -13,6 +13,7 @@ public struct TrajectorySettings
     public bool backtrack;                                  // if the trajectory should go back to the start once all CPs have been visited
     public LayerMask mask;                                  // the layermask of obstacle detection
     public double lbfgs_gradient_termination_threshold;     // the termination threshold for the optimizer
+    public int physics_computations_per_step;               // the number of raycasts & spherecasts every time the objective function worker is called
 
     [Range(0.01f, 1)]
     public double distance_weight;                          // the weight for the tour distance cost term

@@ -27,7 +27,7 @@ public class VisibilitymapHandler : IHandler<(RSGrid, LayerMask), float[,,]>
         RSGrid rsgrid = input.Item1;
         LayerMask mask = input.Item2;
 
-        float total_cells = rsgrid.GetLengths().ToArray().Aggregate((a, b) => a * b);
+        float total_cells = (float)rsgrid.GetLengths().ToArray().Aggregate((a, b) => a * b);
 
         // Corresponds to a nested loop, that iterates over all cells for each cell
         // the idea is to cast a ray from each cell to each other cell and see if there is an intersection

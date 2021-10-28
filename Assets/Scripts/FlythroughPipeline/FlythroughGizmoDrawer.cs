@@ -151,7 +151,7 @@ public class FlythroughGizmoDrawer : MonoBehaviour
     {
         var cps = fg.trajectory_container.control_points;
         var rsgrid = fg.map_container.rsgrid;
-        var xz = ((int)rsgrid.lengths.At(0), (int)rsgrid.lengths.At(2));
+        var xz = ((int)rsgrid.GetLengths().At(0), (int)rsgrid.GetLengths().At(2));
 
         map_tiles = new GameObject[xz.Item1, xz.Item2];
         control_points = new List<GameObject>();

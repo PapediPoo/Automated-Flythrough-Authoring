@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,5 +12,6 @@ public struct TrajectoryContainer
     public List<Vector<double>> tour;
     public Vector<double> trajectory;
     public IObjectiveFunction objective;
+    public ISimpleWorker<Vector<double>, Tuple<double, Vector<double>>> objective_worker;
     public LBFGS lbfgs;
 }
