@@ -2,6 +2,8 @@
 
 **Note:** This project served as my B.Sc thesis at ETH Zurich from 2021.
 
+![](https://github.com/PapediPoo/Automated-Flythrough-Authoring/blob/main/Assets/Textures/ablation_default_full.png)
+
 The visualization and presentation of architectural models in virtual reality enables architects to evaluate their designs and present their architectural models to stakeholders,
 improving the fidelity of architectural communication in architectural design. Stakeholders can better examine the models in an immersive environment and have a better
 understanding of the final product, which helps to align stakeholder expectations with
@@ -19,4 +21,10 @@ Utilizing trajectory optimization and path planning techniques, our tool instant
 The efficiency of the algorithms allows our tool to run at interactive rates, in the sense that the designer is able to tweak the positions of the keypoints, or any other parameters, and observe the newly computed trajectory instantaneously.
 In addition, our VR interface allows the designer to have both an inside view and and overview simultaneously, which leads to improved productivity.
 
+![](https://github.com/PapediPoo/Automated-Flythrough-Authoring/blob/main/Assets/Textures/VR_overview.png)
+
+![](https://github.com/PapediPoo/Automated-Flythrough-Authoring/blob/main/Assets/Textures/VR_edit_cp4.png)
+
 We have published a paper about this topic, which can be viewed [HERE](https://caadria2022.org/automatic_flythrough_authoring_in_vr/).
+
+
