@@ -1,8 +1,18 @@
 # Automated Flythrough Authoring
 
-**Note:** This project served as my B.Sc thesis at ETH Zurich from 2021.
+<!-- ![](https://github.com/PapediPoo/Automated-Flythrough-Authoring/blob/main/Assets/Textures/ablation_default_full.png) -->
+This tool automatically generates flythrough animations through virtual buildings. The trajectories can be edited in real-time.
+The final flythrough animation can be viewed using a VR headset.
 
-![](https://github.com/PapediPoo/Automated-Flythrough-Authoring/blob/main/Assets/Textures/ablation_default_full.png)
+https://github.com/PapediPoo/Automated-Flythrough-Authoring/assets/47283136/decdbb49-2181-4fa6-ba38-723020698f10
+
+We have published a paper about this topic, which can be viewed [HERE](https://papers.cumincad.org/data/works/att/caadria2022_221.pdf).
+
+This project served as my B.Sc thesis at ETH Zurich from 2021.
+The code in this repository acts as an implementation of the method outlined in our paper.
+Even though this project could be repurposed to work for arbitrary buildings, in its current state, it serves as a proof of concept.
+
+## Paper Abstract
 
 The visualization and presentation of architectural models in virtual reality enables architects to evaluate their designs and present their architectural models to stakeholders,
 improving the fidelity of architectural communication in architectural design. Stakeholders can better examine the models in an immersive environment and have a better
@@ -24,7 +34,5 @@ In addition, our VR interface allows the designer to have both an inside view an
 ![](https://github.com/PapediPoo/Automated-Flythrough-Authoring/blob/main/Assets/Textures/VR_overview.png)
 
 ![](https://github.com/PapediPoo/Automated-Flythrough-Authoring/blob/main/Assets/Textures/VR_edit_cp4.png)
-
-We have published a paper about this topic, which can be viewed [HERE](https://caadria2022.org/automatic_flythrough_authoring_in_vr/).
 
 
